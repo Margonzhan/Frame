@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9F2527E3-FF68-4BF8-B68D-4499E36AA00C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TwoDimensionCode</RootNamespace>
+    <AssemblyName>TwoDimensionCode</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="halcondotnet">
+      <HintPath>..\DllFile\halcondotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ViewROI">
+      <HintPath>..\Display\ViewROI\bin\Release\ViewROI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="2DCode.cs" />
+    <Compile Include="CDelegate.cs" />
+    <Compile Include="FormDMCodeParam.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FormDMCodeParam.Designer.cs">
+      <DependentUpon>FormDMCodeParam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormQRCodeParam.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FormQRCodeParam.Designer.cs">
+      <DependentUpon>FormQRCodeParam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReadCode.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ReadCode.Designer.cs">
+      <DependentUpon>ReadCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FormDMCodeParam.resx">
+      <DependentUpon>FormDMCodeParam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormQRCodeParam.resx">
+      <DependentUpon>FormQRCodeParam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReadCode.resx">
+      <DependentUpon>ReadCode.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonTool\CommonFunc.csproj">
+      <Project>{deeafd62-1f59-45cd-9c66-34f5ca7ed03c}</Project>
+      <Name>CommonFunc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Display\HDisplay\HDisplay.csproj">
+      <Project>{96cc5929-ee8a-4cb5-812e-5cee3c23820b}</Project>
+      <Name>HDisplay</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
