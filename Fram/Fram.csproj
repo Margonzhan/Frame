@@ -84,6 +84,8 @@
     </Compile>
     <Compile Include="FXSerialConnect.cs" />
     <Compile Include="GlobalParameter.cs" />
+    <Compile Include="IOCard\IIoCard.cs" />
+    <Compile Include="IOCard\IoCardBase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Station\StationBase.cs" />
@@ -151,6 +153,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\loading02.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MotionCard\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
