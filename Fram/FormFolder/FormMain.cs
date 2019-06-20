@@ -9,12 +9,14 @@ using HalconModle;
 using System.Xml;
 using Connection;
 using CommonFunc;
+using Fram.Config;
 namespace Fram
 {
     public partial class FormMain : Form
     {
 
         NetClientConnection _client;
+        IOCard.EMC0064 EMC0064;
       //  HaiKangCamera hk = new HaiKangCamera("camera1", CameraConnectType.GigEVision);
         public FormMain()
         {
@@ -25,7 +27,7 @@ namespace Fram
             FormLoading.GetInstance().Closed();
             //_client = new NetClientConnection("127.0.0.1", 8080);
             //_client.ReConnect();
-  
+            EMC0064 = new IOCard.EMC0064();
 
         }
         private void Init()
@@ -55,22 +57,12 @@ namespace Fram
         XMLFile xMLFile = new XMLFile();
         private void button1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                // _client.SendString(DateTime.Now.ToString("yyyy_MM_dd  hh:mm:ss"));
-                _client.HeartBeatEnable = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);               
-            }
+            EMC0064.Open();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            _client.HeartBeatKey = "123456";
-            _client.HeartBeatTimeSpan = 3000;
-            _client.HeartBeatEnable = true;
+          ConfigManager configManager=  ConfigManager.Instance;
         }
     }
     public class managerrrr : Singleton<managerrrr>
