@@ -8,8 +8,31 @@ namespace Fram.Config
 {
     public class IoCardConfig : ConfigBase
     {
-        
-        public IoCardConnectType ConnectType {get;set ;}
+        private IoCardBrand m_ioCardBrand;
+        public string IoCardBrand
+        {
+            get { return m_ioCardBrand.ToString(); }
+            set
+            {
+                if(!Enum.TryParse<IoCardBrand>(value, out m_ioCardBrand))
+                {
+                    throw new InvalidCastException($"{IoCardBrand} {value} change to System.IO.Ports.Parity Exception");
+
+                }
+            }
+        }
+        private IoCardConnectType m_ioCardConnectType;
+        public string ConnectType
+        {
+            get { return m_ioCardConnectType.ToString(); }
+            set
+            {
+               if(! Enum.TryParse<IoCardConnectType>(value, out m_ioCardConnectType))
+                {
+                    throw new InvalidCastException($"{ConnectType} {value} change to System.IO.Ports.Parity Exception");
+                }
+            }
+        }
         public string COM { get; set; }
         public int BaudRate { get; set; }
         public int DataBits { get; set; }
@@ -49,6 +72,8 @@ namespace Fram.Config
             }
         }
 
+
+
         public int InputCount { get; set; }
         public int OutputCount { get; set; }
     }
@@ -61,5 +86,9 @@ namespace Fram.Config
     {
         SerialPort,
         EtherNet,
+    }
+    public enum IoCardBrand
+    {
+        ZMotion_ECI0064,
     }
 }

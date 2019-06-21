@@ -10,6 +10,8 @@ using System.Xml;
 using Connection;
 using CommonFunc;
 using Fram.Config;
+using System.Text;
+
 namespace Fram
 {
     public partial class FormMain : Form
@@ -57,12 +59,31 @@ namespace Fram
         XMLFile xMLFile = new XMLFile();
         private void button1_Click(object sender, EventArgs e)
         {
-            EMC0064.Open();
+            //EMC0064.Open();
+            HardWareConfigrationMuster hardWareConfigrationMuster = new HardWareConfigrationMuster();
+           // IoCardConfig[] ioCardConfigs = new IoCardConfig[2] ;
+            IoCardConfig ioCardConfig1 = new IoCardConfig();
+            IoCardConfig ioCardConfig2 = new IoCardConfig();
+            hardWareConfigrationMuster.IoCardConfigs.Add( ioCardConfig1);
+            hardWareConfigrationMuster.IoCardConfigs.Add( ioCardConfig2);
+            var settings = new Newtonsoft.Json. JsonSerializerSettings();
+            settings.TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto;
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(hardWareConfigrationMuster, Newtonsoft.Json.Formatting.Indented,settings);
+            System.IO.File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "Config\\" + "HardWareConfigration.json", json, Encoding.UTF8);
+          
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-          ConfigManager configManager=  ConfigManager.Instance;
+            try
+            {
+                ConfigManager configManager = ConfigManager.Instance;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
     public class managerrrr : Singleton<managerrrr>
