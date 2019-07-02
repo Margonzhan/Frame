@@ -63,6 +63,26 @@ namespace Fram.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap led_off {
+            get {
+                object obj = ResourceManager.GetObject("led_off", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap led_on {
+            get {
+                object obj = ResourceManager.GetObject("led_on", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap loading01 {
             get {
                 object obj = ResourceManager.GetObject("loading01", resourceCulture);
@@ -76,16 +96,6 @@ namespace Fram.Properties {
         internal static System.Drawing.Bitmap loading02 {
             get {
                 object obj = ResourceManager.GetObject("loading02", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap loading021 {
-            get {
-                object obj = ResourceManager.GetObject("loading021", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

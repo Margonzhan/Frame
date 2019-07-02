@@ -35,9 +35,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CLCamera">
-      <HintPath>..\CLCamera\bin\Release\CLCamera.dll</HintPath>
-    </Reference>
     <Reference Include="DevExpress.Data.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraBars.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -46,12 +43,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\DllFile\halcondotnet.dll</HintPath>
     </Reference>
-    <Reference Include="HDisplay, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\TwoDimensionCode\bin\Release\HDisplay.dll</HintPath>
-    </Reference>
     <Reference Include="MvCameraControl.Net">
-      <HintPath>..\CLCamera\bin\Release\MvCameraControl.Net.dll</HintPath>
+      <HintPath>..\DllFile\MvCameraControl.Net.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -67,20 +60,20 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="TwoDimensionCode, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\TwoDimensionCode\bin\Release\TwoDimensionCode.dll</HintPath>
-    </Reference>
-    <Reference Include="ViewROI, Version=1.0.6348.31298, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Display\HDisplay\bin\Release\ViewROI.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\CameraConfig\CameraConfig.cs" />
     <Compile Include="Config\ConfigBase.cs" />
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Config\IORelevantConfig\IoCardConfig.cs" />
+    <Compile Include="Config\IORelevantConfig\SingleIoDeviceConfig.cs" />
     <Compile Include="DelegateUIControl.cs" />
+    <Compile Include="FormFolder\FormIO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFolder\FormIO.Designer.cs">
+      <DependentUpon>FormIO.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormFolder\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +88,12 @@
     </Compile>
     <Compile Include="FXSerialConnect.cs" />
     <Compile Include="GlobalParameter.cs" />
+    <Compile Include="Hardware\CameraManager.cs" />
+    <Compile Include="Hardware\HardwareBase.cs" />
+    <Compile Include="Hardware\IOBaseDevice\ISingleIoDevice.cs" />
+    <Compile Include="Hardware\IOBaseDevice\SingleIoDevice.cs" />
+    <Compile Include="Hardware\IoCardManager.cs" />
+    <Compile Include="Hardware\IoDeviceManager.cs" />
     <Compile Include="IOCard\EMC0064.cs" />
     <Compile Include="IOCard\IIoCard.cs" />
     <Compile Include="IOCard\IoCardBase.cs" />
@@ -105,6 +104,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Station\StationBase.cs" />
     <Compile Include="Station\StationManager.cs" />
+    <EmbeddedResource Include="FormFolder\FormIO.resx">
+      <DependentUpon>FormIO.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormFolder\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -135,6 +137,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CLCamera\CLCamera.csproj">
+      <Project>{16ef9809-b85e-41b0-96fc-ac7b77adadd7}</Project>
+      <Name>CLCamera</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CommonTool\CommonFunc.csproj">
       <Project>{deeafd62-1f59-45cd-9c66-34f5ca7ed03c}</Project>
       <Name>CommonFunc</Name>
@@ -142,6 +148,14 @@
     <ProjectReference Include="..\Connection\Connection.csproj">
       <Project>{b5b73599-34b1-43db-9d2c-c9b523b22995}</Project>
       <Name>Connection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Display\HDisplay\HDisplay.csproj">
+      <Project>{96cc5929-ee8a-4cb5-812e-5cee3c23820b}</Project>
+      <Name>HDisplay</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Display\ViewROI\ViewROI.csproj">
+      <Project>{275cc20c-00b9-470b-9017-4d6457d74be6}</Project>
+      <Name>ViewROI</Name>
     </ProjectReference>
     <ProjectReference Include="..\FileOperate\FileOperate.csproj">
       <Project>{bc57b764-2415-4089-bbcb-c1c3195ff37e}</Project>
@@ -154,6 +168,10 @@
     <ProjectReference Include="..\OcrTool\OcrTool.csproj">
       <Project>{119C4064-F497-42B1-9E1F-B7DDCE753FCE}</Project>
       <Name>OcrTool</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TwoDimensionCode\TwoDimensionCode.csproj">
+      <Project>{9f2527e3-ff68-4bf8-b68d-4499e36aa00c}</Project>
+      <Name>TwoDimensionCode</Name>
     </ProjectReference>
     <ProjectReference Include="..\Vision\Vision.csproj">
       <Project>{3f94d3a5-721d-487c-b6a1-d7f702c71129}</Project>
@@ -169,7 +187,15 @@
   <ItemGroup>
     <None Include="Resources\loading02.gif" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Hardware\CameraDevice\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\led_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\led_on.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

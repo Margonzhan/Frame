@@ -70,9 +70,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="ViewROI">
-      <HintPath>..\ViewROI\bin\Release\ViewROI.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +112,12 @@
       <CustomToolNamespace>HalWindow</CustomToolNamespace>
       <Generator>HDisplay</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ViewROI\ViewROI.csproj">
+      <Project>{275cc20c-00b9-470b-9017-4d6457d74be6}</Project>
+      <Name>ViewROI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -47,4 +47,9 @@ namespace CLCamera
         USB3Vision,//
         DirectShow//
     }
+    public enum CameraType
+    {
+        HaiKangCamera,
+        HalconCamera,
+    }
 }

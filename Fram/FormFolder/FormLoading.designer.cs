@@ -36,7 +36,7 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.Desktop;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = global::Fram.Properties.Resources.loading021;
+            this.pictureBox1.Image = global::Fram.Properties.Resources.loading02;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(523, 446);

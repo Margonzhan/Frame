@@ -44,9 +44,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="ViewROI">
-      <HintPath>..\Display\ViewROI\bin\Release\ViewROI.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="2DCode.cs" />
@@ -91,6 +88,10 @@
     <ProjectReference Include="..\Display\HDisplay\HDisplay.csproj">
       <Project>{96cc5929-ee8a-4cb5-812e-5cee3c23820b}</Project>
       <Name>HDisplay</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Display\ViewROI\ViewROI.csproj">
+      <Project>{275cc20c-00b9-470b-9017-4d6457d74be6}</Project>
+      <Name>ViewROI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
