@@ -43,7 +43,7 @@ namespace CLCamera
     }
    public  enum CameraConnectType
     {
-        GigEVision,//
+        GigEVision2,//
         USB3Vision,//
         DirectShow//
     }

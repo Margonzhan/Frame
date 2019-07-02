@@ -135,7 +135,6 @@
             this.tabPane_Menu.Size = new System.Drawing.Size(1526, 741);
             this.tabPane_Menu.TabIndex = 0;
             this.tabPane_Menu.Text = "IO设备";
-            this.tabPane_Menu.SelectedPageChanged += new DevExpress.XtraBars.Navigation.SelectedPageChangedEventHandler(this.tabPane_Menu_SelectedPageChanged);
             // 
             // tabNavigationPage_IoDevice
             // 

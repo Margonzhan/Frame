@@ -46,6 +46,7 @@ namespace CLCamera
 
             //触发命令
             nRet = m_pOperator.CommandExecute("TriggerSoftware");
+     
             if (CameraOperator.CO_OK != nRet)
             {
                 throw new Exception(m_Cameraname+"取像失败");
@@ -84,9 +85,6 @@ namespace CLCamera
 
                     if (device.nTLayerType == MyCamera.MV_GIGE_DEVICE)
                     {
-                        
-
-
 
                         IntPtr buffer = Marshal.UnsafeAddrOfPinnedArrayElement(device.SpecialInfo.stGigEInfo, 0);
                         MyCamera.MV_GIGE_DEVICE_INFO gigeInfo = (MyCamera.MV_GIGE_DEVICE_INFO)Marshal.PtrToStructure(buffer, typeof(MyCamera.MV_GIGE_DEVICE_INFO));

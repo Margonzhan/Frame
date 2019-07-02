@@ -16,7 +16,8 @@ namespace Fram
 {
     public partial class FormMain : Form
     {
-        FormIO formIO = new FormIO();
+        FormIO formIO ;
+        FormVision formVision;
         ConfigManager configManager;
         Hardware.IoCardManager IoCardManager;
         Hardware.IoDeviceManager IoDeviceManager;
@@ -29,7 +30,7 @@ namespace Fram
             configManager = ConfigManager.Instance;
             IoCardManager = Hardware.IoCardManager.Instance;
             IoDeviceManager = Hardware.IoDeviceManager.Instance;
-            CameraManager = Hardware.CameraManager.Instance;
+          //  CameraManager = Hardware.CameraManager.Instance;
             Init();
             Thread.Sleep(3000);
             
@@ -39,13 +40,17 @@ namespace Fram
 
         }
         private void Init()
-        {          
-            formIO.Dock = DockStyle.Fill;
-            formIO.TopLevel = false;
+        {
+            formIO = new FormIO();
+            formIO.Dock = DockStyle.Fill;         
             tabNavigationPage_IoDevice.Controls.Add(formIO);
-            formIO.Show();
 
+            formVision = new FormVision();
+            formVision.Dock = DockStyle.Fill;
+            tabNavigationPage_Cameras.Controls.Add(formVision);
 
+            tabPane.SelectedPage = tabPage_Auto;
+            tabPane_Menu.SelectedPage = tabNavigationPage_IoDevice;
         }
         private void ProcessLoading()
         {
@@ -108,11 +113,12 @@ namespace Fram
         {
             if (e.Page == tabNavigationPage_IoDevice)
             {
-                formIO.StartReadIO();
+               
+               
             }
             else
             {
-                formIO.StopReadIO();
+               
             }
                 
         }

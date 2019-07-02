@@ -25,10 +25,9 @@ namespace CLCamera
                     return;
                 }
                 string cameratype = m_CameraConnectType.ToString();
-                HOperatorSet.OpenFramegrabber(cameratype, 0, 0, 0, 0, 0, 0, "default", -1,
-        "default", -1, "false", "default", m_CameraHandle, 0, -1, out m_CameraHandle);
-                this.m_IsConnected = true;
-                
+                HOperatorSet.OpenFramegrabber(cameratype, 0, 0, 0, 0, 0, 0, "progressive", -1,
+        "default", -1, "false", "default", m_Cameraname, 0, -1, out m_CameraHandle);
+                this.m_IsConnected = true;               
             }
             catch (Exception ex)
             {

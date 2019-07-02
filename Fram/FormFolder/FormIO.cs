@@ -11,7 +11,7 @@ using Fram.Config;
 using Fram.Hardware;
 namespace Fram
 {
-    public partial class FormIO : Form
+    internal partial class FormIO : UserControl
     {
         Timer Timer = new Timer();
         int InputCurrentPage = 1;
@@ -24,9 +24,19 @@ namespace Fram
         {
             InitializeComponent();
             Timer.Interval = 100;
-            Timer.Tick += Timer_Tick;         
+            Timer.Tick += Timer_Tick;
+            this.VisibleChanged += FormIO_VisibleChanged;       
             Init();       
         }
+
+        private void FormIO_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible)
+                Timer.Start();
+            else
+                Timer.Stop();
+        }
+
         public void StartReadIO()
         {
             Timer.Start();
@@ -39,14 +49,17 @@ namespace Fram
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            foreach(var mem in tLPanel_Input2.Controls)
-            {
-                Button _button = (Button)mem;
-                if(_button!=null)
-                {                   
-                    _button.Image=Inputs[_button.Text].GetStatue()? global::Fram.Properties.Resources.led_on : global::Fram.Properties.Resources.led_off;
+            if (this.Visible)
+                foreach (var mem in tLPanel_Input2.Controls)
+                {
+                    Button _button = (Button)mem;
+                    if (_button != null)
+                    {
+                        _button.Image = Inputs[_button.Text].GetStatue() ? global::Fram.Properties.Resources.led_on : global::Fram.Properties.Resources.led_off;
+                    }
                 }
-            }
+            else
+                Timer.Stop();
             
         }
 

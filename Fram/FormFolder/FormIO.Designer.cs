@@ -230,9 +230,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1283, 785);
             this.Controls.Add(this.tableLayoutPanel_IODevice);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            //this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            //this.MaximizeBox = false;
+            //this.MinimizeBox = false;
             this.Name = "FormIO";
             this.Text = "FormIO";
             this.tableLayoutPanel_IODevice.ResumeLayout(false);
