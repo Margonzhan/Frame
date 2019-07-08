@@ -40,18 +40,18 @@ namespace CLCamera
         {
             m_pOperator.Close();      
         }
-        public override void SnapShot()
-        {
-            int nRet;
+        //public override void SnapShot<object>(ref object image)
+        //{
+        //    int nRet;
 
-            //触发命令
-            nRet = m_pOperator.CommandExecute("TriggerSoftware");
+        //    //触发命令
+        //    nRet = m_pOperator.CommandExecute("TriggerSoftware");
      
-            if (CameraOperator.CO_OK != nRet)
-            {
-                throw new Exception(m_Cameraname+"取像失败");
-            }
-        }
+        //    if (CameraOperator.CO_OK != nRet)
+        //    {
+        //        throw new Exception(m_Cameraname+"取像失败");
+        //    }
+        //}
         public override void SetExpourseTime(int t)
         {
             m_pOperator.SetFloatValue("ExposureTime", t);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using HalconDotNet;
 namespace CLCamera
 {
    public   class CameraBase
@@ -23,9 +23,9 @@ namespace CLCamera
         public virtual void CloseCamera() { }
       
         /// <summary>
-        /// 单次取像，通过事件返回
+        /// 单次取像
         /// </summary>
-        public virtual void SnapShot() { }
+        public virtual HObject  SnapShot() { return new HObject(); }
        
         /// <summary>
         /// 设置曝光时间
@@ -51,5 +51,10 @@ namespace CLCamera
     {
         HaiKangCamera,
         HalconCamera,
+    }
+    public enum ImageType
+    {
+        HObject,
+        BMP,
     }
 }

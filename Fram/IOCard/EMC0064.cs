@@ -23,7 +23,7 @@ namespace Fram.IOCard
         {
             Open();
         }
-        private bool Open()
+        private new bool Open()
         {
             int ret=0;
             switch (CardConnectType)

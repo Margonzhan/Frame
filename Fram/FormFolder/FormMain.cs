@@ -30,7 +30,7 @@ namespace Fram
             configManager = ConfigManager.Instance;
             IoCardManager = Hardware.IoCardManager.Instance;
             IoDeviceManager = Hardware.IoDeviceManager.Instance;
-          //  CameraManager = Hardware.CameraManager.Instance;
+            CameraManager = Hardware.CameraManager.Instance;
             Init();
             Thread.Sleep(3000);
             

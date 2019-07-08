@@ -8,7 +8,7 @@ namespace CLCamera
    public  class HalconCamera:CameraBase
     {
         private HTuple m_CameraHandle;
-        event EventHandler<ImageEventArgs<HObject>> ImageEvent;
+       private  event EventHandler<ImageEventArgs<HObject>> ImageEvent;
        
         public HalconCamera(string cameraname,CameraConnectType cameraconnecttype)
         {
@@ -25,7 +25,7 @@ namespace CLCamera
                     return;
                 }
                 string cameratype = m_CameraConnectType.ToString();
-                HOperatorSet.OpenFramegrabber(cameratype, 0, 0, 0, 0, 0, 0, "progressive", -1,
+                HOperatorSet.OpenFramegrabber(cameratype, 0, 0, 0, 0, 0, 0, "default", -1,
         "default", -1, "false", "default", m_Cameraname, 0, -1, out m_CameraHandle);
                 this.m_IsConnected = true;               
             }
@@ -52,17 +52,14 @@ namespace CLCamera
                 }
             }
         }
-        public override void SnapShot()
+        public override HObject SnapShot( )
         {
+            HObject _image = new HObject();
             if (m_CameraHandle != null)
-            {
+            {               
                 try
                 {
-                    HObject image=new HObject();
-                    HOperatorSet.GrabImageAsync(out image, m_CameraHandle, -1);
-                    ImageEventArgs<HObject> e = new ImageEventArgs<HObject>();
-                    e.image = image.Clone();
-                    OnImageEvent(e);
+                    HOperatorSet.GrabImageAsync(out _image, m_CameraHandle, -1);                 
                 }
                 catch (Exception ex)
                 {
@@ -71,10 +68,10 @@ namespace CLCamera
             }
             else
             {
-                throw new Exception("相机未连接：" + m_Cameraname );
+                throw new Exception("相机未连接：" + m_Cameraname);
             }
-
-        }
+            return _image;
+        }        
         private void OnImageEvent(ImageEventArgs<HObject> e)
         {
             if (e != null)

@@ -14,7 +14,7 @@ namespace Fram
 {
     public partial class FormVision : UserControl
     {
-        object m_image;
+        HObject m_image;
         CLCamera.CameraBase m_camera;
         public FormVision()
         {
@@ -32,7 +32,13 @@ namespace Fram
         }
         private void btn_GrabOnce_Click(object sender, EventArgs e)
         {
-           
+            m_image = m_camera.SnapShot();
+            hDisplay1.HImageX = m_image;
+        }
+
+        private void cmB_Camera_SelectedIndexChanged(object sender, EventArgs e)
+        {          
+            m_camera= CameraManager.Instance.Cameras[cmB_Camera.SelectedItem.ToString()];
         }
     }
 }
