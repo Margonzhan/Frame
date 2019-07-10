@@ -16,12 +16,10 @@ namespace CLCamera
         MyCamera.cbOutputdelegate ImageCallback;
         MyCamera.cbExceptiondelegate ExceptionCallback;
         public  event EventHandler<ImageEventArgs<HObject>> ImageAcquired;
-        public HaiKangCamera(string cameraname, CameraConnectType cameraconnecttype)
+        public HaiKangCamera(string cameraname, CameraConnectType cameraconnecttype): base(cameraname, cameraconnecttype)
         {
             m_pDeviceList = new MyCamera.MV_CC_DEVICE_INFO_LIST();
-            m_pOperator = new CameraOperator();
-            this.m_Cameraname = cameraname;
-            this.m_CameraConnectType = cameraconnecttype;
+            m_pOperator = new CameraOperator();       
         }
         public override void OpenCamera()
         {
@@ -52,11 +50,11 @@ namespace CLCamera
         //        throw new Exception(m_Cameraname+"取像失败");
         //    }
         //}
-        public override void SetExpourseTime(int t)
+        public override void SetExpourseTime(uint t)
         {
             m_pOperator.SetFloatValue("ExposureTime", t);
         }
-        public override void SetGain(int g)
+        public override void SetGain(uint g)
         {
             m_pOperator.SetFloatValue("Gain", g);
         }

@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Basler.Pylon, Version=1.1.0.0, Culture=neutral, PublicKeyToken=e389355f398382ab, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DllFile\Basler.Pylon.dll</HintPath>
+    </Reference>
     <Reference Include="halcondotnet">
       <HintPath>..\DllFile\halcondotnet.dll</HintPath>
     </Reference>
@@ -50,6 +54,7 @@
     <Compile Include="HaiKangCamera.cs" />
     <Compile Include="HalconCamera.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PylonCamera.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

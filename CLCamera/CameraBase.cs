@@ -5,12 +5,17 @@ using System.Text;
 using HalconDotNet;
 namespace CLCamera
 {
-   public   class CameraBase
+   public  class CameraBase
     {
         public  bool m_IsConnected;
         public string m_Cameraname=string .Empty;
         public string m_IpAddress=string.Empty;
         public CameraConnectType m_CameraConnectType;
+        public CameraBase(string cameraname, CameraConnectType cameraconnecttype)
+        {
+            this.m_Cameraname = cameraname;
+            this.m_CameraConnectType = cameraconnecttype;
+        }
         /// <summary>
         /// 连接相机
         /// </summary>
@@ -31,14 +36,14 @@ namespace CLCamera
         /// 设置曝光时间
         /// </summary>
         /// <param name="t"></param>
-        public virtual void SetExpourseTime(int t) { }
-      
+        public virtual void SetExpourseTime(uint t) { }
+        public virtual float GetExpourseTime() { return 0; }
         /// <summary>
         /// 设置相机增益
         /// </summary>
         /// <param name="g"></param>
-        public virtual void SetGain(int g) { }
-      
+        public virtual void SetGain(uint g) { }
+        public virtual uint GetGain() { return 0; }
         
     }
    public  enum CameraConnectType
@@ -51,6 +56,7 @@ namespace CLCamera
     {
         HaiKangCamera,
         HalconCamera,
+        PylonCamera,
     }
     public enum ImageType
     {

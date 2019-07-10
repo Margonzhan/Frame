@@ -38,6 +38,11 @@ namespace Fram.Hardware
                     case CameraType.HalconCamera:
                         camera = new HalconCamera(mem.DeviceName, cameraConnectType);
                         break;
+                    case CameraType.PylonCamera:
+                        camera=new PylonCamera(mem.DeviceName, cameraConnectType);
+                        break;
+                    default:
+                        break;
                 }
                 try
                 {

@@ -10,10 +10,9 @@ namespace CLCamera
         private HTuple m_CameraHandle;
        private  event EventHandler<ImageEventArgs<HObject>> ImageEvent;
        
-        public HalconCamera(string cameraname,CameraConnectType cameraconnecttype)
+        public HalconCamera(string cameraname,CameraConnectType cameraconnecttype): base(cameraname, cameraconnecttype)
         {
-          this.m_Cameraname = cameraname;
-          this.m_CameraConnectType = cameraconnecttype;
+      
         }
         
         public override void OpenCamera()
@@ -79,7 +78,7 @@ namespace CLCamera
                 ImageEvent(this, e);
             }
         }
-        public override void SetExpourseTime(int t)
+        public override void SetExpourseTime(uint t)
         { 
              if (m_CameraHandle != null)
             {
@@ -97,7 +96,7 @@ namespace CLCamera
                  throw new Exception("相机未连接：" + m_Cameraname);
              }
         }
-        public override void  SetGain(int g)
+        public override void  SetGain(uint g)
         {
             if (m_CameraHandle != null)
             {
