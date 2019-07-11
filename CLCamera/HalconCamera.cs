@@ -96,6 +96,12 @@ namespace CLCamera
                  throw new Exception("相机未连接：" + m_Cameraname);
              }
         }
+        public override uint GetExpourseTime()
+        {
+            uint _expouresetime = 0;
+
+            return _expouresetime;
+        }
         public override void  SetGain(uint g)
         {
             if (m_CameraHandle != null)
@@ -113,6 +119,10 @@ namespace CLCamera
             {
                 throw new Exception("相机未连接：" + m_Cameraname);
             }
+        }
+        public override uint GetGain()
+        {
+            return base.GetGain();
         }
     }
    public  class ImageEventArgs<T> : EventArgs

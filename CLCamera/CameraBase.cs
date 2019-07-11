@@ -37,7 +37,7 @@ namespace CLCamera
         /// </summary>
         /// <param name="t"></param>
         public virtual void SetExpourseTime(uint t) { }
-        public virtual float GetExpourseTime() { return 0; }
+        public virtual uint GetExpourseTime() { return 0; }
         /// <summary>
         /// 设置相机增益
         /// </summary>

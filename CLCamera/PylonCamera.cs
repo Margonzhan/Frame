@@ -59,12 +59,18 @@ namespace CLCamera
             {
                 if(camera.IsOpen)
                 {
+                    IFloatParameter parameter = null;
+
                     if (camera.Parameters.Contains(PLCamera.ExposureTimeAbs))
                     {
-                        camera.Parameters[PLCamera.ExposureTimeAbs].SetValue(t);
+                        parameter = camera.Parameters[PLCamera.ExposureTimeAbs];
                     }
                     else
-                        camera.Parameters[PLCamera.ExposureTime].SetValue(t);
+                    {
+                        parameter = camera.Parameters[PLCamera.ExposureTime];
+                    }
+                    if (parameter.IsWritable)
+                        parameter.SetValue(t);
                 }
             }
         }
@@ -74,30 +80,38 @@ namespace CLCamera
             {
                 if (camera.IsOpen)
                 {
-                    if (camera.Parameters.Contains(PLCamera.ExposureTimeAbs))
+                    IFloatParameter parameter = null;
+                    if (camera.Parameters.Contains(PLCamera.GainAbs))
                     {
-                        camera.Parameters[PLCamera.ExposureTimeAbs].SetValue(g);
+                        parameter = camera.Parameters[PLCamera.GainAbs];
                     }
                     else
-                        camera.Parameters[PLCamera.ExposureTime].SetValue(g);
+                    {
+                        parameter = camera.Parameters[PLCamera.Gain];
+                    }
+                    if (parameter.IsWritable)
+                        parameter.SetValue(g);
                 }
             }
         }
-        public override float GetExpourseTime()
+        public override uint GetExpourseTime()
         {
-            float _expourestime = 0;
+            uint _expourestime = 0;
             if (camera != null)
             {
                 if (camera.IsOpen)
                 {
-                    if (camera.Parameters.Contains(PLCamera.GainAbs))
+                    IFloatParameter parameter = null;
+                    if (camera.Parameters.Contains(PLCamera.ExposureTimeAbs))
                     {
-                        _expourestime = (float)camera.Parameters[PLCamera.GainAbs].GetValue();
+                        parameter = camera.Parameters[PLCamera.ExposureTimeAbs];
                     }
                     else
                     {
-                        _expourestime = (float)camera.Parameters[PLCamera.Gain].GetValue();
-                    }                                  
+                        parameter = camera.Parameters[PLCamera.ExposureTime];
+                    }
+                    if (parameter.IsReadable)
+                        _expourestime = (uint)parameter.GetValue();
                 }
             }
             return _expourestime;
@@ -109,14 +123,17 @@ namespace CLCamera
             {
                 if (camera.IsOpen)
                 {
+                    IFloatParameter parameter = null;
                     if (camera.Parameters.Contains(PLCamera.GainAbs))
                     {
-                        _gain = (uint)camera.Parameters[PLCamera.GainAbs].GetValue();
+                        parameter = camera.Parameters[PLCamera.GainAbs];
                     }
                     else
                     {
-                        _gain = (uint)camera.Parameters[PLCamera.Gain].GetValue();
-                    }                  
+                        parameter = camera.Parameters[PLCamera.Gain];
+                    }
+                    if (parameter.IsReadable)
+                        _gain = (uint)parameter.GetValue();
                 }
             }
             return _gain;

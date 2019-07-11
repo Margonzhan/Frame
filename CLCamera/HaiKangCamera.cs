@@ -15,6 +15,8 @@ namespace CLCamera
         MyCamera.MV_CC_DEVICE_INFO_LIST m_pDeviceList;
         MyCamera.cbOutputdelegate ImageCallback;
         MyCamera.cbExceptiondelegate ExceptionCallback;
+        private MyCamera m_pMyCamera;
+
         public  event EventHandler<ImageEventArgs<HObject>> ImageAcquired;
         public HaiKangCamera(string cameraname, CameraConnectType cameraconnecttype): base(cameraname, cameraconnecttype)
         {
@@ -38,13 +40,17 @@ namespace CLCamera
         {
             m_pOperator.Close();      
         }
+        public override HObject SnapShot()
+        {
+            return base.SnapShot();
+        }
         //public override void SnapShot<object>(ref object image)
         //{
         //    int nRet;
 
         //    //触发命令
         //    nRet = m_pOperator.CommandExecute("TriggerSoftware");
-     
+
         //    if (CameraOperator.CO_OK != nRet)
         //    {
         //        throw new Exception(m_Cameraname+"取像失败");
@@ -54,9 +60,26 @@ namespace CLCamera
         {
             m_pOperator.SetFloatValue("ExposureTime", t);
         }
+        public override uint GetExpourseTime()
+        {
+            uint _expoursetime = 0;
+            MyCamera.MVCC_FLOATVALUE stParam = new MyCamera.MVCC_FLOATVALUE();
+            int nRet = m_pMyCamera.MV_CC_GetFloatValue_NET("ExposureTime", ref stParam);
+            if (MyCamera.MV_OK == nRet)
+            {
+                _expoursetime= (uint)stParam.fCurValue;
+            }
+            return _expoursetime;
+        }
         public override void SetGain(uint g)
         {
             m_pOperator.SetFloatValue("Gain", g);
+        }
+        public override uint GetGain()
+        {
+            uint _gain = 0;
+
+            return _gain;
         }
         public void SetTriggerMode(string mode)
         {

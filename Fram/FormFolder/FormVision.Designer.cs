@@ -38,9 +38,13 @@
             this.label_ExpoureseTime = new System.Windows.Forms.Label();
             this.label_camera = new System.Windows.Forms.Label();
             this.hDisplay1 = new HalWindow.HDisplay();
+            this.nmUD_CameraExpourse = new System.Windows.Forms.NumericUpDown();
+            this.nmUD_CameraGain = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmUD_CameraExpourse)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmUD_CameraGain)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -74,6 +78,8 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.nmUD_CameraGain);
+            this.panel1.Controls.Add(this.nmUD_CameraExpourse);
             this.panel1.Controls.Add(this.btn_GrabContinue);
             this.panel1.Controls.Add(this.btn_GrabOnce);
             this.panel1.Controls.Add(this.cmB_Camera);
@@ -94,6 +100,7 @@
             this.btn_GrabContinue.TabIndex = 2;
             this.btn_GrabContinue.Text = "视频播放";
             this.btn_GrabContinue.UseVisualStyleBackColor = true;
+            this.btn_GrabContinue.Click += new System.EventHandler(this.btn_GrabContinue_Click);
             // 
             // btn_GrabOnce
             // 
@@ -155,6 +162,32 @@
             this.hDisplay1.Size = new System.Drawing.Size(614, 553);
             this.hDisplay1.TabIndex = 1;
             // 
+            // nmUD_CameraExpourse
+            // 
+            this.nmUD_CameraExpourse.Location = new System.Drawing.Point(115, 73);
+            this.nmUD_CameraExpourse.Maximum = new decimal(new int[] {
+            2000000,
+            0,
+            0,
+            0});
+            this.nmUD_CameraExpourse.Name = "nmUD_CameraExpourse";
+            this.nmUD_CameraExpourse.Size = new System.Drawing.Size(109, 25);
+            this.nmUD_CameraExpourse.TabIndex = 3;
+            this.nmUD_CameraExpourse.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // nmUD_CameraGain
+            // 
+            this.nmUD_CameraGain.Location = new System.Drawing.Point(115, 118);
+            this.nmUD_CameraGain.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.nmUD_CameraGain.Name = "nmUD_CameraGain";
+            this.nmUD_CameraGain.Size = new System.Drawing.Size(109, 25);
+            this.nmUD_CameraGain.TabIndex = 3;
+            this.nmUD_CameraGain.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // FormVision
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -166,6 +199,8 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmUD_CameraExpourse)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmUD_CameraGain)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -182,5 +217,7 @@
         private HalWindow.HDisplay hDisplay1;
         private System.Windows.Forms.Button btn_GrabContinue;
         private System.Windows.Forms.Button btn_GrabOnce;
+        private System.Windows.Forms.NumericUpDown nmUD_CameraGain;
+        private System.Windows.Forms.NumericUpDown nmUD_CameraExpourse;
     }
 }
