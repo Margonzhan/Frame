@@ -7,7 +7,6 @@ using CommonFunc;
 using System.IO;
 using FileOperate;
 using Newtonsoft.Json;
-using Fram.IOCard;
 using Fram.Hardware;
 namespace Fram.Config
 {
@@ -53,9 +52,14 @@ namespace Fram.Config
     }
   public   class HardWareConfigrationMuster
     {
+        List<MotionCardConfig> m_moitionCardConfigs = new List<MotionCardConfig>();
         List<IoCardConfig> m_ioCardConfigs = new List<IoCardConfig>();
         List<SingleIoDeviceConfig> m_singleIoDeviceConfigs = new List<SingleIoDeviceConfig>();
         List<CameraConfig> m_cameraConfigs = new List<CameraConfig>();
+        public List<MotionCardConfig> MotionCardConfigs
+        {
+            get { return m_moitionCardConfigs; }
+        }
         public List<IoCardConfig> IoCardConfigs
         {
             get { return m_ioCardConfigs; }          

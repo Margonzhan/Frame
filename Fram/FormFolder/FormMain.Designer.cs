@@ -31,6 +31,11 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabPane = new DevExpress.XtraBars.Navigation.TabPane();
             this.tabPage_Auto = new DevExpress.XtraBars.Navigation.TabNavigationPage();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.tabPage_Menu = new DevExpress.XtraBars.Navigation.TabNavigationPage();
@@ -43,6 +48,7 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabPane)).BeginInit();
             this.tabPane.SuspendLayout();
@@ -57,9 +63,9 @@
             this.panel1.Controls.Add(this.tabPane);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1742, 959);
+            this.panel1.Size = new System.Drawing.Size(1161, 639);
             this.panel1.TabIndex = 0;
             // 
             // tabPane
@@ -68,14 +74,14 @@
             this.tabPane.Controls.Add(this.tabPage_Menu);
             this.tabPane.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPane.Location = new System.Drawing.Point(0, 0);
-            this.tabPane.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPane.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabPane.Name = "tabPane";
             this.tabPane.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] {
             this.tabPage_Auto,
             this.tabPage_Menu});
-            this.tabPane.RegularSize = new System.Drawing.Size(1742, 959);
+            this.tabPane.RegularSize = new System.Drawing.Size(1161, 639);
             this.tabPane.SelectedPage = this.tabPage_Menu;
-            this.tabPane.Size = new System.Drawing.Size(1742, 959);
+            this.tabPane.Size = new System.Drawing.Size(1161, 639);
             this.tabPane.TabIndex = 2;
             this.tabPane.Text = "tabPane";
             // 
@@ -83,33 +89,88 @@
             // 
             this.tabPage_Auto.BackgroundPadding = new System.Windows.Forms.Padding(10);
             this.tabPage_Auto.Caption = "Auto";
+            this.tabPage_Auto.Controls.Add(this.textBox2);
+            this.tabPage_Auto.Controls.Add(this.textBox1);
+            this.tabPage_Auto.Controls.Add(this.button5);
+            this.tabPage_Auto.Controls.Add(this.button4);
+            this.tabPage_Auto.Controls.Add(this.button6);
+            this.tabPage_Auto.Controls.Add(this.button3);
             this.tabPage_Auto.Controls.Add(this.button1);
             this.tabPage_Auto.Controls.Add(this.button2);
             this.tabPage_Auto.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabPage_Auto.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPage_Auto.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabPage_Auto.Name = "tabPage_Auto";
             this.tabPage_Auto.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabPage_Auto.Size = new System.Drawing.Size(1720, 892);
+            this.tabPage_Auto.Size = new System.Drawing.Size(1139, 589);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(383, 318);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 21);
+            this.textBox1.TabIndex = 5;
+            // 
+            // button5
+            // 
+            this.button5.Enabled = false;
+            this.button5.Location = new System.Drawing.Point(221, 301);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(110, 38);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "absmove";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Enabled = false;
+            this.button4.Location = new System.Drawing.Point(73, 301);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(110, 38);
+            this.button4.TabIndex = 4;
+            this.button4.Text = "realmove";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button6
+            // 
+            this.button6.Enabled = false;
+            this.button6.Location = new System.Drawing.Point(221, 236);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(110, 38);
+            this.button6.TabIndex = 4;
+            this.button6.Text = "jog-";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Enabled = false;
+            this.button3.Location = new System.Drawing.Point(73, 236);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(110, 38);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "jog+";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(109, 127);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button1.Location = new System.Drawing.Point(73, 85);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(111, 50);
+            this.button1.Size = new System.Drawing.Size(110, 33);
             this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
+            this.button1.Text = "Server on/off";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(109, 236);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button2.Enabled = false;
+            this.button2.Location = new System.Drawing.Point(73, 157);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(111, 55);
+            this.button2.Size = new System.Drawing.Size(110, 37);
             this.button2.TabIndex = 3;
-            this.button2.Text = "button2";
+            this.button2.Text = "home";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -118,10 +179,10 @@
             this.tabPage_Menu.Caption = "Menu";
             this.tabPage_Menu.Controls.Add(this.tabPane_Menu);
             this.tabPage_Menu.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabPage_Menu.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPage_Menu.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabPage_Menu.Name = "tabPage_Menu";
             this.tabPage_Menu.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabPage_Menu.Size = new System.Drawing.Size(1716, 888);
+            this.tabPage_Menu.Size = new System.Drawing.Size(1143, 593);
             // 
             // tabPane_Menu
             // 
@@ -130,39 +191,39 @@
             this.tabPane_Menu.Controls.Add(this.tabNavigationPage_AxisDevice);
             this.tabPane_Menu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPane_Menu.Location = new System.Drawing.Point(0, 0);
-            this.tabPane_Menu.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPane_Menu.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabPane_Menu.Name = "tabPane_Menu";
             this.tabPane_Menu.PageProperties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabPane_Menu.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] {
             this.tabNavigationPage_IoDevice,
             this.tabNavigationPage_Cameras,
             this.tabNavigationPage_AxisDevice});
-            this.tabPane_Menu.RegularSize = new System.Drawing.Size(1716, 888);
+            this.tabPane_Menu.RegularSize = new System.Drawing.Size(1143, 593);
             this.tabPane_Menu.SelectedPage = this.tabNavigationPage_Cameras;
-            this.tabPane_Menu.Size = new System.Drawing.Size(1716, 888);
+            this.tabPane_Menu.Size = new System.Drawing.Size(1143, 593);
             this.tabPane_Menu.TabIndex = 0;
             this.tabPane_Menu.Text = "IO设备";
             // 
             // tabNavigationPage_IoDevice
             // 
             this.tabNavigationPage_IoDevice.Caption = "Io Device";
-            this.tabNavigationPage_IoDevice.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabNavigationPage_IoDevice.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabNavigationPage_IoDevice.Name = "tabNavigationPage_IoDevice";
-            this.tabNavigationPage_IoDevice.Size = new System.Drawing.Size(1690, 817);
+            this.tabNavigationPage_IoDevice.Size = new System.Drawing.Size(1125, 547);
             // 
             // tabNavigationPage_Cameras
             // 
             this.tabNavigationPage_Cameras.Caption = "Camera";
-            this.tabNavigationPage_Cameras.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabNavigationPage_Cameras.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabNavigationPage_Cameras.Name = "tabNavigationPage_Cameras";
-            this.tabNavigationPage_Cameras.Size = new System.Drawing.Size(1690, 817);
+            this.tabNavigationPage_Cameras.Size = new System.Drawing.Size(1125, 547);
             // 
             // tabNavigationPage_AxisDevice
             // 
             this.tabNavigationPage_AxisDevice.Caption = "Axis Device";
-            this.tabNavigationPage_AxisDevice.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabNavigationPage_AxisDevice.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabNavigationPage_AxisDevice.Name = "tabNavigationPage_AxisDevice";
-            this.tabNavigationPage_AxisDevice.Size = new System.Drawing.Size(1717, 889);
+            this.tabNavigationPage_AxisDevice.Size = new System.Drawing.Size(1125, 547);
             // 
             // BottomToolStripPanel
             // 
@@ -200,14 +261,21 @@
             // 
             this.ContentPanel.Size = new System.Drawing.Size(220, 43);
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(498, 318);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 21);
+            this.textBox2.TabIndex = 5;
+            // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1742, 959);
+            this.ClientSize = new System.Drawing.Size(1161, 639);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.Name = "FormMain";
             this.Text = "MyFram";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
@@ -215,6 +283,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabPane)).EndInit();
             this.tabPane.ResumeLayout(false);
             this.tabPage_Auto.ResumeLayout(false);
+            this.tabPage_Auto.PerformLayout();
             this.tabPage_Menu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabPane_Menu)).EndInit();
             this.tabPane_Menu.ResumeLayout(false);
@@ -237,6 +306,12 @@
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPage_IoDevice;
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPage_Cameras;
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPage_AxisDevice;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox textBox2;
 
         #endregion
         //private HalconModle.ShapeModle shapeModle;

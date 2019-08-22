@@ -36,6 +36,13 @@ namespace Fram
               //  m_camera = CameraManager.Instance.Cameras[cmB_Camera.Items[0].ToString()];
                 cmB_Camera.SelectedItem = 0;
             }
+            else
+            {
+                nmUD_CameraExpourse.Enabled = false;
+                nmUD_CameraGain.Enabled = false;
+                btn_GrabContinue.Enabled = false;
+                btn_GrabOnce.Enabled = false;
+            }
         }
         private void btn_GrabOnce_Click(object sender, EventArgs e)
         {

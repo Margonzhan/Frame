@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using cszmcaux;
 using System.IO.Ports;
-namespace Fram.IOCard
+namespace Fram.Hardware.IoCard
 {
     /// <summary>
     /// 正运动公司的EMC存io控制卡，32路input，32路output

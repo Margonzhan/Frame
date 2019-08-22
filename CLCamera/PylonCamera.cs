@@ -16,127 +16,155 @@ namespace CLCamera
         }
         public override void OpenCamera()
         {
-            List<ICameraInfo> allCameras = CameraFinder.Enumerate();           
-            foreach (ICameraInfo cameraInfo in allCameras)
+            lock(m_lock)
             {
-                if (this.m_Cameraname == cameraInfo[CameraInfoKey.UserDefinedName])
+                List<ICameraInfo> allCameras = CameraFinder.Enumerate();
+                foreach (ICameraInfo cameraInfo in allCameras)
                 {
-                    camera = new Camera(cameraInfo);
-                    if (!camera.Open(1000, TimeoutHandling.Return))
+                    if (this.m_Cameraname == cameraInfo[CameraInfoKey.UserDefinedName])
                     {
-                        throw new Exception($"faile to open the camera{this.m_Cameraname}");                     
+                        camera = new Camera(cameraInfo);
+                        if (!camera.Open(1000, TimeoutHandling.Return))
+                        {
+                            throw new Exception($"faile to open the camera{this.m_Cameraname}");
+                        }
+                        return;
                     }
-                    return;
                 }
+                throw new Exception($"cannot find the camera named as{this.m_Cameraname}");
             }
-            throw new Exception($"cannot find the camera named as{this.m_Cameraname}");
+            
         }
         public override void CloseCamera()
         {
-            if(camera!=null)
+            lock(m_lock)
             {
-                camera.Close();
+                if (camera != null)
+                {
+                    camera.Close();
+                }
             }
+            
         }
         public override HObject SnapShot()
         {
-            HObject _image = new HObject();
-            try
+            lock(m_lock)
             {
-                IGrabResult grabResult = camera.StreamGrabber.GrabOne(1000, TimeoutHandling.ThrowException);
-                IntPtr dataaddress = Marshal.UnsafeAddrOfPinnedArrayElement((byte[])grabResult.PixelData, 0);
-                HOperatorSet.GenImage1(out _image, "byte", grabResult.Width, grabResult.Height, dataaddress);
+                HObject _image = new HObject();
+                try
+                {
+                    IGrabResult grabResult = camera.StreamGrabber.GrabOne(1000, TimeoutHandling.ThrowException);
+                    IntPtr dataaddress = Marshal.UnsafeAddrOfPinnedArrayElement((byte[])grabResult.PixelData, 0);
+                    HOperatorSet.GenImage1(out _image, "byte", grabResult.Width, grabResult.Height, dataaddress);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"camera '{this.m_Cameraname}' Snap faild,{ex.Message}");
+                }
+                return _image;
             }
-            catch (Exception ex)
-            {
-                throw new Exception($"camera '{this.m_Cameraname}' Snap faild,{ex.Message}");
-            }
-            return _image;
+            
         }
         public override void SetExpourseTime(uint t)
         {
-            if (camera!=null)
+            lock(m_lock)
             {
-                if(camera.IsOpen)
+                if (camera != null)
                 {
-                    IFloatParameter parameter = null;
+                    if (camera.IsOpen)
+                    {
+                        IFloatParameter parameter = null;
 
-                    if (camera.Parameters.Contains(PLCamera.ExposureTimeAbs))
-                    {
-                        parameter = camera.Parameters[PLCamera.ExposureTimeAbs];
+                        if (camera.Parameters.Contains(PLCamera.ExposureTimeAbs))
+                        {
+                            parameter = camera.Parameters[PLCamera.ExposureTimeAbs];
+                        }
+                        else
+                        {
+                            parameter = camera.Parameters[PLCamera.ExposureTime];
+                        }
+                        if (parameter.IsWritable)
+                            parameter.SetValue(t);
                     }
-                    else
-                    {
-                        parameter = camera.Parameters[PLCamera.ExposureTime];
-                    }
-                    if (parameter.IsWritable)
-                        parameter.SetValue(t);
                 }
             }
+            
         }
         public override void SetGain(uint g)
         {
-            if (camera != null)
+            lock(m_lock)
             {
-                if (camera.IsOpen)
+                if (camera != null)
                 {
-                    IFloatParameter parameter = null;
-                    if (camera.Parameters.Contains(PLCamera.GainAbs))
+                    if (camera.IsOpen)
                     {
-                        parameter = camera.Parameters[PLCamera.GainAbs];
+                        IFloatParameter parameter = null;
+                        if (camera.Parameters.Contains(PLCamera.GainAbs))
+                        {
+                            parameter = camera.Parameters[PLCamera.GainAbs];
+                        }
+                        else
+                        {
+                            parameter = camera.Parameters[PLCamera.Gain];
+                        }
+                        if (parameter.IsWritable)
+                            parameter.SetValue(g);
                     }
-                    else
-                    {
-                        parameter = camera.Parameters[PLCamera.Gain];
-                    }
-                    if (parameter.IsWritable)
-                        parameter.SetValue(g);
                 }
             }
+            
         }
         public override uint GetExpourseTime()
         {
-            uint _expourestime = 0;
-            if (camera != null)
+            lock(m_lock)
             {
-                if (camera.IsOpen)
+                uint _expourestime = 0;
+                if (camera != null)
                 {
-                    IFloatParameter parameter = null;
-                    if (camera.Parameters.Contains(PLCamera.ExposureTimeAbs))
+                    if (camera.IsOpen)
                     {
-                        parameter = camera.Parameters[PLCamera.ExposureTimeAbs];
+                        IFloatParameter parameter = null;
+                        if (camera.Parameters.Contains(PLCamera.ExposureTimeAbs))
+                        {
+                            parameter = camera.Parameters[PLCamera.ExposureTimeAbs];
+                        }
+                        else
+                        {
+                            parameter = camera.Parameters[PLCamera.ExposureTime];
+                        }
+                        if (parameter.IsReadable)
+                            _expourestime = (uint)parameter.GetValue();
                     }
-                    else
-                    {
-                        parameter = camera.Parameters[PLCamera.ExposureTime];
-                    }
-                    if (parameter.IsReadable)
-                        _expourestime = (uint)parameter.GetValue();
                 }
+                return _expourestime;
             }
-            return _expourestime;
+            
         }
         public override uint GetGain()
         {
-            uint _gain = 0;
-            if (camera != null)
+            lock(m_lock)
             {
-                if (camera.IsOpen)
+                uint _gain = 0;
+                if (camera != null)
                 {
-                    IFloatParameter parameter = null;
-                    if (camera.Parameters.Contains(PLCamera.GainAbs))
+                    if (camera.IsOpen)
                     {
-                        parameter = camera.Parameters[PLCamera.GainAbs];
+                        IFloatParameter parameter = null;
+                        if (camera.Parameters.Contains(PLCamera.GainAbs))
+                        {
+                            parameter = camera.Parameters[PLCamera.GainAbs];
+                        }
+                        else
+                        {
+                            parameter = camera.Parameters[PLCamera.Gain];
+                        }
+                        if (parameter.IsReadable)
+                            _gain = (uint)parameter.GetValue();
                     }
-                    else
-                    {
-                        parameter = camera.Parameters[PLCamera.Gain];
-                    }
-                    if (parameter.IsReadable)
-                        _gain = (uint)parameter.GetValue();
                 }
+                return _gain;
             }
-            return _gain;
+            
         }
     }
 }

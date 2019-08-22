@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fram.IOCard
+namespace Fram.Hardware.IoCard
 {
    public  interface IIoCard
     {

@@ -11,7 +11,8 @@ using Connection;
 using CommonFunc;
 using Fram.Config;
 using System.Text;
-
+using System.Threading.Tasks;
+using Fram.Hardware.MotionCard;
 namespace Fram
 {
     public partial class FormMain : Form
@@ -22,12 +23,14 @@ namespace Fram
         Hardware.IoCardManager IoCardManager;
         Hardware.IoDeviceManager IoDeviceManager;
         Hardware.CameraManager CameraManager;
+        Hardware.MotionCardManager MotionCardManager;
         //  HaiKangCamera hk = new HaiKangCamera("camera1", CameraConnectType.GigEVision);
         public FormMain()
         {
             FormLoading.GetInstance().ShowDialog();
             InitializeComponent();
             configManager = ConfigManager.Instance;
+            MotionCardManager = Hardware.MotionCardManager.Instance;
             IoCardManager = Hardware.IoCardManager.Instance;
             IoDeviceManager = Hardware.IoDeviceManager.Instance;
             CameraManager = Hardware.CameraManager.Instance;
@@ -63,50 +66,27 @@ namespace Fram
         {
            // hk.CloseCamera();
         }
-        XMLFile xMLFile = new XMLFile();
-        private void button1_Click(object sender, EventArgs e)
+       
+        private async void  button1_Click(object sender, EventArgs e)
         {
-            var settings = new Newtonsoft.Json.JsonSerializerSettings();
-            settings.TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto;
-            string json;
-            ConfigContent configContent = new ConfigContent();
-            configContent.ConfigFillPath = new string[] { "ConfigFillContent.json", "ConfigFillContent.json" };
-            json = Newtonsoft.Json.JsonConvert.SerializeObject(configContent, Newtonsoft.Json.Formatting.Indented, settings);
-            System.IO.File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "Config\\" + "ConfigFillContent.json", json, Encoding.UTF8);
-
-            HardWareConfigrationMuster hardWareConfigrationMuster = new HardWareConfigrationMuster();
-           // IoCardConfig[] ioCardConfigs = new IoCardConfig[2] ;
-            IoCardConfig ioCardConfig1 = new IoCardConfig();
-            IoCardConfig ioCardConfig2 = new IoCardConfig();
-            hardWareConfigrationMuster.IoCardConfigs.Add( ioCardConfig1);
-            hardWareConfigrationMuster.IoCardConfigs.Add( ioCardConfig2);
-
-            for(int i=0;i<4;i++)
-            {
-                SingleIoDeviceConfig singleIoDeviceConfig = new SingleIoDeviceConfig();
-                singleIoDeviceConfig.DeviceName = "Input" + i.ToString();
-                singleIoDeviceConfig.IoIndex = i;
-                singleIoDeviceConfig.IsInput = true;
-                hardWareConfigrationMuster.singleIoDeviceConfigs.Add(singleIoDeviceConfig);
-            }
-            
-             json = Newtonsoft.Json.JsonConvert.SerializeObject(hardWareConfigrationMuster, Newtonsoft.Json.Formatting.Indented,settings);
-            System.IO.File.WriteAllText(AppDomain.CurrentDomain.BaseDirectory + "Config\\" + "HardWareConfigration.json", json, Encoding.UTF8);
-          
+            MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");
+            card.PowerSet(0, true);
+            button4.Enabled = true;
+            button5.Enabled = true;
         }
-
+        private async Task<int> testasync()
+        {
+          await  Task.Run(() => { Thread.Sleep(5000);MessageBox.Show("111"); });
+            return 3;
+        }
+        private void test()
+        {
+            
+            
+        }
         private void button2_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ConfigManager configManager = ConfigManager.Instance;
-
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            
         }
 
         private void tabPane_Menu_SelectedPageChanged(object sender, DevExpress.XtraBars.Navigation.SelectedPageChangedEventArgs e)
@@ -121,6 +101,16 @@ namespace Fram
                
             }
                 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBox1.Text))
+                return;
+            int puls = Convert.ToInt32(textBox1.Text);
+            int v= Convert.ToInt32(textBox2.Text);
+            MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");
+            card.RelMove(0, 10, 10, 0, (uint)v, puls);
         }
     }
     public class managerrrr : Singleton<managerrrr>

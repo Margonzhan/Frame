@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Fram.IOCard;
+
 using Fram.Config;
+using Fram.Hardware.IoCard;
 namespace Fram.Hardware.IOBaseDevice
 {
     [Serializable]
@@ -18,7 +19,7 @@ namespace Fram.Hardware.IOBaseDevice
         #region property
         public bool IsInput { get { return m_IsInput; } }
         public bool IsShow { get; set; } = true;
-        public string BindDeviceGuid { get; set; }
+        
         #endregion
         /// <summary>
         /// 

@@ -17,59 +17,71 @@ namespace CLCamera
         
         public override void OpenCamera()
         {
-            try
+            lock(m_lock)
             {
-                if (m_CameraHandle != null)
+                try
                 {
-                    return;
+                    if (m_CameraHandle != null)
+                    {
+                        return;
+                    }
+                    string cameratype = m_CameraConnectType.ToString();
+                    HOperatorSet.OpenFramegrabber(cameratype, 0, 0, 0, 0, 0, 0, "default", -1,
+            "default", -1, "false", "default", m_Cameraname, 0, -1, out m_CameraHandle);
+                    this.m_IsConnected = true;
                 }
-                string cameratype = m_CameraConnectType.ToString();
-                HOperatorSet.OpenFramegrabber(cameratype, 0, 0, 0, 0, 0, 0, "default", -1,
-        "default", -1, "false", "default", m_Cameraname, 0, -1, out m_CameraHandle);
-                this.m_IsConnected = true;               
+                catch (Exception ex)
+                {
+                    m_IsConnected = false;
+                    throw new Exception("打开相机异常：" + m_Cameraname + "\r\n" + ex.Message);
+
+                }
             }
-            catch (Exception ex)
-            {
-                m_IsConnected = false;
-                throw new Exception("打开相机异常：" + m_Cameraname+"\r\n"+ex.Message);
-               
-            }
+            
         }
 
        
         public override void CloseCamera()
         {
-            if (m_CameraHandle != null)
+            lock(m_lock)
             {
-                try
+                if (m_CameraHandle != null)
                 {
-                    HOperatorSet.CloseFramegrabber(m_CameraHandle);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("关闭相机异常：" + m_Cameraname + "\r\n" + ex.Message);
+                    try
+                    {
+                        HOperatorSet.CloseFramegrabber(m_CameraHandle);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("关闭相机异常：" + m_Cameraname + "\r\n" + ex.Message);
+                    }
                 }
             }
+            
         }
         public override HObject SnapShot( )
         {
-            HObject _image = new HObject();
-            if (m_CameraHandle != null)
-            {               
-                try
-                {
-                    HOperatorSet.GrabImageAsync(out _image, m_CameraHandle, -1);                 
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("取像异常：" + m_Cameraname + "\r\n" + ex.Message);
-                }
-            }
-            else
+            lock(m_lock)
             {
-                throw new Exception("相机未连接：" + m_Cameraname);
+                HObject _image = new HObject();
+                if (m_CameraHandle != null)
+                {
+                    try
+                    {
+                        HOperatorSet.GrabImageAsync(out _image, m_CameraHandle, -1);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("取像异常：" + m_Cameraname + "\r\n" + ex.Message);
+                    }
+                }
+                else
+                {
+                    throw new Exception("相机未连接：" + m_Cameraname);
+                }
+                return _image;
             }
-            return _image;
+            
         }        
         private void OnImageEvent(ImageEventArgs<HObject> e)
         {
@@ -80,21 +92,25 @@ namespace CLCamera
         }
         public override void SetExpourseTime(uint t)
         { 
-             if (m_CameraHandle != null)
+            lock(m_lock)
             {
-                try
+                if (m_CameraHandle != null)
                 {
-                    HOperatorSet.SetFramegrabberParam(m_CameraHandle, "ExposureTime", t);
+                    try
+                    {
+                        HOperatorSet.SetFramegrabberParam(m_CameraHandle, "ExposureTime", t);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("设置曝光时间异常：" + m_Cameraname);
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    throw new Exception("设置曝光时间异常：" + m_Cameraname);
+                    throw new Exception("相机未连接：" + m_Cameraname);
                 }
             }
-             else
-             {
-                 throw new Exception("相机未连接：" + m_Cameraname);
-             }
+            
         }
         public override uint GetExpourseTime()
         {
@@ -104,6 +120,7 @@ namespace CLCamera
         }
         public override void  SetGain(uint g)
         {
+
             if (m_CameraHandle != null)
             {
                 try

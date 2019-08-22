@@ -23,6 +23,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -67,9 +68,10 @@
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Config\IORelevantConfig\IoCardConfig.cs" />
     <Compile Include="Config\IORelevantConfig\SingleIoDeviceConfig.cs" />
+    <Compile Include="Config\MotionCardConfig\MotionCardConfig.cs" />
     <Compile Include="DelegateUIControl.cs" />
     <Compile Include="FormFolder\FormIO.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="FormFolder\FormIO.Designer.cs">
       <DependentUpon>FormIO.cs</DependentUpon>
@@ -94,18 +96,25 @@
     </Compile>
     <Compile Include="FXSerialConnect.cs" />
     <Compile Include="GlobalParameter.cs" />
+    <Compile Include="Hardware\AxisDevice\Motor.cs" />
+    <Compile Include="Hardware\AxisDevice\ServoMotor.cs" />
+    <Compile Include="Hardware\AxisDevice\StepMotor.cs" />
     <Compile Include="Hardware\CameraManager.cs" />
     <Compile Include="Hardware\HardwareBase.cs" />
     <Compile Include="Hardware\IOBaseDevice\ISingleIoDevice.cs" />
     <Compile Include="Hardware\IOBaseDevice\SingleIoDevice.cs" />
     <Compile Include="Hardware\IoCardManager.cs" />
     <Compile Include="Hardware\IoDeviceManager.cs" />
-    <Compile Include="IOCard\EMC0064.cs" />
-    <Compile Include="IOCard\IIoCard.cs" />
-    <Compile Include="IOCard\IoCardBase.cs" />
-    <Compile Include="IOCard\Zmcaux.cs" />
-    <Compile Include="MotionCard\IMotionCard.cs" />
-    <Compile Include="MotionCard\MotionCardBase.cs" />
+    <Compile Include="Hardware\IOCard\EMC0064.cs" />
+    <Compile Include="Hardware\IOCard\IIoCard.cs" />
+    <Compile Include="Hardware\IOCard\IoCardBase.cs" />
+    <Compile Include="Hardware\IOCard\Zmcaux.cs" />
+    <Compile Include="Hardware\MotionCardManager.cs" />
+    <Compile Include="Hardware\MotionCard\Adlink_Amp204c.cs" />
+    <Compile Include="Hardware\MotionCard\APS168x64.cs" />
+    <Compile Include="Hardware\MotionCard\APS_Define.cs" />
+    <Compile Include="Hardware\MotionCard\IMotionCard.cs" />
+    <Compile Include="Hardware\MotionCard\MotionCardBase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Station\StationBase.cs" />

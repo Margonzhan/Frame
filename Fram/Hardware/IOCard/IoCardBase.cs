@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO.Ports;
-namespace Fram.IOCard
+
+namespace Fram.Hardware.IoCard
 {
-   public  class IoCardBase:IIoCard
+   public  class IoCardBase: HardwareBase,IIoCard
     {
-        #region property
-        public string DeviceName { get; private set; }
-        public Guid Guid { get; private set; }
+        #region property       
         public uint COM { get; private set; }
 
         public Parity Parity { get; private set; }
@@ -26,7 +25,7 @@ namespace Fram.IOCard
         #endregion
         #region method
         public IoCardBase(IoCardConnectType connectType,uint Com,uint baudrate,StopBits stopBits,Parity parity,uint databits,
-            Guid guid,string devicename,uint inputcount,uint outputcount)
+            Guid guid,string devicename,uint inputcount,uint outputcount):base(devicename, guid)
         {
             CardConnectType = connectType;
             COM = Com;
@@ -40,7 +39,7 @@ namespace Fram.IOCard
             OutputCount = outputcount;
         }
         public IoCardBase(IoCardConnectType connectType, string ipaddress, uint port,
-            Guid guid, string devicename, uint inputcount, uint outputcount)
+            Guid guid, string devicename, uint inputcount, uint outputcount):base(devicename, guid)
         {
             CardConnectType = connectType;
             IPAddress = ipaddress;

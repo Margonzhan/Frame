@@ -11,6 +11,7 @@ namespace CLCamera
         public string m_Cameraname=string .Empty;
         public string m_IpAddress=string.Empty;
         public CameraConnectType m_CameraConnectType;
+        protected static readonly object m_lock = new object();
         public CameraBase(string cameraname, CameraConnectType cameraconnecttype)
         {
             this.m_Cameraname = cameraname;

@@ -25,7 +25,8 @@ namespace Fram.Hardware
                 }
                 foreach(var iocard in IoCardManager.Instance.IoCards)
                 {
-                    if(iocard.Value.Guid==mem.BindDeviceGuid)
+                    HardwareBase hardwareBase = (HardwareBase)iocard.Value;
+                    if(hardwareBase.Guid==mem.BindDeviceGuid)
                     {
                        singleIoDevice = new IOBaseDevice.SingleIoDevice(iocard.Value, mem.IsInput, mem.IoIndex, mem.DeviceName, mem.Guid);                                                        
                         m_IoDevices.Add(mem.DeviceName, singleIoDevice);

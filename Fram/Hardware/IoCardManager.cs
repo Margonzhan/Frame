@@ -3,25 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Fram.IOCard;
 using CommonFunc;
 using Fram.Config;
+using Fram.Hardware.IoCard;
+using Fram.Hardware.MotionCard;
 namespace Fram.Hardware
 {
   public   class IoCardManager:Singleton<IoCardManager>
     {
-        Dictionary<string, IoCardBase> m_IoCards = new Dictionary<string, IoCardBase>();
+        Dictionary<string, IIoCard> m_IoCards = new Dictionary<string, IIoCard>();
        public  IoCardManager()
         {
             foreach(var mem in ConfigManager.Instance.HardWareConfigrationMuster.IoCardConfigs)
             {
                IoCardBrand _iocardbrand;
+                if (!mem.Enable)
+                    continue;
                 if (m_IoCards.ContainsKey(mem.DeviceName))
                 {
                     //show error info in this place
                     continue;
                 }
-                   
+                bool ismotioncard = false;
+                foreach(var motionCard in ConfigManager.Instance.HardWareConfigrationMuster.MotionCardConfigs)
+                {
+                    if(mem.Guid==motionCard.Guid)
+                    {
+                        ismotioncard = true;
+                        MotionCard.MotionCardBase _motionCard = (MotionCard.MotionCardBase)Hardware.MotionCardManager.Instance.GetByKey(motionCard.DeviceName);
+                        m_IoCards.Add(mem.DeviceName, _motionCard);
+                        break;
+                        
+                    }
+                }
+                if (ismotioncard)
+                    continue;
                if( Enum.TryParse<IoCardBrand>(mem.IoCardBrand,out _iocardbrand))
                 {
                     switch(_iocardbrand)
@@ -73,11 +89,11 @@ namespace Fram.Hardware
             }
             m_IoCards.Remove(key);
         }
-        public IoCardBase GetByKey(string key)
+        public IIoCard GetByKey(string key)
         {
             return m_IoCards[key];
         }
-        public Dictionary<string, IoCardBase> IoCards
+        public Dictionary<string, IIoCard> IoCards
         {
             get { return m_IoCards; }
         }
