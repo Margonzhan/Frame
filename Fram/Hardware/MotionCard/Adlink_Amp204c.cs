@@ -151,7 +151,7 @@ namespace Fram.Hardware.MotionCard
                 throw new Exception("未加载xml配置文件");
             APS168.APS_set_servo_on((int)axisindex, Convert .ToInt32(value));
         }
-        public override void AbsMove(uint axisindex, uint acc, uint dec, uint startv, uint maxv, int position)
+        public override async Task AbsMove(uint axisindex, uint acc, uint dec, uint startv, uint maxv, int position)
         {
             if (!m_isInitialed)
                 throw new Exception("请先初始化");
@@ -162,15 +162,19 @@ namespace Fram.Hardware.MotionCard
             APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_VS, startv);
 
             APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_VM, maxv);
-            APS168.APS_absolute_move((int)axisindex, position, (int)maxv);
-            //等待Motion Down完成
-            int motionStatusMdn = 5;
-            while ((APS168.APS_motion_status((int)axisindex) & 1 << motionStatusMdn) == 0)
+            await Task.Run(() => 
             {
-                Thread.Sleep(100);
-            }
+                APS168.APS_absolute_move((int)axisindex, position, (int)maxv);
+                //等待Motion Down完成
+                int motionStatusMdn = 5;
+                while ((APS168.APS_motion_status((int)axisindex) & 1 << motionStatusMdn) == 0)
+                {
+                    Thread.Sleep(100);
+                }
+            });
+            
         }
-        public override void RelMove(uint axisindex, uint acc, uint dec, uint startv, uint maxv, int distance)
+        public override async Task RelMoveAsync(uint axisindex, uint acc, uint dec, uint startv, uint maxv, int distance)
         {
             if (!m_isInitialed)
                 throw new Exception("请先初始化");
@@ -181,13 +185,16 @@ namespace Fram.Hardware.MotionCard
             APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_VS, startv);
 
             APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_VM, maxv);
-
-            APS168.APS_relative_move((int)axisindex, distance, (int)maxv);
-            int motionStatusMdn = 5;
-            while ((APS168.APS_motion_status((int)axisindex) & 1 << motionStatusMdn) == 0)
-            {
-                Thread.Sleep(100);
-            }
+            await Task.Run(() =>
+           {
+               APS168.APS_relative_move((int)axisindex, distance, (int)maxv);
+               int motionStatusMdn = 5;
+               while ((APS168.APS_motion_status((int)axisindex) & 1 << motionStatusMdn) == 0)
+               {
+                   Thread.Sleep(100);
+               }
+           });
+          
 
         }
         public override void JogStart(uint axisindex, uint acc, uint dec, uint velocity, bool positiveDirection)
@@ -196,7 +203,8 @@ namespace Fram.Hardware.MotionCard
                 throw new Exception("请先初始化");
             if (!m_isLoadConfigFile)
                 throw new Exception("未加载xml配置文件");
-            APS168.APS_set_axis_param((int)axisindex, (int)APS_Define.PRA_JG_MODE, 1);
+            //jog mode 0 means constant mode,1 means step mode
+            APS168.APS_set_axis_param((int)axisindex, (int)APS_Define.PRA_JG_MODE, 0);
             APS168.APS_set_axis_param((int)axisindex, (int)APS_Define.PRA_JG_DIR, positiveDirection?0:1);
             APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_ACC, acc);
             APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_DEC, dec);
@@ -206,7 +214,7 @@ namespace Fram.Hardware.MotionCard
         {
             APS168.APS_jog_start((int)axisindex, 0);
         }
-        public override void Home(uint axisindex,uint homedir, uint acc, uint dec, uint startv, uint maxv, uint homemode)
+        public override async Task Home(uint axisindex,uint homedir, uint acc, uint dec, uint startv, uint maxv, uint homemode)
         {
             if (!m_isInitialed)
                 throw new Exception("请先初始化");
@@ -217,18 +225,24 @@ namespace Fram.Hardware.MotionCard
             // Set homing acceleration rate
             APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_VM, maxv); // Set homing maximum velocity.
             APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_VS, startv); // Set homing start speed
-            APS168.APS_home_move((int)axisindex);
 
-            int motionStatusCstp = 0, motionStatusAstp = 16;
-            while ((APS168.APS_motion_status((int)axisindex) & 1 << motionStatusCstp) == 0)
+            await Task.Run(() =>
             {
-                Thread.Sleep(100);
-            }
-            Thread.Sleep(500);
-            if ((APS168.APS_motion_status((int)axisindex) & 1 << motionStatusAstp) != 0)
-            {
-                throw new Exception($"轴 { axisindex} 回零失败！");
-            }
+                APS168.APS_home_move((int)axisindex);
+
+                int motionStatusCstp = 0, motionStatusAstp = 16;
+                while ((APS168.APS_motion_status((int)axisindex) & 1 << motionStatusCstp) == 0)
+                {
+                    Thread.Sleep(100);
+                }
+                Thread.Sleep(500);
+                if ((APS168.APS_motion_status((int)axisindex) & 1 << motionStatusAstp) != 0)
+                {
+                    throw new Exception($"轴 { axisindex} 回零失败！");
+                }
+                APS168.APS_set_position((int)axisindex,0);
+            });
+            
         
 
         }

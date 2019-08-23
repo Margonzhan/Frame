@@ -31,6 +31,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabPane = new DevExpress.XtraBars.Navigation.TabPane();
             this.tabPage_Auto = new DevExpress.XtraBars.Navigation.TabNavigationPage();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -48,7 +49,6 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabPane)).BeginInit();
             this.tabPane.SuspendLayout();
@@ -103,6 +103,13 @@
             this.tabPage_Auto.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabPage_Auto.Size = new System.Drawing.Size(1139, 589);
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(498, 318);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 21);
+            this.textBox2.TabIndex = 5;
+            // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(383, 318);
@@ -140,6 +147,8 @@
             this.button6.TabIndex = 4;
             this.button6.Text = "jog-";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button6_MouseDown);
+            this.button6.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button6_MouseUp);
             // 
             // button3
             // 
@@ -150,6 +159,8 @@
             this.button3.TabIndex = 4;
             this.button3.Text = "jog+";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button3_MouseDown);
+            this.button3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button3_MouseUp);
             // 
             // button1
             // 
@@ -260,13 +271,6 @@
             // ContentPanel
             // 
             this.ContentPanel.Size = new System.Drawing.Size(220, 43);
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(498, 318);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 21);
-            this.textBox2.TabIndex = 5;
             // 
             // FormMain
             // 

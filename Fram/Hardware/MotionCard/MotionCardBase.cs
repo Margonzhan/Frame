@@ -55,7 +55,7 @@ namespace Fram.Hardware.MotionCard
         /// <param name="startv">the start velocity </param>
         /// <param name="maxv"> the max velocity</param>
         /// <param name="position"> the pos want to move to</param>
-        public virtual void AbsMove(uint axisindex,uint acc,uint dec,uint startv,uint maxv,int position) { }
+        public virtual async Task AbsMove(uint axisindex,uint acc,uint dec,uint startv,uint maxv,int position) { }
         /// <summary>
         /// relative move
         /// </summary>
@@ -65,7 +65,7 @@ namespace Fram.Hardware.MotionCard
         /// <param name="startv">the start velocity </param>
         /// <param name="maxv"> the max velocity</param>
         /// <param name="position"> the plus want to move</param>
-        public virtual void RelMove(uint axisindex, uint acc, uint dec, uint startv, uint maxv, int distance) { }
+        public virtual async Task  RelMoveAsync(uint axisindex, uint acc, uint dec, uint startv, uint maxv, int distance) { }
         /// <summary>
         /// jog move
         /// </summary>
@@ -82,7 +82,7 @@ namespace Fram.Hardware.MotionCard
         /// <param name="axisindex">the axis want to operate</param>
         /// <param name="value">on means power on,off means power off</param>
         public virtual void PowerSet(uint axisindex,bool value) { }
-        public virtual void Home(uint axisindex,uint homedir, uint acc, uint dec, uint startv, uint maxv,uint homemode) { }
+        public virtual async Task Home(uint axisindex,uint homedir, uint acc, uint dec, uint startv, uint maxv,uint homemode) { }
         public virtual void AxisNormalStop(uint axisindex) { }
         public virtual void AxisEmgStop(uint axisindex) { }
 

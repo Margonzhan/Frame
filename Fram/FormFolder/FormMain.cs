@@ -71,8 +71,11 @@ namespace Fram
         {
             MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");
             card.PowerSet(0, true);
+            button3.Enabled = true;
+            button2.Enabled = true;
             button4.Enabled = true;
             button5.Enabled = true;
+            button6.Enabled = true;
         }
         private async Task<int> testasync()
         {
@@ -84,9 +87,11 @@ namespace Fram
             
             
         }
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
-            
+            MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");
+           await card.Home(0, 1, 1000, 1000, 1000, 1000, 0);
+            MessageBox.Show("home over");
         }
 
         private void tabPane_Menu_SelectedPageChanged(object sender, DevExpress.XtraBars.Navigation.SelectedPageChangedEventArgs e)
@@ -103,14 +108,44 @@ namespace Fram
                 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private async void button4_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(textBox1.Text))
-                return;
-            int puls = Convert.ToInt32(textBox1.Text);
-            int v= Convert.ToInt32(textBox2.Text);
+            Thread thread = new Thread(new ThreadStart(thre));
+            thread.Start();
+        }
+        private async void thre()
+        {
+            //if (string.IsNullOrEmpty(textBox1.Text))
+            //    return;
+            int puls = 100000;// Convert.ToInt32(textBox1.Text);
+            int v = 10000;// Convert.ToInt32(textBox2.Text);
             MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");
-            card.RelMove(0, 10, 10, 0, (uint)v, puls);
+            await card.RelMoveAsync(0, 1000, 1000, 1000, (uint)v, puls);
+            MessageBox.Show("over");
+        }
+
+        private void button3_MouseDown(object sender, MouseEventArgs e)
+        {
+            MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");
+            card.JogStart(0, 100, 100, 500, true);
+        }
+
+        private void button3_MouseUp(object sender, MouseEventArgs e)
+        {
+            MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");
+            card.JogStop(0);
+        }
+
+        private void button6_MouseDown(object sender, MouseEventArgs e)
+        {
+            MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");
+            card.JogStart(0, 100, 100, 5000, false);
+        }
+
+        private void button6_MouseUp(object sender, MouseEventArgs e)
+        {
+            MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");
+            card.JogStop(0);
         }
     }
     public class managerrrr : Singleton<managerrrr>
