@@ -151,17 +151,19 @@ namespace Fram.Hardware.MotionCard
                 throw new Exception("未加载xml配置文件");
             APS168.APS_set_servo_on((int)axisindex, Convert .ToInt32(value));
         }
-        public override async Task AbsMove(uint axisindex, uint acc, uint dec, uint startv, uint maxv, int position)
+        public override async Task AbsMoveAsync(uint axisindex,  int position)
         {
             if (!m_isInitialed)
                 throw new Exception("请先初始化");
             if(!m_isLoadConfigFile)
                 throw new Exception("未加载xml配置文件");
-            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_ACC, acc);
-            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_DEC, dec);
-            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_VS, startv);
+            //APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_ACC, acc);
+            //APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_DEC, dec);
+            //APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_VS, startv);
 
-            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_VM, maxv);
+            //APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_VM, maxv);
+            double maxv = 0;
+            APS168.APS_get_axis_param_f((int)axisindex, (int)APS_Define.PRA_VM, ref  maxv);
             await Task.Run(() => 
             {
                 APS168.APS_absolute_move((int)axisindex, position, (int)maxv);
@@ -174,17 +176,19 @@ namespace Fram.Hardware.MotionCard
             });
             
         }
-        public override async Task RelMoveAsync(uint axisindex, uint acc, uint dec, uint startv, uint maxv, int distance)
+        public override async Task RelMoveAsync(uint axisindex,  int distance)
         {
             if (!m_isInitialed)
                 throw new Exception("请先初始化");
             if (!m_isLoadConfigFile)
                 throw new Exception("未加载xml配置文件");
-            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_ACC, acc);
-            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_DEC, dec);
-            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_VS, startv);
+            //APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_ACC, acc);
+            //APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_DEC, dec);
+            //APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_VS, startv);
 
-            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_VM, maxv);
+            //APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_VM, maxv);
+            double maxv = 0;
+            APS168.APS_get_axis_param_f((int)axisindex, (int)APS_Define.PRA_VM, ref maxv);
             await Task.Run(() =>
            {
                APS168.APS_relative_move((int)axisindex, distance, (int)maxv);
@@ -197,7 +201,7 @@ namespace Fram.Hardware.MotionCard
           
 
         }
-        public override void JogStart(uint axisindex, uint acc, uint dec, uint velocity, bool positiveDirection)
+        public override void JogStart(uint axisindex,  bool positiveDirection)
         {
             if (!m_isInitialed)
                 throw new Exception("请先初始化");
@@ -206,25 +210,25 @@ namespace Fram.Hardware.MotionCard
             //jog mode 0 means constant mode,1 means step mode
             APS168.APS_set_axis_param((int)axisindex, (int)APS_Define.PRA_JG_MODE, 0);
             APS168.APS_set_axis_param((int)axisindex, (int)APS_Define.PRA_JG_DIR, positiveDirection?0:1);
-            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_ACC, acc);
-            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_DEC, dec);
+            //APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_ACC, acc);
+            //APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_DEC, dec);
             APS168.APS_jog_start((int)axisindex, 1);         
         }
         public override void JogStop(uint axisindex)
         {
             APS168.APS_jog_start((int)axisindex, 0);
         }
-        public override async Task Home(uint axisindex,uint homedir, uint acc, uint dec, uint startv, uint maxv, uint homemode)
+        public override async Task HomeAsync(uint axisindex,uint homedir)
         {
             if (!m_isInitialed)
                 throw new Exception("请先初始化");
             if (!m_isLoadConfigFile)
                 throw new Exception("未加载xml配置文件");
             APS168.APS_set_axis_param((int)axisindex, (Int32)APS_Define.PRA_HOME_DIR,Convert .ToInt32(homedir)); // Set home direction
-            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_ACC, acc);
-            // Set homing acceleration rate
-            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_VM, maxv); // Set homing maximum velocity.
-            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_VS, startv); // Set homing start speed
+            //APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_ACC, acc);
+            //// Set homing acceleration rate
+            //APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_VM, maxv); // Set homing maximum velocity.
+            //APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_VS, startv); // Set homing start speed
 
             await Task.Run(() =>
             {
@@ -245,6 +249,184 @@ namespace Fram.Hardware.MotionCard
             
         
 
+        }
+        public override void AxisNormalStop(uint axisindex)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_stop_move((int)axisindex);          
+        }
+        public override void AxisEmgStop(uint axisindex)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_emg_stop((int)axisindex);          
+        }
+        public override void SetAxisAcc(uint axisindex, double paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_ACC, paramvalue);          
+        }
+        public override void GetAxisAcc(uint axisindex, ref double paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_get_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_ACC,ref paramvalue);           
+        }
+        public override void SetAxisDec(uint axisindex, double paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_DEC, paramvalue);
+        }
+        public override void GetAxisDec(uint axisindex, ref double paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_get_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_DEC, ref paramvalue);
+        }
+        public override void SetAxisEndV(uint axisindex, double paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_VE, paramvalue);
+        }
+        public override void GetAxisEndV(uint axisindex, ref double paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_get_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_VE, ref paramvalue);
+        }
+        public override void SetAxisMaxV(uint axisindex, double paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_VM, paramvalue);
+        }
+        public override void GetAxisMaxV(uint axisindex, ref double paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_get_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_VM, ref paramvalue);
+        }
+        public override void SetAxisStartV(uint axisindex, double paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_VS, paramvalue);
+        }
+        public override void GetAxisStartV(uint axisindex, ref double paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_get_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_VS, ref paramvalue);
+        }
+        public override void SetAxisHomeAcc(uint axisindex, double paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_ACC, paramvalue);
+        }
+        public override void GetAxisHomeAcc(uint axisindex, ref double paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_get_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_ACC,ref paramvalue);
+        }
+        public override void SetAxisHomeDec(uint axisindex, double paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            base.SetAxisHomeDec( axisindex,  paramvalue);
+        }
+        public override void GetAxisHomeDec(uint axisindex, ref double paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_get_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_ACC, ref paramvalue);
+        }
+        public override void SetAxisHomeMaxV(uint axisindex, double paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_VM, paramvalue);
+        }
+        public override void GetAxisHomeMaxV(uint axisindex, ref double paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_get_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_VM, ref paramvalue);
+        }
+        public override void SetAxisHomeStartV(uint axisindex, double paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_VS, paramvalue);
+        }
+        public override void GetAxisHomeStartV(uint axisindex, ref double paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_get_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_VS, ref paramvalue);
+        }
+        public override void SetAxisHomeMode(uint axisindex, int paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_MODE, paramvalue);
+        }
+        public override void GetAxisHomeMode(uint axisindex, ref int paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            double rtn=0;
+            APS168.APS_get_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_MODE, ref rtn);
+            paramvalue = (int)rtn;
         }
     }
 }

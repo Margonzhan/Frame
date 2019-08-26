@@ -3,38 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Fram.Hardware.MotionCard;
 namespace Fram.Hardware.AxisDevice
 {
-   public  class ServoMotor:HardwareBase
+   public  class ServoMotor:StepMotor
     {
-        public ServoMotor(string devicename,Guid guid):base(devicename,guid)
+        public ServoMotor(MotionCardBase motionCard, uint axisindex, string devicename, Guid guid) :base(motionCard, axisindex,devicename, guid)
         {
 
         }
         public void PowerSet(bool value)
         {
-
+            m_motionCard.PowerSet(m_axisIndex, value);
         }
-        public void Home(bool direction)
-        {
-
-        }
-        public void AbsMove(int position)
-        {
-
-        }
-        public void RelMove(int distance)
-        {
-
-        }
-        public void JogStart(bool direction)
-        {
-
-        }
-        public void JogStop()
-        {
-
-        }
+       
     }
 }

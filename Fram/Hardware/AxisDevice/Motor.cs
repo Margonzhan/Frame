@@ -28,13 +28,17 @@ namespace Fram.Hardware.AxisDevice
         { get; set; }
         public abstract double MoveDecV
         { get; set; }
-        public abstract double MoveV
+        public abstract double MoveVS
         { get; set; }
-
-       //  public abstract void PowerSet(bool value);
-         public abstract void Home(bool ispositivedir);
-         public abstract void AbsMove(int position);
-         public abstract void RelMove(int distance);
+        public abstract double MoveVE
+        { get; set; }
+        public abstract double MoveVM
+        { get; set; }
+            
+        public abstract Task HomeAsync(bool ispositivedir);
+      
+         public abstract Task AbsMoveAsync(int position);      
+         public abstract Task RelMoveAsync(int distance);
          public abstract void JogStart(bool ispositivedir);
          public abstract void JogStop();
     }

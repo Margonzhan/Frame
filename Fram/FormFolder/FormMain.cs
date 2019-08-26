@@ -13,6 +13,7 @@ using Fram.Config;
 using System.Text;
 using System.Threading.Tasks;
 using Fram.Hardware.MotionCard;
+using Fram.Hardware.AxisDevice;
 namespace Fram
 {
     public partial class FormMain : Form
@@ -24,6 +25,7 @@ namespace Fram
         Hardware.IoDeviceManager IoDeviceManager;
         Hardware.CameraManager CameraManager;
         Hardware.MotionCardManager MotionCardManager;
+        ServoMotor stepMotor;
         //  HaiKangCamera hk = new HaiKangCamera("camera1", CameraConnectType.GigEVision);
         public FormMain()
         {
@@ -39,7 +41,8 @@ namespace Fram
             
             FormLoading.GetInstance().Closed();
             this.WindowState = FormWindowState.Maximized;
-           
+            MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");
+            stepMotor = new ServoMotor(card, 0, "server0", new Guid());
 
         }
         private void Init()
@@ -69,8 +72,7 @@ namespace Fram
        
         private async void  button1_Click(object sender, EventArgs e)
         {
-            MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");
-            card.PowerSet(0, true);
+            stepMotor.PowerSet(true);
             button3.Enabled = true;
             button2.Enabled = true;
             button4.Enabled = true;
@@ -89,8 +91,7 @@ namespace Fram
         }
         private async void button2_Click(object sender, EventArgs e)
         {
-            MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");
-           await card.Home(0, 1, 1000, 1000, 1000, 1000, 0);
+           await stepMotor.HomeAsync(true);
             MessageBox.Show("home over");
         }
 
@@ -110,42 +111,37 @@ namespace Fram
 
         private async void button4_Click(object sender, EventArgs e)
         {
-            Thread thread = new Thread(new ThreadStart(thre));
-            thread.Start();
+            stepMotor.RelMoveAsync(10000);
         }
-        private async void thre()
+        private async Task thre()
         {
             //if (string.IsNullOrEmpty(textBox1.Text))
             //    return;
             int puls = 100000;// Convert.ToInt32(textBox1.Text);
             int v = 10000;// Convert.ToInt32(textBox2.Text);
-            MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");
-            await card.RelMoveAsync(0, 1000, 1000, 1000, (uint)v, puls);
-            MessageBox.Show("over");
+            MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");           
+            card.RelMoveAsync(0,  puls);
+      
         }
 
         private void button3_MouseDown(object sender, MouseEventArgs e)
         {
-            MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");
-            card.JogStart(0, 100, 100, 500, true);
+            stepMotor.JogStart(true);
         }
 
         private void button3_MouseUp(object sender, MouseEventArgs e)
         {
-            MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");
-            card.JogStop(0);
+            stepMotor.JogStop();
         }
 
         private void button6_MouseDown(object sender, MouseEventArgs e)
         {
-            MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");
-            card.JogStart(0, 100, 100, 5000, false);
+            stepMotor.JogStart(false);
         }
 
         private void button6_MouseUp(object sender, MouseEventArgs e)
         {
-            MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");
-            card.JogStop(0);
+            stepMotor.JogStop();
         }
     }
     public class managerrrr : Singleton<managerrrr>
