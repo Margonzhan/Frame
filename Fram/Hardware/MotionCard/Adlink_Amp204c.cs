@@ -428,5 +428,22 @@ namespace Fram.Hardware.MotionCard
             APS168.APS_get_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_MODE, ref rtn);
             paramvalue = (int)rtn;
         }
+        public override void GetAxisPosition(uint axisindex, ref double paramvalue)
+        {
+            if (!m_isInitialed)
+                throw new Exception("请先初始化");
+            if (!m_isLoadConfigFile)
+                throw new Exception("未加载xml配置文件");
+            APS168.APS_get_position_f((int)axisindex, ref paramvalue);           
+        }
+        public override void GetAxisIoData(uint axisindex, ref int value)
+        {
+            value = APS168.APS_motion_io_status((int)axisindex);           
+        }
+        public override void GetAxisStatue(uint axisindex, ref int value)
+        {
+            value = APS168.APS_motion_status((int)axisindex);
+            base.GetAxisStatue(axisindex, ref value);
+        }
     }
 }

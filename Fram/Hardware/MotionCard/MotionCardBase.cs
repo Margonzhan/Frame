@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 using Fram.Hardware.IoCard;
 namespace Fram.Hardware.MotionCard
 {
-  public class MotionCardBase:HardwareBase,IMotionCard,IIoCard
+    public class MotionCardBase : HardwareBase, IMotionCard, IIoCard
     {
-        protected  int m_startAxisIndex;
-        protected  int m_totalAxisCount;
-        protected  int m_cardId;
+        protected int m_startAxisIndex;
+        protected int m_totalAxisCount;
+        protected int m_cardId;
         protected bool m_isInitialed = false;
         protected bool m_isLoadConfigFile = false;
-        protected  int m_cardIdMode = 0;//which way to get the card id,auto system assigned or manul dis switch
+        protected int m_cardIdMode = 0;//which way to get the card id,auto system assigned or manul dis switch
         public int StartAxisIndex
         {
-            get {return  m_startAxisIndex; }
+            get { return m_startAxisIndex; }
         }
         public int TotalAxisCount
         {
@@ -26,7 +26,7 @@ namespace Fram.Hardware.MotionCard
         {
             get { return m_cardId; }
         }
-        public MotionCardBase(string devicename,Guid guid,int cardid=0,int cardidmode=0):base(devicename,guid)
+        public MotionCardBase(string devicename, Guid guid, int cardid = 0, int cardidmode = 0) : base(devicename, guid)
         {
             m_cardId = cardid;
             m_cardIdMode = cardidmode;
@@ -68,7 +68,7 @@ namespace Fram.Hardware.MotionCard
         /// <param name="maxv"> the max velocity</param>
         /// <param name="position"> the plus want to move</param>
        // public virtual async Task  RelMoveAsync(uint axisindex, uint acc, uint dec, uint startv, uint maxv, int distance) { }
-        public virtual async Task RelMoveAsync(uint axisindex,  int distance) { }
+        public virtual async Task RelMoveAsync(uint axisindex, int distance) { }
 
         /// <summary>
         /// jog move
@@ -87,13 +87,13 @@ namespace Fram.Hardware.MotionCard
         /// </summary>
         /// <param name="axisindex">the axis want to operate</param>
         /// <param name="value">on means power on,off means power off</param>
-        public virtual void PowerSet(uint axisindex,bool value) { }
-        public virtual async Task HomeAsync(uint axisindex,uint homedir) { }
+        public virtual void PowerSet(uint axisindex, bool value) { }
+        public virtual async Task HomeAsync(uint axisindex, uint homedir) { }
         public virtual void AxisNormalStop(uint axisindex) { }
         public virtual void AxisEmgStop(uint axisindex) { }
 
-        public virtual void SetAxisAcc(uint axisindex, double  paramvalue) { }
-        public virtual void GetAxisAcc(uint axisindex,ref double  paramvalue) { }
+        public virtual void SetAxisAcc(uint axisindex, double paramvalue) { }
+        public virtual void GetAxisAcc(uint axisindex, ref double paramvalue) { }
         public virtual void SetAxisDec(uint axisindex, double paramvalue) { }
         public virtual void GetAxisDec(uint axisindex, ref double paramvalue) { }
         public virtual void SetAxisStartV(uint axisindex, double paramvalue) { }
@@ -103,8 +103,8 @@ namespace Fram.Hardware.MotionCard
         public virtual void SetAxisEndV(uint axisindex, double paramvalue) { }
         public virtual void GetAxisEndV(uint axisindex, ref double paramvalue) { }
 
-        public virtual void SetAxisHomeAcc(uint axisindex,double paramvalue) { }
-        public virtual void GetAxisHomeAcc(uint axisindex,ref double paramvalue) { }
+        public virtual void SetAxisHomeAcc(uint axisindex, double paramvalue) { }
+        public virtual void GetAxisHomeAcc(uint axisindex, ref double paramvalue) { }
         public virtual void SetAxisHomeStartV(uint axisindex, double paramvalue) { }
         public virtual void GetAxisHomeStartV(uint axisindex, ref double paramvalue) { }
         public virtual void SetAxisHomeMaxV(uint axisindex, double paramvalue) { }
@@ -112,8 +112,12 @@ namespace Fram.Hardware.MotionCard
         public virtual void SetAxisHomeDec(uint axisindex, double paramvalue) { }
         public virtual void GetAxisHomeDec(uint axisindex, ref double paramvalue) { }
         public virtual void SetAxisHomeMode(uint axisindex, int paramvalue) { }
-        public virtual void GetAxisHomeMode(uint axisindex,ref int paramvalue) { }
-        #endregion
+        public virtual void GetAxisHomeMode(uint axisindex, ref int paramvalue) { }
+
+        public virtual void GetAxisPosition(uint axisindex, ref double paramvalue) { }
+        public virtual void GetAxisIoData(uint axisindex, ref int value) { }
+        public virtual void GetAxisStatue(uint axisindex,ref int value) { }
+          #endregion
     }
     public enum MotionCardBrand
     {
