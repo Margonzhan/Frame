@@ -7,7 +7,7 @@ using HalconDotNet;
 using CLCamera;
 using HalconModle;
 using System.Xml;
-using Connection;
+using Communication;
 using CommonFunc;
 using Fram.Config;
 using System.Text;

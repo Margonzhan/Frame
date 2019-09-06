@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-namespace Connection
+namespace Communication
 {
    public  class NetClientConnection
     {

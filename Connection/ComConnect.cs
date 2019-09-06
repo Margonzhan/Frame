@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO.Ports;
 using System.Threading;
-namespace Connection
+namespace Communication
 {
     public class ComConnect
     {    

@@ -163,9 +163,9 @@
       <Project>{deeafd62-1f59-45cd-9c66-34f5ca7ed03c}</Project>
       <Name>CommonFunc</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Connection\Connection.csproj">
+    <ProjectReference Include="..\Connection\Communication.csproj">
       <Project>{b5b73599-34b1-43db-9d2c-c9b523b22995}</Project>
-      <Name>Connection</Name>
+      <Name>Communication</Name>
     </ProjectReference>
     <ProjectReference Include="..\Display\HDisplay\HDisplay.csproj">
       <Project>{96cc5929-ee8a-4cb5-812e-5cee3c23820b}</Project>

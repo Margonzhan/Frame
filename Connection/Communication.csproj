@@ -7,8 +7,8 @@
     <ProjectGuid>{B5B73599-34B1-43DB-9D2C-C9B523B22995}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Connection</RootNamespace>
-    <AssemblyName>Connection</AssemblyName>
+    <RootNamespace>Communication</RootNamespace>
+    <AssemblyName>Communication</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComConnect.cs" />
+    <Compile Include="CommunicationBase.cs" />
     <Compile Include="NetConnection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Connection;
+using Communication;
 using System.Threading;
 using FileOperate;
 using Fram;

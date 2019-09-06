@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fram", "Fram\Fram.csproj", "{5DA21538-22BF-4522-BE58-47542FEFAE5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connection", "Connection\Connection.csproj", "{B5B73599-34B1-43DB-9D2C-C9B523B22995}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Communication", "Connection\Communication.csproj", "{B5B73599-34B1-43DB-9D2C-C9B523B22995}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileOperate", "FileOperate\FileOperate.csproj", "{BC57B764-2415-4089-BBCB-C1C3195FF37E}"
 EndProject
