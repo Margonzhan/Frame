@@ -41,5 +41,8 @@ namespace Fram.Hardware.AxisDevice
          public abstract Task RelMoveAsync(int distance);
          public abstract void JogStart(bool ispositivedir);
          public abstract void JogStop();
+        public abstract void GetAxisIoStatue(ref int data);
+        public abstract void GetAxisMotionStatue(ref int data);
+        public abstract void GetAxisCPoint(ref double data);
     }
 }

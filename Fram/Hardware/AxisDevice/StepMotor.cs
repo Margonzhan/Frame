@@ -141,7 +141,20 @@ namespace Fram.Hardware.AxisDevice
         {
             await m_motionCard.RelMoveAsync(m_axisIndex, distance);
         }
-        
+        public override void GetAxisIoStatue(ref int data)
+        {
+            m_motionCard.GetAxisIoData(m_axisIndex, ref data);
+
+        }
+        public override void GetAxisMotionStatue(ref int data)
+        {
+            m_motionCard.GetAxisStatue(m_axisIndex, ref data);
+        }
+        public override void GetAxisCPoint(ref double data)
+        {
+            m_motionCard.GetAxisPosition(m_axisIndex, ref data);
+        }
+
     }
 
 }
