@@ -56,7 +56,7 @@ namespace Fram.Hardware
         {
             return m_motionCards[key];
         }
-        public Dictionary<string, IMotionCard> IoCards
+        public Dictionary<string, IMotionCard> MotionCards
         {
             get { return m_motionCards; }
         }

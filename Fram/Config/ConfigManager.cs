@@ -12,7 +12,7 @@ namespace Fram.Config
 {
    public  class ConfigManager:Singleton<ConfigManager>
     {
-        public const string ConfigFillContent = "Config\\ConfigFillContent.json";
+        public const string ConfigFillContent = "Config\\ConfigFile\\ConfigFillContent.json";
         public HardWareConfigrationMuster HardWareConfigrationMuster { get; private set; }
         public ConfigManager()
         {
@@ -28,16 +28,16 @@ namespace Fram.Config
             {
                 if (!mem.EndsWith(".json"))
                 {
-                    Log.WriteString($"{AppDomain.CurrentDomain.BaseDirectory + "Config\\" + ConfigFillContent} is not json file");
-                    throw new IOException($"{AppDomain.CurrentDomain.BaseDirectory + "Config\\" + ConfigFillContent} is not json file");
+                    Log.WriteString($"{AppDomain.CurrentDomain.BaseDirectory + "Config\\ConfigFile\\" + ConfigFillContent} is not json file");
+                    throw new IOException($"{AppDomain.CurrentDomain.BaseDirectory + "Config\\ConfigFile\\" + ConfigFillContent} is not json file");
                 }
                 if (!File.Exists("Config\\" + mem))
                 {
-                    Log.WriteString($"{AppDomain.CurrentDomain.BaseDirectory + "Config\\" + ConfigFillContent} is not exist");
-                    throw new IOException($"{AppDomain.CurrentDomain.BaseDirectory + "Config\\" + ConfigFillContent} is not exist");
+                    Log.WriteString($"{AppDomain.CurrentDomain.BaseDirectory + "Config\\ConfigFile\\" + ConfigFillContent} is not exist");
+                    throw new IOException($"{AppDomain.CurrentDomain.BaseDirectory + "Config\\ConfigFile\\" + ConfigFillContent} is not exist");
                 }
 
-                string _configinfo = File.ReadAllText("Config\\" + mem);
+                string _configinfo = File.ReadAllText("Config\\ConfigFile\\" + mem);
                 HardWareConfigrationMuster = JsonConvert.DeserializeObject<HardWareConfigrationMuster>(_configinfo);
             }
         }      
@@ -55,6 +55,7 @@ namespace Fram.Config
         List<MotionCardConfig> m_moitionCardConfigs = new List<MotionCardConfig>();
         List<IoCardConfig> m_ioCardConfigs = new List<IoCardConfig>();
         List<SingleIoDeviceConfig> m_singleIoDeviceConfigs = new List<SingleIoDeviceConfig>();
+        List<AxisConfig> m_axisConfigs = new List<AxisConfig>();
         List<CameraConfig> m_cameraConfigs = new List<CameraConfig>();
         public List<MotionCardConfig> MotionCardConfigs
         {
@@ -64,9 +65,13 @@ namespace Fram.Config
         {
             get { return m_ioCardConfigs; }          
         } 
-        public List<SingleIoDeviceConfig> singleIoDeviceConfigs
+        public List<SingleIoDeviceConfig> SingleIoDeviceConfigs
         {
             get { return m_singleIoDeviceConfigs; }
+        }
+        public List<AxisConfig> AxisConfigs
+        {
+            get { return m_axisConfigs; }
         }
         public List<CameraConfig> CameraConfigs
         {

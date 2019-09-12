@@ -13,7 +13,7 @@ namespace Fram.Hardware
         Dictionary<string, IOBaseDevice.SingleIoDevice> m_IoDevices = new Dictionary<string, IOBaseDevice.SingleIoDevice>();
         public IoDeviceManager()
         {
-            foreach(var mem in ConfigManager.Instance.HardWareConfigrationMuster.singleIoDeviceConfigs)
+            foreach(var mem in ConfigManager.Instance.HardWareConfigrationMuster.SingleIoDeviceConfigs)
             {
                 if (!mem.Enable)
                     continue;

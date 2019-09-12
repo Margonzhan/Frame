@@ -68,7 +68,8 @@
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Config\IORelevantConfig\IoCardConfig.cs" />
     <Compile Include="Config\IORelevantConfig\SingleIoDeviceConfig.cs" />
-    <Compile Include="Config\MotionCardConfig\MotionCardConfig.cs" />
+    <Compile Include="Config\MotionRelevantConfig\AxisConfig.cs" />
+    <Compile Include="Config\MotionRelevantConfig\MotionCardConfig.cs" />
     <Compile Include="DelegateUIControl.cs" />
     <Compile Include="FormFolder\FormIO.cs">
       <SubType>UserControl</SubType>
@@ -99,6 +100,7 @@
     <Compile Include="Hardware\AxisDevice\Motor.cs" />
     <Compile Include="Hardware\AxisDevice\ServoMotor.cs" />
     <Compile Include="Hardware\AxisDevice\StepMotor.cs" />
+    <Compile Include="Hardware\AxisManager.cs" />
     <Compile Include="Hardware\CameraManager.cs" />
     <Compile Include="Hardware\HardwareBase.cs" />
     <Compile Include="Hardware\IOBaseDevice\ISingleIoDevice.cs" />
@@ -141,6 +143,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Config\ConfigFile\ConfigFillContent.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\ConfigFile\HardWareConfigration.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

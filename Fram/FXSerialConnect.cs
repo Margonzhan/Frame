@@ -7,6 +7,7 @@ using System.Threading;
 using FileOperate;
 using Fram;
 using System.Drawing;
+
 namespace readCodetest
 {
     /// <summary>
@@ -21,7 +22,7 @@ namespace readCodetest
 
         private byte M10_M17 = new byte();
         Thread ReadIoHandle;
-        ComConnect serial;
+        SerialCommunicate serial;
         public static FXSerialConnect GetInstance()
         {
             if (m_instance == null)
@@ -49,10 +50,10 @@ namespace readCodetest
             {
                 if (serial == null)
                 {
-                    serial = new ComConnect(portName, baudrate, databit, parity, stopbits);
-                    serial.OpenSerialPort();
-                    serial.PortDateReceiveEvent -= serial_PortDateReceiveEvent;
-                    serial.PortDateReceiveEvent += serial_PortDateReceiveEvent;
+                    serial = new SerialCommunicate(portName, baudrate, databit, parity, stopbits);
+                    serial.Connect();
+                   // serial.PortDateReceiveEvent -= serial_PortDateReceiveEvent;
+                   // serial.PortDateReceiveEvent += serial_PortDateReceiveEvent;
                     ReadIoHandle.Start();
                 }
             }
@@ -134,7 +135,7 @@ namespace readCodetest
         }
         public void CloseConnect()
         {
-            serial.Close();
+            serial.DisConnect();
         }
     }
 }
