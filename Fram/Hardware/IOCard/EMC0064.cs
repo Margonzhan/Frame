@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using cszmcaux;
 using System.IO.Ports;
+using Communication;
+
 namespace Fram.Hardware.IoCard
 {
     /// <summary>
@@ -13,26 +15,26 @@ namespace Fram.Hardware.IoCard
     public class EMC0064 : IoCardBase
     {
         IntPtr phandle;
-        public EMC0064(IoCardConnectType connectType,uint Com,uint baudrate, StopBits stopBits,Parity parity,uint databits,
-             Guid guid,string devicename,uint inputcount,uint outputcount) : base(connectType, Com, baudrate, stopBits, parity, databits, guid, devicename, inputcount, outputcount)
-            {
-            Open();
-            }
-        public EMC0064(IoCardConnectType connectType, string ipaddress, uint port,
-            Guid guid, string devicename, uint inputcount, uint outputcount):base(connectType, ipaddress, port, guid, devicename, inputcount, outputcount)           
+        public EMC0064(BaseCommunicate communicate, Guid guid,string devicename,uint inputcount,uint outputcount) : base(communicate,  guid, devicename, inputcount, outputcount)
         {
             Open();
         }
+        
         private new bool Open()
         {
             int ret=0;
-            switch (CardConnectType)
+            switch (Communicate.CommunicationType)
             {
-                case IoCardConnectType.EtherNet:
-                     ret = zmcaux.ZAux_OpenEth(IPAddress, out phandle);                
+                case CommunicatioinType.TcpClient:
+                    TcpClientCommunicate tcpClientCommunicate = (TcpClientCommunicate)Communicate;
+                     ret = zmcaux.ZAux_OpenEth(tcpClientCommunicate.LocalIpAddress, out phandle);                
                     break;
-                case IoCardConnectType.SerialPort:                   
-                     ret=  zmcaux.ZAux_OpenCom(COM, out  phandle);
+                case CommunicatioinType.SerialPort:
+                    SerialCommunicate serialCommunicate = (SerialCommunicate)Communicate;
+                    if (!serialCommunicate.PortName.StartsWith("COM"))
+                        throw new Exception();
+                    int comIndex = int.Parse( serialCommunicate.PortName.Substring(3, 1));
+                    ret =  zmcaux.ZAux_OpenCom((uint)comIndex, out  phandle);
                     break;
                 default:
                     // log the error info

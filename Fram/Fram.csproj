@@ -64,6 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\CameraConfig\CameraConfig.cs" />
+    <Compile Include="Config\CommunicateConfig\BaseCommunicateConfig.cs" />
+    <Compile Include="Config\CommunicateConfig\SerialPortConfig.cs" />
+    <Compile Include="Config\CommunicateConfig\TcpClientConfig.cs" />
     <Compile Include="Config\ConfigBase.cs" />
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Config\IORelevantConfig\IoCardConfig.cs" />

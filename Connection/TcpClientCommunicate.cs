@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace Communication
 {
-   public  class TcpClientCommunicate : BaseCommunicate,ITcpClientCommunicate,IHeartBeat 
+   public  class TcpClientCommunicate : BaseCommunicate,IHeartBeat 
     {
         #region variable member
         private TcpClient m_Client;
         private readonly object m_lock=new object();
         private IPAddress remoteIpaddress;
-        private int remotePort;
+        private uint remotePort;
         private CancellationTokenSource cts;
         private Task _heartTask;
         #endregion
@@ -100,7 +100,7 @@ namespace Communication
         #endregion
 
         #region function
-        public TcpClientCommunicate(string localIpAddress,int localPort, string remoteIpAddress, int remotePort)
+        public TcpClientCommunicate(string localIpAddress,uint localPort, string remoteIpAddress, uint remotePort)
         {
             if(!IPAddress.TryParse(localIpAddress,out  IPAddress localipaddress))
             {
@@ -112,7 +112,7 @@ namespace Communication
             }
             this.remoteIpaddress = remoteipaddress;
             this.remotePort = remotePort;
-            m_Client = new TcpClient(new System.Net.IPEndPoint(localipaddress, localPort));
+            m_Client = new TcpClient(new System.Net.IPEndPoint(localipaddress, (int)localPort));
         }
        public override  void Connect()
         {
@@ -121,7 +121,7 @@ namespace Communication
                 try
                 {
                     if (!m_Client.Connected)
-                        m_Client.Connect(remoteIpaddress, remotePort);
+                        m_Client.Connect(remoteIpaddress, (int)remotePort);
 
                 }
                 catch (Exception ex)

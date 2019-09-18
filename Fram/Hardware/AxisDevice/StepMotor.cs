@@ -115,9 +115,9 @@ namespace Fram.Hardware.AxisDevice
             set { m_motionCard.SetAxisMaxV(m_axisIndex, value); }
         }
         #endregion
-        public StepMotor(IMotionCard motionCard,uint axisindex, string devicename, Guid guid) : base(devicename, guid)
+        public StepMotor(MotionCardBase motionCard,uint axisindex, string devicename, Guid guid) : base(devicename, guid)
         {
-            m_motionCard = (MotionCardBase)motionCard;
+            m_motionCard = motionCard;
             m_axisIndex = axisindex;
         }
         public override async Task HomeAsync(bool ispositivedir)

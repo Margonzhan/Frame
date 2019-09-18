@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Fram.Hardware.IoCard;
 namespace Fram.Hardware.MotionCard
 {
-    public class MotionCardBase : HardwareBase, IMotionCard, IIoCard
+    public class MotionCardBase : HardwareBase, IIoCard
     {
         protected int m_startAxisIndex;
         protected int m_totalAxisCount;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Communication
 {
-    public class SerialCommunicate : BaseCommunicate,ISerialCommunicate
+    public class SerialCommunicate : BaseCommunicate
     {
         #region member variables
         SerialPort port;
@@ -18,28 +18,28 @@ namespace Communication
         
 
         #region property
-        string ISerialCommunicate.PortName
+       public  string PortName
         {
             get { return port.PortName; }          
         }
-        int ISerialCommunicate.BaudRate
+       public  int BaudRate
         {
             get { return port.BaudRate; }         
         }
-        Parity ISerialCommunicate.Parity
+        public Parity Parity
         {
             get { return port.Parity; }         
         }
-        int ISerialCommunicate.DataBits
+        public int DataBits
         {
             get { return port.DataBits; }
             
         }
-        StopBits ISerialCommunicate.StopBits
+        public StopBits StopBits
         {
             get { return port.StopBits; }            
         }
-        string ISerialCommunicate.NewLine
+        public string NewLine
         {
             get {return  port.NewLine; }           
         }
@@ -145,5 +145,10 @@ namespace Communication
             port.WriteLine(data);
         }
         #endregion
+    }
+    public class PortEventArgs : EventArgs
+    {
+        public byte[] buffer;
+        public int bytes;
     }
 }

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommonFunc;
+using Communication;
 using Fram.Config;
 using Fram.Hardware.IoCard;
 using Fram.Hardware.MotionCard;
+using Communication;
 namespace Fram.Hardware
 {
   public   class IoCardManager:Singleton<IoCardManager>
@@ -43,31 +45,20 @@ namespace Fram.Hardware
                     switch(_iocardbrand)
                     {
                         case IoCardBrand.ZMotion_EMC0064:
-                            if (mem.ConnectType == IoCardConnectType.EtherNet.ToString())
+                            if (mem.Communicate.CommunicationType == Config.CommunicatioinType.TcpClient)
                             {
-                                EMC0064 eMC0064 = new EMC0064(IoCardConnectType.EtherNet, mem.IpAddress, mem.Port, mem.Guid, mem.DeviceName, mem.InputCount, mem.OutputCount); ;
+                                TcpClientConfig Config = (TcpClientConfig)mem.Communicate;
+                                TcpClientCommunicate tcpClient = new TcpClientCommunicate(Config.LocalIpAddress, Config.LocalPort, Config.RemoteIpAddress, Config.RemotePort);
+                                EMC0064 eMC0064 = new EMC0064(tcpClient, mem.Guid, mem.DeviceName, mem.InputCount, mem.OutputCount);                               
                                 m_IoCards.Add(mem.DeviceName, eMC0064);
                             }
                             else
                             {
-                                System.IO.Ports.StopBits _stopBits;
-                                if(!Enum.TryParse<System.IO.Ports.StopBits>(mem.StopBits, out _stopBits))
-                                {
-                                    // log the error info
-                                    continue;
-                                }
-                                System.IO.Ports.Parity _parity;
-                                if(!Enum.TryParse<System.IO.Ports.Parity>(mem.Parity, out _parity))
-                                {
-                                    // log the error info
-                                    continue;
-                                }
-                                EMC0064 eMC0064 = new EMC0064(IoCardConnectType.SerialPort,mem.COM,mem.BaudRate, _stopBits, _parity, mem.DataBits, mem.Guid, mem.DeviceName, mem.InputCount, mem.OutputCount); ;
+                                SerialPortConfig config=(SerialPortConfig)mem.Communicate;
+                                SerialCommunicate serialCommunicate = new SerialCommunicate(config.PortName, config.BaudRate, config.DataBits, config.Parity, config.StopBits, config.NewLine);
+                                EMC0064 eMC0064 = new EMC0064(serialCommunicate, mem.Guid, mem.DeviceName, mem.InputCount, mem.OutputCount); 
                                 m_IoCards.Add(mem.DeviceName, eMC0064);
                             }
-                           
-                            
-                            
                             break;
                     }
                 }

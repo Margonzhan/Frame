@@ -10,7 +10,7 @@ namespace Fram.Hardware
 {
    public  class MotionCardManager : Singleton<MotionCardManager>
     {
-        Dictionary<string, IMotionCard> m_motionCards = new Dictionary<string, IMotionCard>();
+        Dictionary<string, MotionCardBase> m_motionCards = new Dictionary<string, MotionCardBase>();
         public MotionCardManager()
         {
             foreach (var mem in ConfigManager.Instance.HardWareConfigrationMuster.MotionCardConfigs)
@@ -52,11 +52,11 @@ namespace Fram.Hardware
             }
             m_motionCards.Remove(key);
         }
-        public IMotionCard GetByKey(string key)
+        public MotionCardBase GetByKey(string key)
         {
             return m_motionCards[key];
         }
-        public Dictionary<string, IMotionCard> MotionCards
+        public Dictionary<string, MotionCardBase> MotionCards
         {
             get { return m_motionCards; }
         }
