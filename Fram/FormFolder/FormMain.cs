@@ -25,7 +25,7 @@ namespace Fram
         Hardware.IoDeviceManager IoDeviceManager;
         Hardware.CameraManager CameraManager;
         Hardware.MotionCardManager MotionCardManager;
-        ServoMotor stepMotor;
+        
         //  HaiKangCamera hk = new HaiKangCamera("camera1", CameraConnectType.GigEVision);
         public FormMain()
         {
@@ -41,8 +41,6 @@ namespace Fram
             
             FormLoading.GetInstance().Closed();
             this.WindowState = FormWindowState.Maximized;
-            MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");
-            stepMotor = new ServoMotor(card, 0, "server0", new Guid());
 
         }
         private void Init()
@@ -72,7 +70,7 @@ namespace Fram
        
         private async void  button1_Click(object sender, EventArgs e)
         {
-            stepMotor.PowerSet(true);
+            
             button3.Enabled = true;
             button2.Enabled = true;
             button4.Enabled = true;
@@ -91,7 +89,7 @@ namespace Fram
         }
         private async void button2_Click(object sender, EventArgs e)
         {
-           await stepMotor.HomeAsync(true);
+          // await stepMotor.HomeAsync(true);
             MessageBox.Show("home over");
         }
 
@@ -111,7 +109,7 @@ namespace Fram
 
         private async void button4_Click(object sender, EventArgs e)
         {
-            stepMotor.RelMoveAsync(10000);
+          //  stepMotor.RelMoveAsync(10000);
         }
         private async Task thre()
         {
@@ -119,29 +117,29 @@ namespace Fram
             //    return;
             int puls = 100000;// Convert.ToInt32(textBox1.Text);
             int v = 10000;// Convert.ToInt32(textBox2.Text);
-            MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");           
-            card.RelMoveAsync(0,  puls);
+           // MotionCardBase card = (MotionCardBase)MotionCardManager.GetByKey("amp204c");           
+           // card.RelMoveAsync(0,  puls);
       
         }
 
         private void button3_MouseDown(object sender, MouseEventArgs e)
         {
-            stepMotor.JogStart(true);
+           // stepMotor.JogStart(true);
         }
 
         private void button3_MouseUp(object sender, MouseEventArgs e)
         {
-            stepMotor.JogStop();
+           // stepMotor.JogStop();
         }
 
         private void button6_MouseDown(object sender, MouseEventArgs e)
         {
-            stepMotor.JogStart(false);
+           // stepMotor.JogStart(false);
         }
 
         private void button6_MouseUp(object sender, MouseEventArgs e)
         {
-            stepMotor.JogStop();
+           // stepMotor.JogStop();
         }
     }
     public class managerrrr : Singleton<managerrrr>

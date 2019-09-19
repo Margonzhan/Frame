@@ -45,5 +45,7 @@ namespace Fram.Hardware.IoCard
     public enum IoCardBrand
     {
         ZMotion_EMC0064,
+        SerialIOCardTest,
+        TcpClientIOCardTest,
     }
 }

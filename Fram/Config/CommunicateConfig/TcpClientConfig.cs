@@ -8,9 +8,9 @@ namespace Fram.Config
 {
    public  class TcpClientConfig:BaseCommunicateConfig
     {
-        public  string LocalIpAddress { get; private set; }
-        public uint LocalPort { get; private set; }
-        public string RemoteIpAddress { get; private set; }
-        public uint RemotePort { get; private set; }
+        public  string LocalIpAddress { get;  set; }
+        public uint LocalPort { get;  set; }
+        public string RemoteIpAddress { get;  set; }
+        public uint RemotePort { get;  set; }
     }
 }

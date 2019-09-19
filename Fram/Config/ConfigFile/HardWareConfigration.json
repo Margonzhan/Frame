@@ -25,7 +25,7 @@
     {
       "MotionCardBrand": "AdlinkAMP204c",
       "ConnectType": "EtherNet",
-      "Enable": true,
+      "Enable": false,
       "DeviceName": "amp204c",
       "Guid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b"
     }
@@ -44,7 +44,40 @@
       "Guid": "2ad51f62-4fc9-490f-8cc8-cc448894f03b"
     },
     {
+      "IoCardBrand": "SerialIOCardTest",
+      "Communicate": {
+        "ConnectType": "SerialPort",
+        "PortName": "COM3",
+        "BaudRate": 9600,
+        "Parity": "Even",
+        "DataBits": 8,
+        "StopBits": "One"
+      },
+
+      "InputCount": 32,
+      "OutputCount": 32,
       "Enable": true,
+      "DeviceName": "testiocard",
+      "Guid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13"
+    },
+    {
+      "IoCardBrand": "TcpClientIOCardTest",
+      "Communicate": {
+        "ConnectType": "TcpClient",
+        "LocalIpAddress": "127.0.0.2",
+        "LocalPort": 8070,
+        "RemoteIpAddress": "127.0.0.1",
+        "RemotePort": 8080
+      },
+
+      "InputCount": 32,
+      "OutputCount": 32,
+      "Enable": true,
+      "DeviceName": "testiocard1",
+      "Guid": "1f487ff6-5685-49c8-a2e7-60bb75caf614"
+    },
+    {
+      "Enable": false,
       "DeviceName": "amp204c",
       "Guid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b"
     }
@@ -52,144 +85,144 @@
   "SingleIoDeviceConfigs": [
     {
       "DeviceName": "Input0",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "3bd20161-ddad-451c-a332-1dbb02425d22",
-      "Enable": true,
+      "Enable": false,
       "IsShow": true,
       "IsInput": true,
       "IoIndex": 8
     },
     {
       "DeviceName": "Input1",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "9740d39d-d477-4f18-a919-41a49669e8d7",
-      "Enable": true,
+      "Enable": false,
       "IsShow": true,
       "IsInput": true,
       "IoIndex": 9
     },
     {
       "DeviceName": "Input2",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "3ea3c8bf-3c52-4d47-89d0-5962640f96a5",
-      "Enable": true,
+      "Enable": false,
       "IsShow": true,
       "IsInput": true,
       "IoIndex": 10
     },
     {
       "DeviceName": "Input3",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "5838cee7-f023-40c0-a051-868ef1d2ce0d",
-      "Enable": true,
+      "Enable": false,
       "IsShow": true,
       "IsInput": true,
       "IoIndex": 11
     },
     {
       "DeviceName": "Input4",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "5838cee7-f023-40c0-a051-868ef1d2ce0d",
-      "Enable": true,
+      "Enable": false,
       "IsShow": true,
       "IsInput": true,
       "IoIndex": 12
     },
     {
       "DeviceName": "Input5",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "5838cee7-f023-40c0-a051-868ef1d2ce0d",
-      "Enable": true,
+      "Enable": false,
       "IsShow": true,
       "IsInput": true,
       "IoIndex": 13
     },
     {
       "DeviceName": "Input6",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "5838cee7-f023-40c0-a051-868ef1d2ce0d",
-      "Enable": true,
+      "Enable": false,
       "IsShow": true,
       "IsInput": true,
       "IoIndex": 14
     },
     {
       "DeviceName": "Input7",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "5838cee7-f023-40c0-a051-868ef1d2ce0d",
-      "Enable": true,
+      "Enable": false,
       "IsShow": true,
       "IsInput": true,
       "IoIndex": 15
     },
     {
       "DeviceName": "Input8",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "5838cee7-f023-40c0-a051-868ef1d2ce0d",
-      "Enable": true,
+      "Enable": false,
       "IsShow": true,
       "IsInput": true,
       "IoIndex": 16
     },
     {
       "DeviceName": "Input9",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "5838cee7-f023-40c0-a051-868ef1d2ce0d",
-      "Enable": true,
+      "Enable": false,
       "IsShow": true,
       "IsInput": true,
       "IoIndex": 17
     },
     {
       "DeviceName": "Input10",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "5838cee7-f023-40c0-a051-868ef1d2ce0d",
-      "Enable": true,
+      "Enable": false,
       "IsShow": true,
       "IsInput": true,
       "IoIndex": 18
     },
     {
       "DeviceName": "Input11",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "5838cee7-f023-40c0-a051-868ef1d2ce0d",
-      "Enable": true,
+      "Enable": false,
       "IsShow": true,
       "IsInput": true,
       "IoIndex": 19
     },
     {
       "DeviceName": "Input12",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "5838cee7-f023-40c0-a051-868ef1d2ce0d",
-      "Enable": true,
+      "Enable": false,
       "IsShow": true,
       "IsInput": true,
       "IoIndex": 20
     },
     {
       "DeviceName": "Input13",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "5838cee7-f023-40c0-a051-868ef1d2ce0d",
-      "Enable": true,
+      "Enable": false,
       "IsShow": true,
       "IsInput": true,
       "IoIndex": 21
     },
     {
       "DeviceName": "Input14",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "5838cee7-f023-40c0-a051-868ef1d2ce0d",
-      "Enable": true,
+      "Enable": false,
       "IsShow": true,
       "IsInput": true,
       "IoIndex": 22
     },
     {
       "DeviceName": "Input15",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "5838cee7-f023-40c0-a051-868ef1d2ce0d",
-      "Enable": true,
+      "Enable": false,
       "IsShow": true,
       "IsInput": true,
       "IoIndex": 23
@@ -198,7 +231,7 @@
 
     {
       "DeviceName": "Output0",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "3bd20161-ddad-451c-a332-1dbb02425d22",
       "Enable": true,
       "IsShow": true,
@@ -207,7 +240,7 @@
     },
     {
       "DeviceName": "Output1",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "9740d39d-d477-4f18-a919-41a49669e8d7",
       "Enable": true,
       "IsShow": true,
@@ -216,7 +249,7 @@
     },
     {
       "DeviceName": "Output2",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "3ea3c8bf-3c52-4d47-89d0-5962640f96a5",
       "Enable": true,
       "IsShow": true,
@@ -225,7 +258,7 @@
     },
     {
       "DeviceName": "Output3",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "5838cee7-f023-40c0-a051-868ef1d2ce0d",
       "Enable": true,
       "IsShow": true,
@@ -234,7 +267,7 @@
     },
     {
       "DeviceName": "Output4",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "5838cee7-f023-40c0-a051-868ef1d2ce0d",
       "Enable": true,
       "IsShow": true,
@@ -243,7 +276,7 @@
     },
     {
       "DeviceName": "Output5",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "3bd20161-ddad-451c-a332-1dbb02425d22",
       "Enable": true,
       "IsShow": true,
@@ -252,7 +285,7 @@
     },
     {
       "DeviceName": "Output6",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "9740d39d-d477-4f18-a919-41a49669e8d7",
       "Enable": true,
       "IsShow": true,
@@ -261,7 +294,7 @@
     },
     {
       "DeviceName": "Output7",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "3ea3c8bf-3c52-4d47-89d0-5962640f96a5",
       "Enable": true,
       "IsShow": true,
@@ -270,7 +303,7 @@
     },
     {
       "DeviceName": "Output8",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "Guid": "5838cee7-f023-40c0-a051-868ef1d2ce0d",
       "Enable": true,
       "IsShow": true,
@@ -279,7 +312,7 @@
     },
     {
       "DeviceName": "Output9",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "1f487ff6-5685-49c8-a2e7-60bb75caf614",
       "Guid": "5838cee7-f023-40c0-a051-868ef1d2ce0d",
       "Enable": true,
       "IsShow": true,
@@ -288,7 +321,7 @@
     },
     {
       "DeviceName": "Output10",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "1f487ff6-5685-49c8-a2e7-60bb75caf614",
       "Guid": "3bd20161-ddad-451c-a332-1dbb02425d22",
       "Enable": true,
       "IsShow": true,
@@ -297,7 +330,7 @@
     },
     {
       "DeviceName": "Output11",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "1f487ff6-5685-49c8-a2e7-60bb75caf614",
       "Guid": "9740d39d-d477-4f18-a919-41a49669e8d7",
       "Enable": true,
       "IsShow": true,
@@ -306,7 +339,7 @@
     },
     {
       "DeviceName": "Output12",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "1f487ff6-5685-49c8-a2e7-60bb75caf614",
       "Guid": "3ea3c8bf-3c52-4d47-89d0-5962640f96a5",
       "Enable": true,
       "IsShow": true,
@@ -315,7 +348,7 @@
     },
     {
       "DeviceName": "Output13",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "1f487ff6-5685-49c8-a2e7-60bb75caf614",
       "Guid": "5838cee7-f023-40c0-a051-868ef1d2ce0d",
       "Enable": true,
       "IsShow": true,
@@ -324,7 +357,7 @@
     },
     {
       "DeviceName": "Output14",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "1f487ff6-5685-49c8-a2e7-60bb75caf614",
       "Guid": "5838cee7-f023-40c0-a051-868ef1d2ce0d",
       "Enable": true,
       "IsShow": true,
@@ -333,7 +366,7 @@
     },
     {
       "DeviceName": "Output15",
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "1f487ff6-5685-49c8-a2e7-60bb75caf614",
       "Guid": "3bd20161-ddad-451c-a332-1dbb02425d22",
       "Enable": true,
       "IsShow": true,
@@ -343,7 +376,7 @@
   ],
   "AxisConfigs": [
     {
-      "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
+      "BindDeviceGuid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13",
       "DeviceName": "Axis1",
       "Guid": "ea6c5b64-158f-4d15-98ed-033906d35d90",
       "Enable": false,

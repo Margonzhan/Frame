@@ -109,11 +109,13 @@
     <Compile Include="Hardware\IOBaseDevice\ISingleIoDevice.cs" />
     <Compile Include="Hardware\IOBaseDevice\SingleIoDevice.cs" />
     <Compile Include="Hardware\IoCardManager.cs" />
+    <Compile Include="Hardware\IoCard\SerialIOCardTest.cs" />
+    <Compile Include="Hardware\IoCard\TcpClientIoCardTest.cs" />
     <Compile Include="Hardware\IoDeviceManager.cs" />
-    <Compile Include="Hardware\IOCard\EMC0064.cs" />
-    <Compile Include="Hardware\IOCard\IIoCard.cs" />
-    <Compile Include="Hardware\IOCard\IoCardBase.cs" />
-    <Compile Include="Hardware\IOCard\Zmcaux.cs" />
+    <Compile Include="Hardware\IoCard\EMC0064.cs" />
+    <Compile Include="Hardware\IoCard\IIoCard.cs" />
+    <Compile Include="Hardware\IoCard\IoCardBase.cs" />
+    <Compile Include="Hardware\IoCard\Zmcaux.cs" />
     <Compile Include="Hardware\MotionCardManager.cs" />
     <Compile Include="Hardware\MotionCard\Adlink_Amp204c.cs" />
     <Compile Include="Hardware\MotionCard\APS168x64.cs" />

@@ -11,13 +11,13 @@ namespace Fram.Config
 {
    public  class SerialPortConfig:BaseCommunicateConfig
     {
-        public  string PortName { get; private set; }
-        public int BaudRate { get; private set; }
-        [JsonConverter(typeof (StringEnumConverter))]
-        public Parity Parity { get; private set; }
-        public int DataBits { get; private set; }
+        public  string PortName { get;  set; }
+        public int BaudRate { get; set; } = 9600;
         [JsonConverter(typeof(StringEnumConverter))]
-        public StopBits StopBits { get; private set; }
-        public  string NewLine { get; private set; }
+        public Parity Parity { get; set; } = Parity.None;
+        public int DataBits { get; set; } = 8;
+        [JsonConverter(typeof(StringEnumConverter))]
+        public StopBits StopBits { get; set; } = StopBits.None;
+        public string NewLine { get; set; } = "\n";
     }
 }

@@ -60,6 +60,19 @@ namespace Fram.Hardware
                                 m_IoCards.Add(mem.DeviceName, eMC0064);
                             }
                             break;
+                        case IoCardBrand.SerialIOCardTest:
+                            SerialPortConfig config1 = (SerialPortConfig)mem.Communicate;
+
+                            SerialCommunicate serialCommunicate1 = new SerialCommunicate(config1.PortName, config1.BaudRate, config1.DataBits, config1.Parity, config1.StopBits, config1.NewLine);
+                            SerialIOCardTest serialIOCardTest=new SerialIOCardTest(serialCommunicate1, mem.Guid, mem.DeviceName, mem.InputCount, mem.OutputCount);
+                            m_IoCards.Add(mem.DeviceName, serialIOCardTest);
+                            break;
+                        case IoCardBrand.TcpClientIOCardTest:
+                            TcpClientConfig config2 = (TcpClientConfig)mem.Communicate;
+                            TcpClientCommunicate tcpClientCommunicate = new TcpClientCommunicate(config2.LocalIpAddress, config2.LocalPort, config2.RemoteIpAddress, config2.RemotePort);
+                            TcpClientIoCardTest tcpClientIoCard = new TcpClientIoCardTest(tcpClientCommunicate, mem.Guid, mem.DeviceName, mem.InputCount, mem.OutputCount);
+                            m_IoCards.Add(mem.DeviceName, tcpClientIoCard);
+                            break;
                     }
                 }
             }

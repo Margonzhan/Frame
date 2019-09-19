@@ -8,6 +8,9 @@ using System.IO;
 using FileOperate;
 using Newtonsoft.Json;
 using Fram.Hardware;
+using Newtonsoft.Json.Linq;
+using Communication;
+
 namespace Fram.Config
 {
    public  class ConfigManager:Singleton<ConfigManager>
@@ -31,17 +34,83 @@ namespace Fram.Config
                     Log.WriteString($"{AppDomain.CurrentDomain.BaseDirectory + "Config\\ConfigFile\\" + ConfigFillContent} is not json file");
                     throw new IOException($"{AppDomain.CurrentDomain.BaseDirectory + "Config\\ConfigFile\\" + ConfigFillContent} is not json file");
                 }
-                if (!File.Exists("Config\\" + mem))
+                if (!File.Exists("Config\\ConfigFile\\" + mem))
                 {
                     Log.WriteString($"{AppDomain.CurrentDomain.BaseDirectory + "Config\\ConfigFile\\" + ConfigFillContent} is not exist");
                     throw new IOException($"{AppDomain.CurrentDomain.BaseDirectory + "Config\\ConfigFile\\" + ConfigFillContent} is not exist");
                 }
 
                 string _configinfo = File.ReadAllText("Config\\ConfigFile\\" + mem);
-                HardWareConfigrationMuster = JsonConvert.DeserializeObject<HardWareConfigrationMuster>(_configinfo);
+                dataConverter dataConverter = new dataConverter();
+                HardWareConfigrationMuster = JsonConvert.DeserializeObject<HardWareConfigrationMuster>(_configinfo, dataConverter);
             }
-        }      
-       
+        }
+        public class dataConverter : DATACreationConverter<BaseCommunicateConfig>
+        {
+            protected override BaseCommunicateConfig Create(Type objectType, JObject jObject)
+            {
+                string info;
+                if (FieldExists("TcpClient", jObject))
+                {
+                    info= jObject.ToString();
+                    return JsonConvert.DeserializeObject<TcpClientConfig>(info);
+                    // return new TcpClientCommunicate(jObject.Value<String>("LocalIpAddress"), jObject.Value<uint>("LocalPort"), jObject.Value<String>("RemoteIpAddress"), jObject.Value<uint>("RemotePort"));
+                }
+                else
+                {
+                    info = jObject.ToString();
+                    
+                    return  JsonConvert.DeserializeObject<SerialPortConfig>(info);
+                }
+            }
+
+            private bool FieldExists(string fieldName, JObject jObject)
+            {
+                return jObject.Value<string>("ConnectType") == fieldName;
+            }
+        }
+
+        public abstract class DATACreationConverter<T> : JsonConverter
+        {
+            /// <summary>
+        
+            /// Create an instance of objectType, based properties in the JSON object
+
+            /// </summary>
+
+            /// <param name="objectType">type of object expected</param>
+
+            /// <param name="jObject">
+
+            /// contents of JSON object that will be deserialized
+
+            /// </param>
+
+            /// <returns></returns>
+            protected abstract T Create(Type objectType, JObject jObject);
+
+            public override bool CanConvert(Type objectType)
+            {
+                return typeof(T).IsAssignableFrom(objectType);
+            }
+
+            public override object ReadJson(JsonReader reader,Type objectType,object existingValue,JsonSerializer serializer)
+            {
+                // Load JObject from stream
+                JObject jObject = JObject.Load(reader);
+
+                // Create target object based on JObject
+                T target = Create(objectType, jObject);
+
+                // Populate the object properties
+                serializer.Populate(jObject.CreateReader(), target);
+                return target;
+            }
+            public override void WriteJson(JsonWriter writer,object value,JsonSerializer serializer)
+            {
+                throw new NotImplementedException();
+            }
+        }
     }
     /// <summary>
     /// save the config file path want to read 
