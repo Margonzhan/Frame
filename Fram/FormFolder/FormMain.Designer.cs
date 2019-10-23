@@ -28,17 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.XtraCharts.XYDiagram xyDiagram1 = new DevExpress.XtraCharts.XYDiagram();
+            DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.LineSeriesView lineSeriesView1 = new DevExpress.XtraCharts.LineSeriesView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabPane = new DevExpress.XtraBars.Navigation.TabPane();
             this.tabPage_Auto = new DevExpress.XtraBars.Navigation.TabNavigationPage();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.chartControl1 = new DevExpress.XtraCharts.ChartControl();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.tabPage_Menu = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tabPane_Menu = new DevExpress.XtraBars.Navigation.TabPane();
             this.tabNavigationPage_IoDevice = new DevExpress.XtraBars.Navigation.TabNavigationPage();
@@ -49,10 +46,15 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
+            this.shapeModle1 = new HalconModle.ShapeModle();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabPane)).BeginInit();
             this.tabPane.SuspendLayout();
             this.tabPage_Auto.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(lineSeriesView1)).BeginInit();
             this.tabPage_Menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabPane_Menu)).BeginInit();
             this.tabPane_Menu.SuspendLayout();
@@ -89,84 +91,30 @@
             // 
             this.tabPage_Auto.BackgroundPadding = new System.Windows.Forms.Padding(10);
             this.tabPage_Auto.Caption = "Auto";
-            this.tabPage_Auto.Controls.Add(this.textBox2);
-            this.tabPage_Auto.Controls.Add(this.textBox1);
-            this.tabPage_Auto.Controls.Add(this.button5);
-            this.tabPage_Auto.Controls.Add(this.button4);
-            this.tabPage_Auto.Controls.Add(this.button6);
-            this.tabPage_Auto.Controls.Add(this.button3);
+            this.tabPage_Auto.Controls.Add(this.shapeModle1);
+            this.tabPage_Auto.Controls.Add(this.chartControl1);
             this.tabPage_Auto.Controls.Add(this.button1);
-            this.tabPage_Auto.Controls.Add(this.button2);
             this.tabPage_Auto.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabPage_Auto.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage_Auto.Name = "tabPage_Auto";
             this.tabPage_Auto.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabPage_Auto.Size = new System.Drawing.Size(1526, 741);
             // 
-            // textBox2
+            // chartControl1
             // 
-            this.textBox2.Location = new System.Drawing.Point(664, 398);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(132, 25);
-            this.textBox2.TabIndex = 5;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(511, 398);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(132, 25);
-            this.textBox1.TabIndex = 5;
-            // 
-            // button5
-            // 
-            this.button5.Enabled = false;
-            this.button5.Location = new System.Drawing.Point(295, 376);
-            this.button5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(147, 48);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "absmove";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Enabled = false;
-            this.button4.Location = new System.Drawing.Point(97, 376);
-            this.button4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(147, 48);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "realmove";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button6
-            // 
-            this.button6.Enabled = false;
-            this.button6.Location = new System.Drawing.Point(295, 295);
-            this.button6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(147, 48);
-            this.button6.TabIndex = 4;
-            this.button6.Text = "jog-";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button6_MouseDown);
-            this.button6.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button6_MouseUp);
-            // 
-            // button3
-            // 
-            this.button3.Enabled = false;
-            this.button3.Location = new System.Drawing.Point(97, 295);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(147, 48);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "jog+";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button3_MouseDown);
-            this.button3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button3_MouseUp);
+            xyDiagram1.AxisX.VisibleInPanesSerializable = "-1";
+            xyDiagram1.AxisY.VisibleInPanesSerializable = "-1";
+            this.chartControl1.Diagram = xyDiagram1;
+            this.chartControl1.Legend.Name = "Default Legend";
+            this.chartControl1.Location = new System.Drawing.Point(72, 181);
+            this.chartControl1.Name = "chartControl1";
+            series1.LegendName = "Default Legend";
+            series1.Name = "Series 1";
+            series1.View = lineSeriesView1;
+            this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
+        series1};
+            this.chartControl1.Size = new System.Drawing.Size(172, 252);
+            this.chartControl1.TabIndex = 3;
             // 
             // button1
             // 
@@ -175,21 +123,9 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(147, 41);
             this.button1.TabIndex = 2;
-            this.button1.Text = "Server on/off";
+            this.button1.Text = "Open";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(97, 196);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(147, 46);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "home";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // tabPage_Menu
             // 
@@ -226,7 +162,7 @@
             this.tabNavigationPage_IoDevice.Caption = "Io Device";
             this.tabNavigationPage_IoDevice.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabNavigationPage_IoDevice.Name = "tabNavigationPage_IoDevice";
-            this.tabNavigationPage_IoDevice.Size = new System.Drawing.Size(1500, 684);
+            this.tabNavigationPage_IoDevice.Size = new System.Drawing.Size(1504, 683);
             // 
             // tabNavigationPage_Cameras
             // 
@@ -278,6 +214,13 @@
             // 
             this.ContentPanel.Size = new System.Drawing.Size(220, 43);
             // 
+            // shapeModle1
+            // 
+            this.shapeModle1.Location = new System.Drawing.Point(354, 26);
+            this.shapeModle1.Name = "shapeModle1";
+            this.shapeModle1.Size = new System.Drawing.Size(826, 521);
+            this.shapeModle1.TabIndex = 4;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -293,7 +236,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabPane)).EndInit();
             this.tabPane.ResumeLayout(false);
             this.tabPage_Auto.ResumeLayout(false);
-            this.tabPage_Auto.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(lineSeriesView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).EndInit();
             this.tabPage_Menu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabPane_Menu)).EndInit();
             this.tabPane_Menu.ResumeLayout(false);
@@ -305,7 +251,6 @@
         private DevExpress.XtraBars.Navigation.TabPane tabPane;
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabPage_Auto;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabPage_Menu;
         private System.Windows.Forms.ToolStripPanel BottomToolStripPanel;
         private System.Windows.Forms.ToolStripPanel TopToolStripPanel;
@@ -316,12 +261,8 @@
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPage_IoDevice;
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPage_Cameras;
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPage_AxisDevice;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox2;
+        private DevExpress.XtraCharts.ChartControl chartControl1;
+        private HalconModle.ShapeModle shapeModle1;
 
         #endregion
         //private HalconModle.ShapeModle shapeModle;

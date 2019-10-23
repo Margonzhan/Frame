@@ -29,7 +29,8 @@ namespace Fram.Station
             foreach(var mem in StationDictionry)
             {
                 string error = null;
-                if(!mem.Value.Init(ref error))
+                mem.Value.Init(ref error);
+                if (!string.IsNullOrEmpty(error))
                 {
                     errorInfo += error;
                 }

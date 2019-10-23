@@ -14,6 +14,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Fram.Hardware.MotionCard;
 using Fram.Hardware.AxisDevice;
+using DevExpress.XtraCharts;
+
 namespace Fram
 {
     public partial class FormMain : Form
@@ -67,15 +69,57 @@ namespace Fram
         {
            // hk.CloseCamera();
         }
-       
-        private async void  button1_Click(object sender, EventArgs e)
+        DataTable ddd;
+        private  void  button1_Click(object sender, EventArgs e)
         {
+             DataTable data= CSV.OpenCSV("C: \\Users\\test\\Desktop\\untitled5.csv");
             
-            button3.Enabled = true;
-            button2.Enabled = true;
-            button4.Enabled = true;
-            button5.Enabled = true;
-            button6.Enabled = true;
+           // DataTable data = CreateTestDB();
+            Series series =  new Series("123",ViewType.Spline);
+            
+            series.ArgumentScaleType = ScaleType.Qualitative;
+            series.ArgumentDataMember = "time";
+            series.ValueDataMembers[0] = "data";
+            series.DataSource = data;
+            chartControl1.Series.Add(series);
+            HTuple hTuplex = new HTuple();
+            HTuple hTupley = new HTuple();
+            for(int i=1;i<data.Rows.Count;i++)
+            {
+                hTuplex.Append(Convert.ToDouble(data.Rows[i].ItemArray[0]));
+                hTupley.Append(Convert.ToDouble(data.Rows[i].ItemArray[1]));
+            }
+            HOperatorSet.WriteTuple(hTuplex, "C:/Users/test/Desktop/456.tup");
+            HOperatorSet.WriteTuple(hTupley, "C:/Users/test/Desktop/123.tup");
+
+            //for (int i = 1; i < data.Rows.Count/1000; i++)
+            //{
+            //    object k = data.Rows[i].ItemArray[1];
+            //    SeriesPoint pt = new SeriesPoint(data.Rows[i].ItemArray[0]);
+            //    pt.Values =new double[] { Convert.ToDouble(k)} ;
+            //    chartControl1.Series[0].Points.Add(pt);
+
+            //}
+
+            ddd = data;
+            MessageBox.Show("readover");
+        }
+        private DataTable CreateTestDB()
+        {
+            DataTable _testData = new DataTable();
+            _testData.Columns.Add(new DataColumn("time", typeof(string)));
+            _testData.Columns.Add(new DataColumn("Power", typeof(decimal)));
+            _testData.Columns.Add(new DataColumn("ActulPower", typeof(decimal)));
+            Random _rm = new Random();
+            for (int i = 0; i < 24; i++)
+            {
+                DataRow _drNew = _testData.NewRow();
+                _drNew["time"] = string.Format("{0}点", i);
+                _drNew["Power"] = 250;
+                _drNew["ActulPower"] = _rm.Next(2200, 4000);
+                _testData.Rows.Add(_drNew);
+            }
+            return _testData;
         }
         private async Task<int> testasync()
         {

@@ -56,7 +56,7 @@
 
       "InputCount": 32,
       "OutputCount": 32,
-      "Enable": true,
+      "Enable": false,
       "DeviceName": "testiocard",
       "Guid": "f28cf681-e9ed-4e9a-bf85-1db405e91e13"
     },
@@ -72,7 +72,7 @@
 
       "InputCount": 32,
       "OutputCount": 32,
-      "Enable": true,
+      "Enable": false,
       "DeviceName": "testiocard1",
       "Guid": "1f487ff6-5685-49c8-a2e7-60bb75caf614"
     },

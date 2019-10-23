@@ -15,8 +15,8 @@ namespace Communication
         #region variable member
         private TcpClient m_Client;
         private readonly object m_lock=new object();
-        private IPAddress remoteIpaddress;
-        private uint remotePort;
+        private IPAddress remoteIpaddress,localIpAddress;
+        private uint remotePort,localPort;
         private CancellationTokenSource cts;
         private Task _heartTask;
         #endregion
@@ -110,18 +110,23 @@ namespace Communication
             {
                 throw new FormatException($"{localIpAddress} is  not an avaliable ipaddress");
             }
+            this.localIpAddress = localipaddress;
+            this.localPort = localPort;
             this.remoteIpaddress = remoteipaddress;
             this.remotePort = remotePort;
             m_Client = new TcpClient(new System.Net.IPEndPoint(localipaddress, (int)localPort));
+
         }
-       public override  void Connect()
+        public override  void Connect()
         {
             lock (m_lock)
             {             
                 try
-                {
+                {                 
                     if (!m_Client.Connected)
+                    {                    
                         m_Client.Connect(remoteIpaddress, (int)remotePort);
+                    }
 
                 }
                 catch (Exception ex)
@@ -134,7 +139,11 @@ namespace Communication
         public override void DisConnect()
         {
             if (m_Client.Connected)
+            {
                 m_Client.Close();
+              
+            }
+                
         }
         public override void SendString(string data)
         {
@@ -210,7 +219,7 @@ namespace Communication
             }
             byte[] data = await Task<byte[]>.Run(() =>
             {
-                using (NetworkStream ns = m_Client.GetStream())
+                NetworkStream ns = m_Client.GetStream();
                 {
                     byte[] rtn = new byte[length];
                     int cacheLength = m_Client.Available;
@@ -237,10 +246,14 @@ namespace Communication
             byte[] data = await Task<byte[]>.Run(() =>
             {
                 byte[] rtn;
-                using (NetworkStream ns = m_Client.GetStream())
-                {
-                    long bufferLength = m_Client.ReceiveBufferSize;
-                    rtn = new byte[bufferLength + 1];
+                NetworkStream ns = m_Client.GetStream();
+                {                  
+                    while(m_Client.Available==0)
+                    {
+                        Thread.Sleep(5);
+                    }
+                    long bufferLength = m_Client.Available;
+                    rtn = new byte[bufferLength];
                     ns.Read(rtn, 0, Convert.ToInt32(bufferLength));
                 }
                     

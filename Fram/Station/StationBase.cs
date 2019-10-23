@@ -16,20 +16,21 @@ namespace Fram.Station
         StationStatue m_stationStatue = StationStatue.WaitingReady;
         #endregion
         #region 属性
-        public string StationName { get; set; }
+        public string StationName { get;private  set; }
         public StationStatue StationStatue {get;}
+        
         #endregion
-        StationBase(string stationname)
+       public  StationBase(string stationname)
         {            
             StationName = stationname;
             m_task = new Task(ProcessTask, cancellationTokenSource.Token);
         }
-        #region
+        #region function
         /// <summary>
         /// Init station statue
         /// </summary>
         /// <returns></returns>
-        public virtual bool Init(ref string ErrMessage) { return true; }
+        public abstract void  Init(ref string ErrMessage);
         /// <summary>
         /// start the station task
         /// </summary>
@@ -92,7 +93,7 @@ namespace Fram.Station
             m_stationStatue = StationStatue.Running;
         }
 
-        private  void ProcessTask()
+        private void ProcessTask()
         {
             while (cancellationTokenSource.IsCancellationRequested)
             {
@@ -100,6 +101,7 @@ namespace Fram.Station
                 {
                     Processor();
                 }
+                Thread.Sleep(10);
             }
         }
        protected virtual void  Processor()

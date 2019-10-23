@@ -78,7 +78,8 @@ namespace FileOperate
             int columnCount = 0;
             //标示是否是读取的第一行
             bool IsFirst = true;
-            ;
+            int countmax = 50000;
+            int count = 0;
             //逐行读取CSV中的数据
             while ((strLine = sr.ReadLine()) != null)
             {
@@ -94,7 +95,7 @@ namespace FileOperate
                     //创建列
                     for (int i = 0; i < columnCount; i++)
                     {
-                        DataColumn dc = new DataColumn(tableHead[i]);
+                        DataColumn dc = new DataColumn(tableHead[i],typeof(decimal));
                         dt.Columns.Add(dc);
                     }
                 }
@@ -104,9 +105,12 @@ namespace FileOperate
                     DataRow dr = dt.NewRow();
                     for (int j = 0; j < columnCount; j++)
                     {
-                        dr[j] = aryLine[j];
+                        dr[j] =aryLine[j];
                     }
                     dt.Rows.Add(dr);
+                    count++;
+                    if (count == countmax)
+                        break;
                 }              
             }
             if (aryLine != null && aryLine.Length > 0)
