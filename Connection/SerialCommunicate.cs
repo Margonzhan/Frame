@@ -91,7 +91,7 @@ namespace Communication
             }            
         }
 
-        public override async Task<byte[]> ReadAll( )
+        public override async Task<byte[]> ReadAll(int outtime=300 )
         {
             if (!port.IsOpen)
                 throw new NotImplementedException(port.PortName + " is not opend");
@@ -108,7 +108,7 @@ namespace Communication
            
         }
 
-        public override async Task<byte[]> ReadBytes(  int length)
+        public override async Task<byte[]> ReadBytes(  int length,int outtime=300)
         {
             if (!port.IsOpen)
                 throw new NotImplementedException(port.PortName + " is not opend");

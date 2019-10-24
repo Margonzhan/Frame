@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="CameraBase.cs" />
     <Compile Include="CameraOperator.cs" />
+    <Compile Include="HaiKangCamera - 复制.cs" />
     <Compile Include="HaiKangCamera.cs" />
     <Compile Include="HalconCamera.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,7 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
+using CommonFunc;
 namespace Communication
 {
    public  class TcpClientCommunicate : BaseCommunicate,IHeartBeat 
@@ -211,7 +211,7 @@ namespace Communication
 
             }
         }
-        public override async Task<byte[]> ReadBytes(int length)
+        public override async Task<byte[]> ReadBytes(int length,int outtime=300)
         {
             if (!m_Client.Connected)
             {
@@ -221,13 +221,15 @@ namespace Communication
             {
                 NetworkStream ns = m_Client.GetStream();
                 {
+                    Time_Meter time_Meter = new Time_Meter();
                     byte[] rtn = new byte[length];
-                    int cacheLength = m_Client.Available;
-                    if(cacheLength <length)
+                    while (m_Client.Available < length)
                     {
-                        throw new Exception("the receive cache area donot have eanugh data");
+                        if (time_Meter.IstimeOn(outtime))
+                            throw new Exception("time out");
+                        Thread.Sleep(5);
                     }
-                    if (ns.CanWrite)
+                    if (ns.CanRead)
                     {
                         ns.Read(rtn, 0, length);
                     }
@@ -237,7 +239,7 @@ namespace Communication
             });
             return data;
         }
-        public override async Task<byte[]> ReadAll()
+        public override async Task<byte[]> ReadAll(int outtime=300)
         {
             if (!m_Client.Connected)
             {
@@ -247,14 +249,19 @@ namespace Communication
             {
                 byte[] rtn;
                 NetworkStream ns = m_Client.GetStream();
-                {                  
-                    while(m_Client.Available==0)
+                {
+                    Time_Meter time_Meter = new Time_Meter();
+
+                    while (m_Client.Available == 0)
                     {
+                        if (time_Meter.IstimeOn(outtime))
+                            throw new Exception("time out");
                         Thread.Sleep(5);
                     }
                     long bufferLength = m_Client.Available;
                     rtn = new byte[bufferLength];
-                    ns.Read(rtn, 0, Convert.ToInt32(bufferLength));
+                    if (ns.CanRead)
+                        ns.Read(rtn, 0, Convert.ToInt32(bufferLength));
                 }
                     
               

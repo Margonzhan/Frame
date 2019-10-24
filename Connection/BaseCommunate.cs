@@ -14,8 +14,8 @@ namespace Communication
         
         public virtual void SendBytes(byte[] data) { }
         public virtual void SendString(string data) { }
-        public virtual Task<byte[]> ReadBytes(int length) { return null; }
-        public virtual Task<byte[]> ReadAll( ) { return null; }
+        public virtual Task<byte[]> ReadBytes(int length,int outtime) { return null; }
+        public virtual Task<byte[]> ReadAll( int outtime) { return null; }
     }
     public enum CommunicatioinType
     {

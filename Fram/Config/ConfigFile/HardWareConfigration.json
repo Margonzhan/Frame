@@ -1,10 +1,10 @@
 ﻿{
   "CameraConfigs": [
     {
-      "DeviceName": "CamRobot",
+      "DeviceName": "camera",
       "Guid": "3bd20161-ddad-451c-a332-1dbb02425d22",
-      "Enable": false,
-      "CameraType": "PylonCamera",
+      "Enable": true,
+      "CameraType": "HaiKangCamera",
       "IpAddress": "null",
       "CameraConnectType": "GigEVision2",
       "ExposureTime": 100,

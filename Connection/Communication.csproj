@@ -48,6 +48,12 @@
     <Compile Include="SerialCommunicate.cs" />
     <Compile Include="TcpClientCommunicate.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonTool\CommonFunc.csproj">
+      <Project>{deeafd62-1f59-45cd-9c66-34f5ca7ed03c}</Project>
+      <Name>CommonFunc</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

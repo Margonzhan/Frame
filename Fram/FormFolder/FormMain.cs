@@ -185,6 +185,11 @@ namespace Fram
         {
            // stepMotor.JogStop();
         }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            
+        }
     }
     public class managerrrr : Singleton<managerrrr>
     {

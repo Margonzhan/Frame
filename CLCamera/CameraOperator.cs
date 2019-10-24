@@ -191,10 +191,12 @@ namespace DeviceSource
          * @param        pFrameInfo            OUT               数据信息
          * @return       成功：0；错误：-1
          ****************************************************************************/
-        public int GetOneFrame(IntPtr pData, ref UInt32 pnDataLen, UInt32 nDataSize, ref MyCamera.MV_FRAME_OUT_INFO pFrameInfo)
+        public int GetOneFrame(IntPtr pData, ref UInt32 pnDataLen, UInt32 nDataSize, ref MyCamera.MV_FRAME_OUT_INFO_EX pFrameInfo)
         {
             pnDataLen = 0;
-            int nRet = m_pCSI.MV_CC_GetOneFrame_NET(pData, nDataSize, ref pFrameInfo);
+           
+            int nRet = m_pCSI.MV_CC_GetOneFrameEx_NET(pData, nDataSize, ref pFrameInfo);
+            nRet = m_pCSI.MV_CC_GetOneFrameTimeout_NET(pData, nDataSize, ref pFrameInfo, 10000);
             if (MyCamera.MV_OK != nRet)
             {
                 return CO_FAIL;
