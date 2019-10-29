@@ -117,27 +117,30 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="hWindowControl.LayoutBitmap" type="System.Resources.ResXNullRef, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value />
+  </metadata>
   <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ts_GrayValue.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAADjSURBVFhH7dihDcIAFIThCiQKjUSjGQDNAAzAAAzABgzA
-        AAyAZgA0AkGQaBQSAf8JkgshOUWpeJd87rV3SV2bSqWDmeCEZ8vUqe6Yf4x7U3fMtwfbFPP5wAN33HDF
-        BUccsMcOW2ywxgpLLDDHDFPo840xwhAD9NGD98X4sdRAeF+MH0sNhPfF+LHUQHhfjB9LDYT3xfix1EB4
-        X4wfSw2E98X4sdRAeF+MH0sNhPfF+LHUQHhfjB9LDYT3xfix1EB4X4wfSw2E98X4sXR+YNtiOv/zSJ/i
-        jG8v+CV1qrtS6VCa5gWS7rPZjs8GUAAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAAONJREFUWEft2KENwgAUhOEKJAqNRKMZAM0ADMAADMAGDMAADIBmADQCQZBoFBIB
+        /wmSCyE5Ral4l3zutXdJXZtKpYOZ4IRny9Sp7ph/jHtTd8y3B9sU8/nAA3fccMUFRxywxw5bbLDGCkss
+        MMcMU+jzjTHCEAP00YP3xfix1EB4X4wfSw2E98X4sdRAeF+MH0sNhPfF+LHUQHhfjB9LDYT3xfix1EB4
+        X4wfSw2E98X4sdRAeF+MH0sNhPfF+LHUQHhfjB9LDYT3xfixdH5g22I6//NIn+KMby/4JXWqu1LpUJrm
+        BZLus9mOzwZQAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="ts_Position.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAAB0AAAAiCAIAAAAs3UUgAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAACuSURBVEhLzdExDoMwDIVh9lyncCpUtTfiUl0ZGTpUOUKt
-        +FWycGxBKzf55IEQ8y8Mjxhh3TVGWHerSZeZBgeDvxPWfdak8UqDg4F3rM2w7usjTbcfB6EirJtr0nSn
-        wcHAO9Zmr10clP66vv66SzEIuCj66+qWFN/lljVYElp32S5Hgwvl3H/bRWlwoZzrMlnERwW3+L3vv12J
-        i/rZ17rL8OqA1l397GvX/U5MN+c34R7sy08n5RUAAAAASUVORK5CYII=
+        iVBORw0KGgoAAAANSUhEUgAAAB0AAAAiCAIAAAAs3UUgAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAAK5JREFUSEvN0TEOgzAMhWH2XKdwKlS1N+JSXRkZOlQ5Qq34VbJwbEErN/nkgRDz
+        LwyPGGHdNUZYd6tJl5kGB4O/E9Z91qTxSoODgXeszbDu6yNNtx8HoSKsm2vSdKfBwcA71mavXRyU/rq+
+        /rpLMQi4KPrr6pYU3+WWNVgSWnfZLkeDC+Xcf9tFaXChnOsyWcRHBbf4ve+/XYmL+tnXusvw6oDWXf3s
+        a9f9Tkw35zfhHuzLTyflFQAAAABJRU5ErkJggg==
 </value>
   </data>
   <metadata name="cms_ROI.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -147,6 +150,6 @@
     <value>240, 14</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>31</value>
+    <value>77</value>
   </metadata>
 </root>

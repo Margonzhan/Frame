@@ -165,6 +165,9 @@ namespace CLCamera
             lock (m_lock)
             {
                 HObject _image = new HObject();
+                MyCamera.MV_FRAME_OUT_INFO_EX FrameInfo = new MyCamera.MV_FRAME_OUT_INFO_EX();
+                IntPtr pBufForDriver = IntPtr.Zero;
+                IntPtr pBufForSaveImage = IntPtr.Zero;
                 try
                 {
                     // ch:获取包大小 || en: Get Payload Size
@@ -177,22 +180,28 @@ namespace CLCamera
                     UInt32 nPayloadSize = stParam.nCurValue;
 
                     int nCount = 0;
-                    IntPtr pBufForDriver = Marshal.AllocHGlobal((int)nPayloadSize);
-                    IntPtr pBufForSaveImage = IntPtr.Zero;
+                    pBufForDriver = Marshal.AllocHGlobal((int)nPayloadSize);
 
-                    MyCamera.MV_FRAME_OUT_INFO_EX FrameInfo = new MyCamera.MV_FRAME_OUT_INFO_EX();
+
+
                     nRet = m_pMyCamera.MV_CC_GetOneFrameTimeout_NET(pBufForDriver, nPayloadSize, ref FrameInfo, 1000);
                     // ch:获取一帧图像 | en:Get one image
                     if (MyCamera.MV_OK == nRet)
                     {
-                       return     GetImage(pBufForDriver, ref FrameInfo);
+                        
+                        _image= GetImage(pBufForDriver, ref FrameInfo);
                     }
-
-
+                    
                 }
                 catch (Exception ex)
                 {
-
+                    throw new Exception($"{m_Cameraname} 获取图像失败，" + ex.Message);
+                }
+                finally
+                {
+                    Marshal.FreeHGlobal(pBufForDriver);
+                    Marshal.FreeHGlobal(pBufForSaveImage);
+                   
                 }
                 return _image;
             }
@@ -240,7 +249,8 @@ namespace CLCamera
         private HObject  GetImage(IntPtr pixelPointer, ref MyCamera.MV_FRAME_OUT_INFO_EX pFrameInfo)
         {
             HObject objImage = new HObject();
-            // 原始数据转换
+  
+                // 原始数据转换
             int width = pFrameInfo.nWidth;
             int height = pFrameInfo.nHeight;
             if (pFrameInfo.enPixelType == MyCamera.MvGvspPixelType.PixelType_Gvsp_Mono8)
@@ -270,6 +280,7 @@ namespace CLCamera
                 HOperatorSet.GenImageInterleaved(out objImage, pixelPointer, "rgb", width, height, -1, "byte", 0, 0, 0, 0, -1, 0);
             }
             return objImage;
+            
         }
         private void ImageOut(IntPtr pixelPointer, ref MyCamera.MV_FRAME_OUT_INFO_EX pFrameInfo, IntPtr pUser)
         {

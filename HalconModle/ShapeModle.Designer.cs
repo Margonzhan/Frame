@@ -429,7 +429,7 @@
             this.nmUD_FindGreediness.TabIndex = 4;
             this.nmUD_FindGreediness.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nmUD_FindGreediness.Value = new decimal(new int[] {
-            1,
+            5,
             0,
             0,
             65536});
@@ -471,7 +471,7 @@
             this.nmUD_FindMaxOverLap.TabIndex = 4;
             this.nmUD_FindMaxOverLap.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nmUD_FindMaxOverLap.Value = new decimal(new int[] {
-            1,
+            3,
             0,
             0,
             65536});
@@ -518,7 +518,7 @@
             this.nmUD_FindMinScore.TabIndex = 4;
             this.nmUD_FindMinScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nmUD_FindMinScore.Value = new decimal(new int[] {
-            1,
+            5,
             0,
             0,
             65536});

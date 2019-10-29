@@ -32,8 +32,10 @@ namespace HalconModle
             cmB_FindSubpixel.DataSource = Enum.GetValues(typeof(EnumSubpixel));
             m_paramTrain = new ShapeModleParameterTrain();
             m_paramFind = new ShapeModelParameterFind();
+            UpdateParam(null, null);
             AddEvent();
         }
+       
         private void AddEvent()
         {
             nmUD_TrainAngleStart.ValueChanged += UpdateParam;
@@ -538,28 +540,28 @@ namespace HalconModle
     [Serializable]
     public class ShapeModleParameterTrain
     {
-        public int NumLevels { get; set; }
-        public int AngleStart { get; set; }
-        public int AngleExtent { get; set; }
-        public double AngleStep { get; set; }
-        public string Optimization { get; set; }
-        public string Metric { get; set; }
-        public HTuple Contrast { get; set; }
-        public HTuple MinContrast { get; set; }
+        public int NumLevels { get; set; } = 0;
+        public int AngleStart { get; set; } = -5;
+        public int AngleExtent { get; set; } = 10;
+        public double AngleStep { get; set; } = 0.1;
+        public string Optimization { get; set; } = "auto";
+        public string Metric { get; set; } = "use_polarity";
+        public HTuple Contrast { get; set; } = "auto";
+        public HTuple MinContrast { get; set; } = "auto";
 
     }
     [Serializable]
     public class ShapeModelParameterFind
     {
-        public int NumLevels { get; set; }
-        public int AngleStart { get; set; }
-        public int AngleExtent { get; set; }
-        public double  AngleStep { get; set; }
-        public double MinScore { get; set; }
-        public int NumMatch { get; set; }
-        public double MaxOverLap { get; set; }
-        public double Greediness { get; set; }
-        public string SubPixel { get; set; }
+        public int NumLevels { get; set; } = 0;
+        public int AngleStart { get; set; } = -5;
+        public int AngleExtent { get; set; } = 10;
+        public double AngleStep { get; set; } = 0.1;
+        public double MinScore { get; set; } = 0.5;
+        public int NumMatch { get; set; } = 1;
+        public double MaxOverLap { get; set; } = 0.1;
+        public double Greediness { get; set; } = 0.8;
+        public string SubPixel { get; set; } = "interpolation";
     }
     public enum EnumOptimization
     {

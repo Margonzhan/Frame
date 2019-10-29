@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraCharts.XYDiagram xyDiagram2 = new DevExpress.XtraCharts.XYDiagram();
-            DevExpress.XtraCharts.Series series2 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.LineSeriesView lineSeriesView2 = new DevExpress.XtraCharts.LineSeriesView();
+            DevExpress.XtraCharts.XYDiagram xyDiagram1 = new DevExpress.XtraCharts.XYDiagram();
+            DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.LineSeriesView lineSeriesView1 = new DevExpress.XtraCharts.LineSeriesView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabPane = new DevExpress.XtraBars.Navigation.TabPane();
             this.tabPage_Auto = new DevExpress.XtraBars.Navigation.TabNavigationPage();
+            this.button2 = new System.Windows.Forms.Button();
             this.chartControl1 = new DevExpress.XtraCharts.ChartControl();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage_Menu = new DevExpress.XtraBars.Navigation.TabNavigationPage();
@@ -46,15 +47,15 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
-            this.button2 = new System.Windows.Forms.Button();
+            this.shapeModle1 = new HalconModle.ShapeModle();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabPane)).BeginInit();
             this.tabPane.SuspendLayout();
             this.tabPage_Auto.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(lineSeriesView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(lineSeriesView1)).BeginInit();
             this.tabPage_Menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabPane_Menu)).BeginInit();
             this.tabPane_Menu.SuspendLayout();
@@ -91,6 +92,7 @@
             // 
             this.tabPage_Auto.BackgroundPadding = new System.Windows.Forms.Padding(10);
             this.tabPage_Auto.Caption = "Auto";
+            this.tabPage_Auto.Controls.Add(this.shapeModle1);
             this.tabPage_Auto.Controls.Add(this.button2);
             this.tabPage_Auto.Controls.Add(this.chartControl1);
             this.tabPage_Auto.Controls.Add(this.button1);
@@ -100,19 +102,29 @@
             this.tabPage_Auto.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabPage_Auto.Size = new System.Drawing.Size(1526, 741);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(315, 42);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(84, 41);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
             // chartControl1
             // 
-            xyDiagram2.AxisX.VisibleInPanesSerializable = "-1";
-            xyDiagram2.AxisY.VisibleInPanesSerializable = "-1";
-            this.chartControl1.Diagram = xyDiagram2;
+            xyDiagram1.AxisX.VisibleInPanesSerializable = "-1";
+            xyDiagram1.AxisY.VisibleInPanesSerializable = "-1";
+            this.chartControl1.Diagram = xyDiagram1;
             this.chartControl1.Legend.Name = "Default Legend";
             this.chartControl1.Location = new System.Drawing.Point(72, 181);
             this.chartControl1.Name = "chartControl1";
-            series2.LegendName = "Default Legend";
-            series2.Name = "Series 1";
-            series2.View = lineSeriesView2;
+            series1.LegendName = "Default Legend";
+            series1.Name = "Series 1";
+            series1.View = lineSeriesView1;
             this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series2};
+        series1};
             this.chartControl1.Size = new System.Drawing.Size(172, 252);
             this.chartControl1.TabIndex = 3;
             // 
@@ -214,15 +226,12 @@
             // 
             this.ContentPanel.Size = new System.Drawing.Size(220, 43);
             // 
-            // button2
+            // shapeModle1
             // 
-            this.button2.Location = new System.Drawing.Point(435, 106);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(84, 41);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.shapeModle1.Location = new System.Drawing.Point(468, 21);
+            this.shapeModle1.Name = "shapeModle1";
+            this.shapeModle1.Size = new System.Drawing.Size(826, 521);
+            this.shapeModle1.TabIndex = 5;
             // 
             // FormMain
             // 
@@ -239,9 +248,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabPane)).EndInit();
             this.tabPane.ResumeLayout(false);
             this.tabPage_Auto.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(lineSeriesView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(lineSeriesView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).EndInit();
             this.tabPage_Menu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tabPane_Menu)).EndInit();
@@ -266,6 +275,7 @@
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPage_AxisDevice;
         private DevExpress.XtraCharts.ChartControl chartControl1;
         private System.Windows.Forms.Button button2;
+        private HalconModle.ShapeModle shapeModle1;
 
         #endregion
         //private HalconModle.ShapeModle shapeModle;
