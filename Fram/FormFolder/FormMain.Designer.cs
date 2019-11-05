@@ -34,8 +34,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabPane = new DevExpress.XtraBars.Navigation.TabPane();
             this.tabPage_Auto = new DevExpress.XtraBars.Navigation.TabNavigationPage();
-            this.button2 = new System.Windows.Forms.Button();
-            this.chartControl1 = new DevExpress.XtraCharts.ChartControl();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage_Menu = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tabPane_Menu = new DevExpress.XtraBars.Navigation.TabPane();
@@ -47,18 +46,25 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
-            this.shapeModle1 = new HalconModle.ShapeModle();
+            this.chartControl1 = new DevExpress.XtraCharts.ChartControl();
+            this.gB_Log = new System.Windows.Forms.GroupBox();
+            this.rTBZD_Log = new 燃气罩锁螺丝.RichTextBoxZd();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabPane)).BeginInit();
             this.tabPane.SuspendLayout();
             this.tabPage_Auto.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.tabPage_Menu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tabPane_Menu)).BeginInit();
+            this.tabPane_Menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(series1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(lineSeriesView1)).BeginInit();
-            this.tabPage_Menu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tabPane_Menu)).BeginInit();
-            this.tabPane_Menu.SuspendLayout();
+            this.gB_Log.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -92,45 +98,38 @@
             // 
             this.tabPage_Auto.BackgroundPadding = new System.Windows.Forms.Padding(10);
             this.tabPage_Auto.Caption = "Auto";
-            this.tabPage_Auto.Controls.Add(this.shapeModle1);
-            this.tabPage_Auto.Controls.Add(this.button2);
-            this.tabPage_Auto.Controls.Add(this.chartControl1);
-            this.tabPage_Auto.Controls.Add(this.button1);
+            this.tabPage_Auto.Controls.Add(this.splitContainer1);
             this.tabPage_Auto.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabPage_Auto.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabPage_Auto.Name = "tabPage_Auto";
             this.tabPage_Auto.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabPage_Auto.Size = new System.Drawing.Size(1526, 741);
             // 
-            // button2
+            // splitContainer1
             // 
-            this.button2.Location = new System.Drawing.Point(315, 42);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(84, 41);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // chartControl1
+            // splitContainer1.Panel1
             // 
-            xyDiagram1.AxisX.VisibleInPanesSerializable = "-1";
-            xyDiagram1.AxisY.VisibleInPanesSerializable = "-1";
-            this.chartControl1.Diagram = xyDiagram1;
-            this.chartControl1.Legend.Name = "Default Legend";
-            this.chartControl1.Location = new System.Drawing.Point(72, 181);
-            this.chartControl1.Name = "chartControl1";
-            series1.LegendName = "Default Legend";
-            series1.Name = "Series 1";
-            series1.View = lineSeriesView1;
-            this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series1};
-            this.chartControl1.Size = new System.Drawing.Size(172, 252);
-            this.chartControl1.TabIndex = 3;
+            this.splitContainer1.Panel1.Controls.Add(this.chartControl1);
+            this.splitContainer1.Panel1.Controls.Add(this.button1);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.gB_Log);
+            this.splitContainer1.Size = new System.Drawing.Size(1526, 741);
+            this.splitContainer1.SplitterDistance = 600;
+            this.splitContainer1.SplitterWidth = 2;
+            this.splitContainer1.TabIndex = 5;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(97, 106);
+            this.button1.Location = new System.Drawing.Point(156, 43);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(147, 41);
@@ -188,7 +187,7 @@
             this.tabNavigationPage_AxisDevice.Caption = "Axis Device";
             this.tabNavigationPage_AxisDevice.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tabNavigationPage_AxisDevice.Name = "tabNavigationPage_AxisDevice";
-            this.tabNavigationPage_AxisDevice.Size = new System.Drawing.Size(1500, 684);
+            this.tabNavigationPage_AxisDevice.Size = new System.Drawing.Size(1504, 683);
             // 
             // BottomToolStripPanel
             // 
@@ -226,12 +225,44 @@
             // 
             this.ContentPanel.Size = new System.Drawing.Size(220, 43);
             // 
-            // shapeModle1
+            // chartControl1
             // 
-            this.shapeModle1.Location = new System.Drawing.Point(468, 21);
-            this.shapeModle1.Name = "shapeModle1";
-            this.shapeModle1.Size = new System.Drawing.Size(826, 521);
-            this.shapeModle1.TabIndex = 5;
+            xyDiagram1.AxisX.VisibleInPanesSerializable = "-1";
+            xyDiagram1.AxisY.VisibleInPanesSerializable = "-1";
+            this.chartControl1.Diagram = xyDiagram1;
+            this.chartControl1.Legend.Name = "Default Legend";
+            this.chartControl1.Location = new System.Drawing.Point(428, 43);
+            this.chartControl1.Name = "chartControl1";
+            series1.LegendName = "Default Legend";
+            series1.Name = "Series 1";
+            series1.View = lineSeriesView1;
+            this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
+        series1};
+            this.chartControl1.Size = new System.Drawing.Size(448, 252);
+            this.chartControl1.TabIndex = 4;
+            // 
+            // gB_Log
+            // 
+            this.gB_Log.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.gB_Log.Controls.Add(this.rTBZD_Log);
+            this.gB_Log.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gB_Log.Location = new System.Drawing.Point(0, 0);
+            this.gB_Log.Name = "gB_Log";
+            this.gB_Log.Padding = new System.Windows.Forms.Padding(0);
+            this.gB_Log.Size = new System.Drawing.Size(1524, 137);
+            this.gB_Log.TabIndex = 0;
+            this.gB_Log.TabStop = false;
+            this.gB_Log.Text = "Log:";
+            // 
+            // rTBZD_Log
+            // 
+            this.rTBZD_Log.AutoScroll = true;
+            this.rTBZD_Log.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rTBZD_Log.Location = new System.Drawing.Point(0, 18);
+            this.rTBZD_Log.Margin = new System.Windows.Forms.Padding(0);
+            this.rTBZD_Log.Name = "rTBZD_Log";
+            this.rTBZD_Log.Size = new System.Drawing.Size(1524, 119);
+            this.rTBZD_Log.TabIndex = 0;
             // 
             // FormMain
             // 
@@ -248,13 +279,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabPane)).EndInit();
             this.tabPane.ResumeLayout(false);
             this.tabPage_Auto.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.tabPage_Menu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tabPane_Menu)).EndInit();
+            this.tabPane_Menu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(lineSeriesView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(series1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).EndInit();
-            this.tabPage_Menu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tabPane_Menu)).EndInit();
-            this.tabPane_Menu.ResumeLayout(false);
+            this.gB_Log.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -273,9 +309,10 @@
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPage_IoDevice;
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPage_Cameras;
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPage_AxisDevice;
+        private System.Windows.Forms.SplitContainer splitContainer1;
         private DevExpress.XtraCharts.ChartControl chartControl1;
-        private System.Windows.Forms.Button button2;
-        private HalconModle.ShapeModle shapeModle1;
+        private System.Windows.Forms.GroupBox gB_Log;
+        private 燃气罩锁螺丝.RichTextBoxZd rTBZD_Log;
 
         #endregion
         //private HalconModle.ShapeModle shapeModle;

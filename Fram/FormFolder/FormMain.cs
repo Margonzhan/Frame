@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Fram.Hardware.MotionCard;
 using Fram.Hardware.AxisDevice;
 using DevExpress.XtraCharts;
+using System.Reflection;
 
 namespace Fram
 {
@@ -31,8 +32,10 @@ namespace Fram
         //  HaiKangCamera hk = new HaiKangCamera("camera1", CameraConnectType.GigEVision);
         public FormMain()
         {
+            
             FormLoading.GetInstance().ShowDialog();
             InitializeComponent();
+            this.Text += $"   V{Assembly.GetExecutingAssembly().GetName().Version}";
             configManager = ConfigManager.Instance;
             MotionCardManager = Hardware.MotionCardManager.Instance;
             IoCardManager = Hardware.IoCardManager.Instance;
@@ -43,7 +46,7 @@ namespace Fram
             
             FormLoading.GetInstance().Closed();
             this.WindowState = FormWindowState.Maximized;
-
+            this.Show();
         }
         private void Init()
         {
@@ -72,6 +75,8 @@ namespace Fram
         DataTable ddd;
         private  void  button1_Click(object sender, EventArgs e)
         {
+            splitContainer1.SplitterDistance = 200;
+            return;
              DataTable data= CSV.OpenCSV("C: \\Users\\test\\Desktop\\untitled5.csv");
             
            // DataTable data = CreateTestDB();
