@@ -402,9 +402,17 @@ namespace HalconModle
                             nmUD_TrainNumLevels.Value = m_paramTrain.NumLevels;
                             cmB_TrainOptimization.Text = m_paramTrain.Optimization;
                             cmB_TrainMetric.Text = m_paramTrain.Metric;
-                            cmB_TrainContrast.Text = m_paramTrain.Contrast;
-                            cmB_TrainMinContrast.Text = m_paramTrain.MinContrast;//此处可能手动设置为整形，需修改
 
+
+                            if (m_paramTrain.Contrast.Type == HTupleType.STRING)
+                                cmB_TrainContrast.Text = m_paramTrain.Contrast;
+                            else
+                                cmB_TrainContrast.Text = m_paramTrain.Contrast.ToString();
+                            if (m_paramTrain.MinContrast.Type == HTupleType.STRING)
+                                cmB_TrainMinContrast.Text = m_paramTrain.MinContrast;
+                            else
+                                cmB_TrainMinContrast.Text = m_paramTrain.MinContrast.ToString();
+                            
                             nmUD_FindAngleStart.Value = m_paramFind.AngleStart;
                             nmUD_FindAngleExtent.Value = m_paramFind.AngleExtent;
                             nmUD_FindAngleStep.Value = (decimal)m_paramFind.AngleStep;
