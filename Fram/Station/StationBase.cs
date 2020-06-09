@@ -17,7 +17,7 @@ namespace Fram.Station
         #endregion
         #region 属性
         public string StationName { get;private  set; }
-        public StationStatue StationStatue {get;}
+        public StationStatue StationStatue { get { return m_stationStatue; } protected set { m_stationStatue = value; } }
         
         #endregion
        public  StationBase(string stationname)
@@ -31,6 +31,9 @@ namespace Fram.Station
         /// </summary>
         /// <returns></returns>
         public abstract void  Init(ref string ErrMessage);
+
+        public abstract void AddFirstStep();
+       
         /// <summary>
         /// start the station task
         /// </summary>
@@ -42,16 +45,29 @@ namespace Fram.Station
             }
             if (m_stationStatue == StationStatue.Running)
                 return;
-            Resume();
-          
-            if(m_task.Status==TaskStatus.Created)
+
+            if(m_stationStatue==StationStatue.Ready|| m_stationStatue == StationStatue.Stoped)
+            {
+                AddFirstStep();
+                m_SuspendFalg = false;
+                TaskRun();
+                return;
+            }
+            if(m_stationStatue == StationStatue.Suspend)
+            {
+                m_SuspendFalg = false;
+            }
+        }
+        private void TaskRun()
+        {
+            if (m_task.Status == TaskStatus.Created)
             {
                 m_task.Start();
             }
-            else if(m_task.Status==TaskStatus.Canceled||m_task.Status==TaskStatus.RanToCompletion)
+            else if (m_task.Status == TaskStatus.Canceled || m_task.Status == TaskStatus.RanToCompletion)
             {
                 cancellationTokenSource = new CancellationTokenSource();
-                m_task = new Task(ProcessTask, cancellationTokenSource.Token);
+                m_task = new Task( ProcessTask, cancellationTokenSource.Token);
                 m_task.Start();
             }
             m_stationStatue = StationStatue.Running;
@@ -59,52 +75,43 @@ namespace Fram.Station
         /// <summary>
         /// stop the station task
         /// </summary>
-        public  void Stop()
+        public virtual   void Stop()
         {
             if (m_stationStatue == StationStatue.WaitingReady)
             {
                 throw new Exception($"{StationName} is on the statue WaitingReady");
             }
+
+
+            m_SuspendFalg = false;
             cancellationTokenSource.Cancel();
             m_stationStatue = StationStatue.Stoped;
+            StepQueue.Clear();
         }
         /// <summary>
         /// suspend the station task
         /// </summary>
-        public  void Suspend()
-        {
-            if (m_stationStatue != StationStatue.Running)
+        public virtual  void Suspend()
+        {          
+            if(m_stationStatue==StationStatue.Running)
             {
-                throw new Exception($"{StationName} is on the statue {m_stationStatue.ToString()}");
-            }
-            m_SuspendFalg = false ;
-            m_stationStatue = StationStatue.Suspend;
+                m_SuspendFalg = true;
+                m_stationStatue = StationStatue.Suspend;
+            }         
         }
-        /// <summary>
-        /// resume the station task
-        /// </summary>
-        public  void Resume()
+   
+        private async void ProcessTask()
         {
-            if (m_stationStatue != StationStatue.Suspend|| m_stationStatue != StationStatue.Running)
+            while (!cancellationTokenSource.IsCancellationRequested)
             {
-                throw new Exception($"{StationName} is on the statue {m_stationStatue.ToString()}");
-            }
-            m_SuspendFalg = true;
-            m_stationStatue = StationStatue.Running;
-        }
-
-        private void ProcessTask()
-        {
-            while (cancellationTokenSource.IsCancellationRequested)
-            {
-                if(m_SuspendFalg)
+                if(!m_SuspendFalg)
                 {
-                    Processor();
+                  await  Processor();
                 }
                 Thread.Sleep(10);
             }
         }
-       protected virtual void  Processor()
+       protected virtual async Task  Processor()
         {
 
 
@@ -123,9 +130,9 @@ namespace Fram.Station
         {
             StepQueue.Enqueue(step.GetHashCode());
         }
-        public void PopStep()
+        public int PopStep()
         {
-            StepQueue.Dequeue();
+          return   StepQueue.Dequeue();
         }
         public void PopAndPushStep<T>(T step) where T:struct
         {

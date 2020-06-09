@@ -8,6 +8,7 @@ namespace Fram.Hardware.IoCard
 {
    public  interface IIoCard
     {
+        
         /// <summary>
         /// open and connect the io card
         /// </summary>
@@ -17,6 +18,17 @@ namespace Fram.Hardware.IoCard
         /// close and disconnect the iocard
         /// </summary>
         void  Close();
+        /// <summary>
+        /// io开开始工作，正常情况下对象内部回开启一个线程来刷新io状态
+        /// </summary>
+        void StartWorking();
+        /// <summary>
+        /// 停止刷新io状态的线程
+        /// </summary>
+        void StopWorking();
+
+
+
         /// <summary>
         /// get the input statue at index
         /// </summary>
@@ -38,17 +50,15 @@ namespace Fram.Hardware.IoCard
         /// <summary>
         /// Batch acquisition of input status
         /// </summary>
-        /// <param name="startindex"></param>
-        /// <param name="offset"></param>
+   
         /// <returns></returns>
-        int GetMultiInput(int startindex,int offset);
+        byte[] GetAllInput();
         /// <summary>
         /// Batch acquisition of outout status
         /// </summary>
-        /// <param name="startindex"></param>
-        /// <param name="offset"></param>
+    
         /// <returns></returns>
-        int GetMultiOutput(int startindex, int offset);
+        byte [] GetAllOutput();
         /// <summary>
         /// Batch setting of output status
         /// </summary>

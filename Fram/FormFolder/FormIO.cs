@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Fram.Config;
 using Fram.Hardware;
-namespace Fram
+namespace Fram.FormFolder
 {
     internal partial class FormIO : UserControl
     {
@@ -32,7 +32,10 @@ namespace Fram
         private void FormIO_VisibleChanged(object sender, EventArgs e)
         {
             if (this.Visible)
+            {
+                RefrushOutput();
                 Timer.Start();
+            }               
             else
                 Timer.Stop();
         }
@@ -282,6 +285,17 @@ namespace Fram
             Outputs[button.Text].SetStatue(!nowstatue);
             button.Image = !nowstatue ? global::Fram.Properties.Resources.led_on : global::Fram.Properties.Resources.led_off;
         }
-        
+        private void RefrushOutput()
+        {
+            foreach(var mem in tLPanel_Output2.Controls)
+            {
+                if(mem is Button)
+                {
+                    Button button = (Button)mem;
+                    bool nowstatue = Outputs[button.Text].GetStatue();
+                    button.Image = nowstatue ? global::Fram.Properties.Resources.led_on : global::Fram.Properties.Resources.led_off;
+                }
+            }
+        }
     }
 }

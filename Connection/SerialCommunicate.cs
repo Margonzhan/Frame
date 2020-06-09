@@ -98,10 +98,9 @@ namespace Communication
             
                 byte[] data = await Task<byte[]>.Run(() =>
                 {
-                    byte[] rtn;
-                    string receive= port.ReadExisting();
-                    rtn = Encoding.Default.GetBytes(receive);
-                    return rtn;
+                    
+                    string receive= port.ReadLine();
+                    return Encoding.Default.GetBytes(receive);
                 });
                 return data;
             

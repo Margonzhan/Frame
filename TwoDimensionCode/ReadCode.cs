@@ -37,11 +37,11 @@ namespace TwoDimensionCode
                 DelegateUIControl.GetInstance().UpdateHDisplay("FormSetHDisplay", m_image, null, null);
             }
         }
-        public HObject Image
-        {
-            get { return m_image; }
-            set { m_image = value; }
-        }
+        //public HObject InputImage
+        //{
+        //    get { return m_image; }
+        //    set { m_image = value; }
+        //}
         private void btn_Decode_Click(object sender, EventArgs e)
         {
             

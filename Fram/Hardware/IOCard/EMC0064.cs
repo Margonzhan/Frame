@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using cszmcaux;
 using System.IO.Ports;
 using Communication;
+using System.Net;
+using System.Threading;
 
 namespace Fram.Hardware.IoCard
 {
@@ -15,37 +17,80 @@ namespace Fram.Hardware.IoCard
     public class EMC0064 : IoCardBase
     {
         IntPtr phandle;
-        public EMC0064(BaseCommunicate communicate, Guid guid,string devicename,uint inputcount,uint outputcount) : base(communicate,  guid, devicename, inputcount, outputcount)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <param name="devicename"></param>
+        /// <param name="inputcount"></param>
+        /// <param name="outputcount"></param>
+        /// <param name="connectinfo">ComNumber or localIpAddress</param>
+        public EMC0064( Guid guid, string devicename, uint inputcount, uint outputcount,string connectinfo) : base( guid, devicename, inputcount, outputcount)
         {
-            Open();
+            Open(connectinfo);
         }
-        
-        private new bool Open()
+        public override void StartWorking()
+        {
+            if (ioTask == null || ioTask.IsCanceled || ioTask.Status == TaskStatus.RanToCompletion)
+            {
+                ioTaskCTS = new CancellationTokenSource();
+                ioTask = new Task(IOThread, ioTaskCTS.Token);
+                ioTask.Start();
+            }
+            else if (ioTask.Status == TaskStatus.Running)
+                return;
+        }
+        public override void StopWorking()
+        {
+            ioTaskCTS.Cancel();
+        }
+        private void IOThread()
+        {
+            GetAllOutputStatue();
+            while (!ioTaskCTS.IsCancellationRequested)
+            {
+                GetAllInputStatue();
+
+                SetAllOutput();
+                Thread.Sleep(20);
+            }
+        }
+        private  bool Open(string connectinfo)
         {
             int ret=0;
-            switch (Communicate.CommunicationType)
+
+            if(connectinfo.ToUpper().Contains("COM"))
             {
-                case CommunicatioinType.TcpClient:
-                    TcpClientCommunicate tcpClientCommunicate = (TcpClientCommunicate)Communicate;
-                     ret = zmcaux.ZAux_OpenEth(tcpClientCommunicate.LocalIpAddress, out phandle);                
-                    break;
-                case CommunicatioinType.SerialPort:
-                    SerialCommunicate serialCommunicate = (SerialCommunicate)Communicate;
-                    if (!serialCommunicate.PortName.StartsWith("COM"))
-                        throw new Exception();
-                    int comIndex = int.Parse( serialCommunicate.PortName.Substring(3, 1));
-                    ret =  zmcaux.ZAux_OpenCom((uint)comIndex, out  phandle);
-                    break;
-                default:
-                    // log the error info
-                    break;
-                    
+                int comIndex = int.Parse(connectinfo.Substring(3, 1));
+                ret = zmcaux.ZAux_OpenCom((uint)comIndex, out phandle);
             }
+            else
+            {
+                if(IPAddress.TryParse(connectinfo,out IPAddress iPAddress))
+                {
+                    throw new Exception("EMC0064 io卡ip地址信息格式异常");
+                }
+                ret = zmcaux.ZAux_OpenEth(connectinfo, out phandle);
+            }           
             
             if (ret == 0)
                 return true;
             else
                 return false;
+        }
+        private void GetAllInputStatue()
+        {           
+
+        }
+
+        private void GetAllOutputStatue()
+        {
+
+        }
+        private bool SetAllOutput()
+        {
+            
+            return true;
         }
         public override bool GetSingleInput(int index)
         {
@@ -69,19 +114,26 @@ namespace Fram.Hardware.IoCard
                 _value = 0;
             int ret = zmcaux.ZAux_Direct_SetOp(phandle, index, _value);          
         }
-        public override int GetMultiInput(int startindex, int offset)
+        public override byte[] GetAllInput()
         {
-            int value=0;
-            int[] data = new int[] { };
-            int ret = zmcaux.ZAux_Direct_GetInMulti(phandle, startindex, startindex + offset, data);
-            for(int i=0;i<offset;i++)
+
+            lock (LockReadInput)
             {
-                if(data[i]==1)
-                {
-                    value += 0x01 << i;
-                }
+                byte[] data = new byte[inputStatueBuffer.Length];
+                Array.Copy(inputStatueBuffer, data, inputStatueBuffer.Length);
+                return data;
+
+            }       
+        }
+        public override byte[] GetAllOutput()
+        {
+            lock (LockReadOutput)
+            {
+                byte[] data = new byte[lastWriteOutputStatueBuffer.Length];
+                Array.Copy(lastWriteOutputStatueBuffer, data, data.Length);
+                return data;
             }
-            return value;
+
         }
     }
 }

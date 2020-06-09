@@ -9,9 +9,15 @@ using System.Threading.Tasks;
 
 namespace Fram.Config
 {
-   public  class SerialPortConfig:BaseCommunicateConfig
+    /// <summary>
+    /// 应用于需要提供串口信息的类
+    /// </summary>
+   public  class SerialPortConfig
     {
-        public  string PortName { get;  set; }
+        public string Description { get;   set; }
+        public string DeviceName { get; set; }
+        public int CardIndex { get; set; } = 1;
+        public string PortName { get;  set; }
         public int BaudRate { get; set; } = 9600;
         [JsonConverter(typeof(StringEnumConverter))]
         public Parity Parity { get; set; } = Parity.None;
@@ -19,5 +25,6 @@ namespace Fram.Config
         [JsonConverter(typeof(StringEnumConverter))]
         public StopBits StopBits { get; set; } = StopBits.None;
         public string NewLine { get; set; } = "\n";
+        public Guid BindGuid { get;  set; }
     }
 }

@@ -8,7 +8,7 @@ using Fram.Config;
 using CLCamera;
 namespace Fram.Hardware
 {
-   public  class CameraManager : Singleton<CameraManager>
+   public sealed class CameraManager : Singleton<CameraManager>
     {
         Dictionary<string, CameraBase> m_cameras = new Dictionary<string, CameraBase>();
 

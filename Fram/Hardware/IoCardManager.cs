@@ -11,7 +11,7 @@ using Fram.Hardware.MotionCard;
 using Communication;
 namespace Fram.Hardware
 {
-  public   class IoCardManager:Singleton<IoCardManager>
+  public sealed class IoCardManager:Singleton<IoCardManager>
     {
         Dictionary<string, IIoCard> m_IoCards = new Dictionary<string, IIoCard>();
        public  IoCardManager()
@@ -32,7 +32,7 @@ namespace Fram.Hardware
                     if(mem.Guid==motionCard.Guid)
                     {
                         ismotioncard = true;
-                        MotionCard.MotionCardBase _motionCard = (MotionCard.MotionCardBase)Hardware.MotionCardManager.Instance.GetByKey(motionCard.DeviceName);
+                        IIoCard _motionCard = (IIoCard)Hardware.MotionCardManager.Instance.GetByKey(motionCard.DeviceName);
                         m_IoCards.Add(mem.DeviceName, _motionCard);
                         break;
                         
@@ -45,33 +45,60 @@ namespace Fram.Hardware
                     switch(_iocardbrand)
                     {
                         case IoCardBrand.ZMotion_EMC0064:
-                            if (mem.Communicate.CommunicationType == Config.CommunicatioinType.TcpClient)
+                            bool isfind = false;
+                            foreach(var serialInfo in ConfigManager.Instance.HardWareConfigrationMuster.SerialPortConfigs)
                             {
-                                TcpClientConfig Config = (TcpClientConfig)mem.Communicate;
-                                TcpClientCommunicate tcpClient = new TcpClientCommunicate(Config.LocalIpAddress, Config.LocalPort, Config.RemoteIpAddress, Config.RemotePort);
-                                EMC0064 eMC0064 = new EMC0064(tcpClient, mem.Guid, mem.DeviceName, mem.InputCount, mem.OutputCount);                               
-                                m_IoCards.Add(mem.DeviceName, eMC0064);
+                                if(serialInfo.BindGuid==mem.Guid)
+                                {
+                                    EMC0064 eMC0064 = new EMC0064( mem.Guid, mem.DeviceName, mem.InputCount, mem.OutputCount,serialInfo.PortName);
+                                    m_IoCards.Add(mem.DeviceName, eMC0064);
+                                    isfind = true;
+                                    break;
+                                }
                             }
-                            else
+                            if(!isfind)
                             {
-                                SerialPortConfig config=(SerialPortConfig)mem.Communicate;
-                                SerialCommunicate serialCommunicate = new SerialCommunicate(config.PortName, config.BaudRate, config.DataBits, config.Parity, config.StopBits, config.NewLine);
-                                EMC0064 eMC0064 = new EMC0064(serialCommunicate, mem.Guid, mem.DeviceName, mem.InputCount, mem.OutputCount); 
-                                m_IoCards.Add(mem.DeviceName, eMC0064);
+                                foreach (var tcpInfo in ConfigManager.Instance.HardWareConfigrationMuster.TcpClientConfigs)
+                                {
+                                    if (tcpInfo.BindGuid == mem.Guid)
+                                    {
+                                        EMC0064 eMC0064 = new EMC0064( mem.Guid, mem.DeviceName, mem.InputCount, mem.OutputCount,tcpInfo.LocalIpAddress);
+                                        m_IoCards.Add(mem.DeviceName, eMC0064);
+                                        isfind = true;
+                                        break;
+                                    }
+                                }
                             }
+                            if(!isfind)
+                            {
+                                throw new Exception($"未找到与 ZMotion_EMC0064 {mem.DeviceName } 相对应的通讯配置文件");
+                            }
+                            isfind = false;
                             break;
                         case IoCardBrand.SerialIOCardTest:
-                            SerialPortConfig config1 = (SerialPortConfig)mem.Communicate;
-
-                            SerialCommunicate serialCommunicate1 = new SerialCommunicate(config1.PortName, config1.BaudRate, config1.DataBits, config1.Parity, config1.StopBits, config1.NewLine);
-                            SerialIOCardTest serialIOCardTest=new SerialIOCardTest(serialCommunicate1, mem.Guid, mem.DeviceName, mem.InputCount, mem.OutputCount);
-                            m_IoCards.Add(mem.DeviceName, serialIOCardTest);
+                            foreach (var serialInfo in ConfigManager.Instance.HardWareConfigrationMuster.SerialPortConfigs)
+                            {
+                                if (serialInfo.BindGuid == mem.Guid)
+                                {
+                                    SerialIOCardTest serialIOCardTest = new SerialIOCardTest( mem.Guid, mem.DeviceName, mem.InputCount, mem.OutputCount);
+                                    m_IoCards.Add(mem.DeviceName, serialIOCardTest);                                  
+                                    break;
+                                }
+                            }
                             break;
-                        case IoCardBrand.TcpClientIOCardTest:
-                            TcpClientConfig config2 = (TcpClientConfig)mem.Communicate;
-                            TcpClientCommunicate tcpClientCommunicate = new TcpClientCommunicate(config2.LocalIpAddress, config2.LocalPort, config2.RemoteIpAddress, config2.RemotePort);
-                            TcpClientIoCardTest tcpClientIoCard = new TcpClientIoCardTest(tcpClientCommunicate, mem.Guid, mem.DeviceName, mem.InputCount, mem.OutputCount);
-                            m_IoCards.Add(mem.DeviceName, tcpClientIoCard);
+                        case IoCardBrand.NLK_IOCard_16:
+                            foreach (var serialInfo in ConfigManager.Instance.HardWareConfigrationMuster.SerialPortConfigs)
+                            {
+                                if (serialInfo.BindGuid == mem.Guid)
+                                {
+                                    NLK_IOCard_16 iocard = new NLK_IOCard_16(mem.Guid, mem.DeviceName, mem.InputCount, mem.OutputCount,serialInfo.CardIndex, serialInfo.PortName,serialInfo.BaudRate,serialInfo.StopBits,serialInfo.Parity,serialInfo.NewLine);
+
+                                    if(iocard.Open())
+                                         m_IoCards.Add(mem.DeviceName, iocard);
+                                    iocard.StartWorking();
+                                    break;
+                                }
+                            }
                             break;
                     }
                 }

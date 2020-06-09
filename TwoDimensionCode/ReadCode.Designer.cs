@@ -262,9 +262,9 @@
         private System.Windows.Forms.GroupBox gBox_CodeParam;
         private System.Windows.Forms.TableLayoutPanel tLPanel1;
         private System.Windows.Forms.Panel panel_DecodeParam;
-        private HalWindow.HDisplay hDisplay1;
         private System.Windows.Forms.TextBox txt_TimeUse;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private HalWindow.HDisplay hDisplay1;
     }
 }

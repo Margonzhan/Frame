@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Fram.Hardware.IoCard;
 namespace Fram.Hardware.MotionCard
 {
-    public class MotionCardBase : HardwareBase, IIoCard
+    public class MotionCardBase : HardwareBase
     {
         protected int m_startAxisIndex;
         protected int m_totalAxisCount;
@@ -14,6 +15,7 @@ namespace Fram.Hardware.MotionCard
         protected bool m_isInitialed = false;
         protected bool m_isLoadConfigFile = false;
         protected int m_cardIdMode = 0;//which way to get the card id,auto system assigned or manul dis switch
+
         public int StartAxisIndex
         {
             get { return m_startAxisIndex; }
@@ -35,15 +37,8 @@ namespace Fram.Hardware.MotionCard
         public virtual bool Open() { return true; }
         public virtual void LoadConfigFile(string filepath) { }
 
-        public virtual void Close() { }
+        public virtual void Close() { }      
         #region Io Operate
-        public virtual bool GetSingleInput(int index) { return false; }
-        public virtual bool GetSingleOutput(int index) { return false; }
-        public virtual void SetSingleOutput(int index, bool value) { }
-
-        public virtual int GetMultiInput(int startindex, int offset) { return 0; }
-        public virtual int GetMultiOutput(int startindex, int offset) { return 0; }
-        public virtual void SetMultiOutPut(int startindex, int value) { }
         #endregion
         #region axis operate
         /// <summary>
@@ -88,7 +83,8 @@ namespace Fram.Hardware.MotionCard
         /// <param name="axisindex">the axis want to operate</param>
         /// <param name="value">on means power on,off means power off</param>
         public virtual void PowerSet(uint axisindex, bool value) { }
-        public virtual async Task HomeAsync(uint axisindex, uint homedir) { }
+        public virtual async Task HomeAsync(uint axisindex) { }
+        
         public virtual void AxisNormalStop(uint axisindex) { }
         public virtual void AxisEmgStop(uint axisindex) { }
 
@@ -113,8 +109,13 @@ namespace Fram.Hardware.MotionCard
         public virtual void GetAxisHomeDec(uint axisindex, ref double paramvalue) { }
         public virtual void SetAxisHomeMode(uint axisindex, int paramvalue) { }
         public virtual void GetAxisHomeMode(uint axisindex, ref int paramvalue) { }
+        public virtual void SetAxisHomeDir(uint axisindex, int paramvalue) { }
+        public virtual void GetAxisHomeDir(uint axisindex, ref int paramvalue) { }
+
 
         public virtual void GetAxisPosition(uint axisindex, ref double paramvalue) { }
+        public virtual void SetAxisPosition(uint axisindex,  double paramvalue) { }
+
         public virtual void GetAxisIoData(uint axisindex, ref int value) { }
         public virtual void GetAxisStatue(uint axisindex,ref int value) { }
           #endregion
@@ -122,5 +123,6 @@ namespace Fram.Hardware.MotionCard
     public enum MotionCardBrand
     {
         AdlinkAMP204c,
+        AdlinkEMX100,
     }
 }

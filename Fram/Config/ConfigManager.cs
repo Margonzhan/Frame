@@ -41,34 +41,36 @@ namespace Fram.Config
                 }
 
                 string _configinfo = File.ReadAllText("Config\\ConfigFile\\" + mem);
-                dataConverter dataConverter = new dataConverter();
-                HardWareConfigrationMuster = JsonConvert.DeserializeObject<HardWareConfigrationMuster>(_configinfo, dataConverter);
-            }
-        }
-        public class dataConverter : DATACreationConverter<BaseCommunicateConfig>
-        {
-            protected override BaseCommunicateConfig Create(Type objectType, JObject jObject)
-            {
-                string info;
-                if (FieldExists("TcpClient", jObject))
-                {
-                    info= jObject.ToString();
-                    return JsonConvert.DeserializeObject<TcpClientConfig>(info);
-                    // return new TcpClientCommunicate(jObject.Value<String>("LocalIpAddress"), jObject.Value<uint>("LocalPort"), jObject.Value<String>("RemoteIpAddress"), jObject.Value<uint>("RemotePort"));
-                }
-                else
-                {
-                    info = jObject.ToString();
-                    
-                    return  JsonConvert.DeserializeObject<SerialPortConfig>(info);
-                }
-            }
+              //  dataConverter dataConverter = new dataConverter();
+             //   HardWareConfigrationMuster = JsonConvert.DeserializeObject<HardWareConfigrationMuster>(_configinfo, dataConverter);
+                HardWareConfigrationMuster = JsonConvert.DeserializeObject<HardWareConfigrationMuster>(_configinfo);
 
-            private bool FieldExists(string fieldName, JObject jObject)
-            {
-                return jObject.Value<string>("ConnectType") == fieldName;
             }
         }
+        //public class dataConverter : DATACreationConverter<BaseCommunicateConfig>
+        //{
+        //    protected override BaseCommunicateConfig Create(Type objectType, JObject jObject)
+        //    {
+        //        string info;
+        //        if (FieldExists("TcpClient", jObject))
+        //        {
+        //            info= jObject.ToString();
+        //            return JsonConvert.DeserializeObject<TcpClientConfig>(info);
+        //            // return new TcpClientCommunicate(jObject.Value<String>("LocalIpAddress"), jObject.Value<uint>("LocalPort"), jObject.Value<String>("RemoteIpAddress"), jObject.Value<uint>("RemotePort"));
+        //        }
+        //        else
+        //        {
+        //            info = jObject.ToString();
+                    
+        //            return  JsonConvert.DeserializeObject<SerialPortConfig>(info);
+        //        }
+        //    }
+
+        //    private bool FieldExists(string fieldName, JObject jObject)
+        //    {
+        //        return jObject.Value<string>("ConnectType") == fieldName;
+        //    }
+        //}
 
         public abstract class DATACreationConverter<T> : JsonConverter
         {
@@ -126,6 +128,8 @@ namespace Fram.Config
         List<SingleIoDeviceConfig> m_singleIoDeviceConfigs = new List<SingleIoDeviceConfig>();
         List<AxisConfig> m_axisConfigs = new List<AxisConfig>();
         List<CameraConfig> m_cameraConfigs = new List<CameraConfig>();
+        List<SerialPortConfig> m_serialPortConfigs = new List<SerialPortConfig>();
+        List<TcpClientConfig> m_tcpClientConfigs = new List<TcpClientConfig>();
         public List<MotionCardConfig> MotionCardConfigs
         {
             get { return m_moitionCardConfigs; }
@@ -145,6 +149,14 @@ namespace Fram.Config
         public List<CameraConfig> CameraConfigs
         {
             get { return m_cameraConfigs; }
+        }
+        public List<SerialPortConfig> SerialPortConfigs
+        {
+            get { return m_serialPortConfigs; }
+        }
+        public List<TcpClientConfig> TcpClientConfigs
+        {
+            get { return m_tcpClientConfigs; }
         }
     }
 }

@@ -4,29 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
+using System.IO;
+using CommonFunc;
+
 namespace Fram
 {
     /// <summary>
     /// 用于跨线程操作空间
     /// </summary>
-    class DelegateUIControl
-    {
-        private static DelegateUIControl m_Instance;
-        private readonly static object m_lock = new object();
-        public static DelegateUIControl GetInstance()
-        {
-            if (m_Instance == null)
-            {
-                lock (m_lock)
-                {
-                    if (m_Instance == null)
-                    {
-                        m_Instance = new DelegateUIControl();
-                    }              
-                }
-            }
-            return m_Instance;
-        }
+  public  sealed class DelegateUIControl:Singleton<DelegateUIControl>
+    {       
+        #region 委托操作textbox
         /// <summary>
         /// 
         /// </summary>
@@ -36,10 +24,13 @@ namespace Fram
         /// <param name="color"></字体颜色，如果为null，则默认黑色字体>       
         public void UpdateTextBox(string textboxname, string info, bool append, Color? color = null)
         {
-            if (textboxname == "txt_ErrorMessage")
+            if(TxtBoxS.ContainsKey(textboxname))
             {
-                DelegateTextBox(txt_ErrorMessage, info, append, color);
-            }
+                if(TxtBoxS.TryGetValue(textboxname, out TextBox textBox))
+                {
+                    DelegateTextBox(textBox, info, append, color);
+                }
+            }          
         }       
         private void DelegateTextBox(TextBox textbox,string info,bool append,Color? color=null)
         {
@@ -47,9 +38,9 @@ namespace Fram
             if (textbox.InvokeRequired)
             {
                 if(append)
-                textbox.Invoke(new Action(() => {textbox.ForeColor=(Color)color;  textbox.Text+=info; }));
+                    textbox.BeginInvoke(new Action(() => {textbox.ForeColor=(Color)color;  textbox.Text+=info; }));
                 else
-                    textbox.Invoke(new Action(() => { textbox.ForeColor = (Color)color; textbox.Text = info; }));
+                    textbox.BeginInvoke(new Action(() => { textbox.ForeColor = (Color)color; textbox.Text = info; }));
             }
             else
             {
@@ -61,20 +52,48 @@ namespace Fram
                 }
             }
         }
-        
-        public  void DelegateButton(Button button, string info)
-        {
 
-            if (button.InvokeRequired)
+        #endregion
+        #region
+        public void UpdateRichTBoxZD(string richTextBoxZdName, string info, bool append = true, Color? color = null, int fontSize = 9)
+        {
+            if (RichTxtBoxZdS.ContainsKey(richTextBoxZdName))
             {
-                button.Invoke(new Action(() => { button.Text = info; }));
+                if (RichTxtBoxZdS.TryGetValue(richTextBoxZdName, out RichTextBoxZd richTextBoxZd))
+                {
+                    DelegateRichTBoxZD(richTextBoxZd, info, append, color, fontSize);
+                }
+            }
+        }
+        private void DelegateRichTBoxZD(RichTextBoxZd richTextBoxZd,string info,bool append=true,Color? color=null,int fontSize=9 )
+        {
+            color = color ?? Color.Black;
+            
+            if (richTextBoxZd.InvokeRequired)
+            {
+                if (append)
+                    richTextBoxZd.BeginInvoke(new Action(() => {  richTextBoxZd.Append(info,color,fontSize); }));
+                else
+                    richTextBoxZd.BeginInvoke(new Action(() => { richTextBoxZd.ClearAll(); richTextBoxZd.Append(info, color, fontSize); }));
             }
             else
             {
-                button.Text = info;
+                if (append)
+                {
+                    richTextBoxZd.Append(info, color, fontSize);
+                    
+                }
+                else
+                {
+                    richTextBoxZd.ClearAll();
+                    richTextBoxZd.Append(info, color, fontSize);
+                }
             }
         }
-        public TextBox txt_ErrorMessage;
+        #endregion
+
+        public Dictionary<string, TextBox> TxtBoxS = new Dictionary<string, TextBox>();
+        public Dictionary<string, RichTextBoxZd> RichTxtBoxZdS = new Dictionary<string, RichTextBoxZd>();
     }
    
 }

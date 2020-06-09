@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using Fram.Config;
 using Fram.Hardware;
 using HalconDotNet;
-namespace Fram
+namespace Fram.FormFolder
 {
     public partial class FormVision : UserControl
     {

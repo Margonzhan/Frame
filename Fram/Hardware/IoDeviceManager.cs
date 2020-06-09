@@ -8,7 +8,7 @@ using Fram.Config;
 
 namespace Fram.Hardware
 {
-   public  class IoDeviceManager:Singleton<IoDeviceManager>
+   public sealed class IoDeviceManager:Singleton<IoDeviceManager>
     {
         Dictionary<string, IOBaseDevice.SingleIoDevice> m_IoDevices = new Dictionary<string, IOBaseDevice.SingleIoDevice>();
         public IoDeviceManager()

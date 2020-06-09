@@ -1,4 +1,4 @@
-﻿namespace Fram
+﻿namespace Fram.FormFolder
 {
     partial class FormVision
     {

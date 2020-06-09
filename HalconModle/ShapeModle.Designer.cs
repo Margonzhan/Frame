@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.tableLP_Layer1 = new System.Windows.Forms.TableLayoutPanel();
-            this.hDisplay1 = new HalWindow.HDisplay();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage_ParamCreateModle = new System.Windows.Forms.TabPage();
@@ -75,6 +74,7 @@
             this.btn_AddModleRegion = new System.Windows.Forms.Button();
             this.btn_LoadModleIInfo = new System.Windows.Forms.Button();
             this.btn_LoadImage = new System.Windows.Forms.Button();
+            this.hDisplay1 = new HalWindow.HDisplay();
             this.tableLP_Layer1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -101,8 +101,8 @@
             this.tableLP_Layer1.ColumnCount = 2;
             this.tableLP_Layer1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
             this.tableLP_Layer1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLP_Layer1.Controls.Add(this.hDisplay1, 1, 0);
             this.tableLP_Layer1.Controls.Add(this.tableLayoutPanel1, 0, 0);
+            this.tableLP_Layer1.Controls.Add(this.hDisplay1, 1, 0);
             this.tableLP_Layer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLP_Layer1.Location = new System.Drawing.Point(0, 0);
             this.tableLP_Layer1.Name = "tableLP_Layer1";
@@ -110,19 +110,6 @@
             this.tableLP_Layer1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLP_Layer1.Size = new System.Drawing.Size(826, 521);
             this.tableLP_Layer1.TabIndex = 0;
-            // 
-            // hDisplay1
-            // 
-            this.hDisplay1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.hDisplay1.HImageX = null;
-            this.hDisplay1.HRegionXList = null;
-            this.hDisplay1.HStringXList = null;
-            this.hDisplay1.IsCancelImageMove = false;
-            this.hDisplay1.Location = new System.Drawing.Point(306, 5);
-            this.hDisplay1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.hDisplay1.Name = "hDisplay1";
-            this.hDisplay1.Size = new System.Drawing.Size(515, 511);
-            this.hDisplay1.TabIndex = 0;
             // 
             // tableLayoutPanel1
             // 
@@ -748,6 +735,19 @@
             this.btn_LoadImage.Text = "加载图片";
             this.btn_LoadImage.UseVisualStyleBackColor = true;
             this.btn_LoadImage.Click += new System.EventHandler(this.btn_LoadImage_Click);
+            // 
+            // hDisplay1
+            // 
+            this.hDisplay1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.hDisplay1.HImageX = null;
+            this.hDisplay1.HRegionXList = null;
+            this.hDisplay1.HStringXList = null;
+            this.hDisplay1.IsCancelImageMove = false;
+            this.hDisplay1.Location = new System.Drawing.Point(306, 5);
+            this.hDisplay1.Margin = new System.Windows.Forms.Padding(4);
+            this.hDisplay1.Name = "hDisplay1";
+            this.hDisplay1.Size = new System.Drawing.Size(515, 511);
+            this.hDisplay1.TabIndex = 2;
             // 
             // ShapeModle
             // 

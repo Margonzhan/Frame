@@ -14,7 +14,7 @@ namespace Fram.Station
         {
             StationDictionry = new Dictionary<string, StationBase>();
         }
-        private  StationBase GetStationByName(string stationname)
+        public   StationBase GetStationByName(string stationname)
         {
             StationBase _station = null;
             if(StationDictionry.ContainsKey(stationname))
@@ -39,7 +39,7 @@ namespace Fram.Station
         }
         public void StartAll()
         {
-            if(InitAll()==string.Empty)
+           // if(string.IsNullOrEmpty(InitAll()))
             {
                 foreach (var mem in StationDictionry)
                 {

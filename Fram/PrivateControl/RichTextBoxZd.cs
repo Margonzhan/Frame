@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace 燃气罩锁螺丝
+namespace Fram
 {
     public partial class RichTextBoxZd : UserControl
     {
@@ -34,15 +34,14 @@ namespace 燃气罩锁螺丝
         {
             richTextBox.SuspendLayout();
             int length = richTextBox.Text.Length;
-            string time = DateTime.Now.ToString("yyyy_MM_dd  hh:MM:ss") + "  ";
+            string time = DateTime.Now.ToString("yyyy_MM_dd  hh:mm:ss") + "  ";
             richTextBox.AppendText(time+txt+"\r");
             richTextBox.Select(length, length + txt.Length+time.Length);
             richTextBox.SelectionColor = color ?? Color.Black;
             
             richTextBox.SelectionFont = new Font(this.Font.Name, size, FontStyle.Bold);
             richTextBox.ScrollToCaret();
-            richTextBox.ResumeLayout();
-            
+            richTextBox.ResumeLayout();           
         }
     }
 }

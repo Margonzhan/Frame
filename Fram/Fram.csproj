@@ -35,6 +35,15 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Charts.v17.2.Core, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Data.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -77,7 +86,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\CameraConfig\CameraConfig.cs" />
-    <Compile Include="Config\CommunicateConfig\BaseCommunicateConfig.cs" />
     <Compile Include="Config\CommunicateConfig\SerialPortConfig.cs" />
     <Compile Include="Config\CommunicateConfig\TcpClientConfig.cs" />
     <Compile Include="Config\ConfigBase.cs" />
@@ -87,6 +95,18 @@
     <Compile Include="Config\MotionRelevantConfig\AxisConfig.cs" />
     <Compile Include="Config\MotionRelevantConfig\MotionCardConfig.cs" />
     <Compile Include="DelegateUIControl.cs" />
+    <Compile Include="FormFolder\FormAuto.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FormFolder\FormAuto.Designer.cs">
+      <DependentUpon>FormAuto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormFolder\FormAxis.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FormFolder\FormAxis.Designer.cs">
+      <DependentUpon>FormAxis.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormFolder\FormIO.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -112,6 +132,7 @@
       <DependentUpon>FormVision.cs</DependentUpon>
     </Compile>
     <Compile Include="FXSerialConnect.cs" />
+    <Compile Include="GloablObject.cs" />
     <Compile Include="GlobalParameter.cs" />
     <Compile Include="Hardware\AxisDevice\Motor.cs" />
     <Compile Include="Hardware\AxisDevice\ServoMotor.cs" />
@@ -122,19 +143,27 @@
     <Compile Include="Hardware\IOBaseDevice\ISingleIoDevice.cs" />
     <Compile Include="Hardware\IOBaseDevice\SingleIoDevice.cs" />
     <Compile Include="Hardware\IoCardManager.cs" />
+    <Compile Include="Hardware\IoCard\NLK_IOCard_16.cs" />
     <Compile Include="Hardware\IoCard\SerialIOCardTest.cs" />
-    <Compile Include="Hardware\IoCard\TcpClientIoCardTest.cs" />
     <Compile Include="Hardware\IoDeviceManager.cs" />
     <Compile Include="Hardware\IoCard\EMC0064.cs" />
     <Compile Include="Hardware\IoCard\IIoCard.cs" />
     <Compile Include="Hardware\IoCard\IoCardBase.cs" />
     <Compile Include="Hardware\IoCard\Zmcaux.cs" />
     <Compile Include="Hardware\MotionCardManager.cs" />
-    <Compile Include="Hardware\MotionCard\Adlink_Amp204c.cs" />
-    <Compile Include="Hardware\MotionCard\APS168x64.cs" />
-    <Compile Include="Hardware\MotionCard\APS_Define.cs" />
+    <Compile Include="Hardware\MotionCard\Adlink\Adlink_EMX100.cs" />
+    <Compile Include="Hardware\MotionCard\Adlink\Adlink_Amp204c.cs" />
+    <Compile Include="Hardware\MotionCard\Adlink\APS168x64.cs" />
+    <Compile Include="Hardware\MotionCard\Adlink\APS_Define.cs" />
     <Compile Include="Hardware\MotionCard\IMotionCard.cs" />
     <Compile Include="Hardware\MotionCard\MotionCardBase.cs" />
+    <Compile Include="Hardware\MotionCard\TcpClientIoCardTest.cs" />
+    <Compile Include="PrivateControl\AxisControlZd.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PrivateControl\AxisControlZd.Designer.cs">
+      <DependentUpon>AxisControlZd.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrivateControl\RichTextBoxZd.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -146,6 +175,12 @@
     <Compile Include="Station\StationBase.cs" />
     <Compile Include="Station\StationManager.cs" />
     <Compile Include="Station\stationtest.cs" />
+    <EmbeddedResource Include="FormFolder\FormAuto.resx">
+      <DependentUpon>FormAuto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFolder\FormAxis.resx">
+      <DependentUpon>FormAxis.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormFolder\FormIO.resx">
       <DependentUpon>FormIO.cs</DependentUpon>
     </EmbeddedResource>
@@ -157,6 +192,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormFolder\FormVision.resx">
       <DependentUpon>FormVision.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrivateControl\AxisControlZd.resx">
+      <DependentUpon>AxisControlZd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrivateControl\RichTextBoxZd.resx">
       <DependentUpon>RichTextBoxZd.cs</DependentUpon>
@@ -177,6 +215,9 @@
     </None>
     <None Include="Config\ConfigFile\HardWareConfigration.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Properties\app.manifest">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -221,16 +262,12 @@
       <Name>HalconModle</Name>
     </ProjectReference>
     <ProjectReference Include="..\OcrTool\OcrTool.csproj">
-      <Project>{119C4064-F497-42B1-9E1F-B7DDCE753FCE}</Project>
+      <Project>{119c4064-f497-42b1-9e1f-b7ddce753fce}</Project>
       <Name>OcrTool</Name>
     </ProjectReference>
     <ProjectReference Include="..\TwoDimensionCode\TwoDimensionCode.csproj">
       <Project>{9f2527e3-ff68-4bf8-b68d-4499e36aa00c}</Project>
       <Name>TwoDimensionCode</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Vision\Vision.csproj">
-      <Project>{3f94d3a5-721d-487c-b6a1-d7f702c71129}</Project>
-      <Name>Vision</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

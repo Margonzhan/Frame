@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Fram.Hardware
 {
-   public  class AxisManager: Singleton<AxisManager>
+   public sealed class AxisManager: Singleton<AxisManager>
     {
         Dictionary<string, AxisDevice.Motor> m_AxisDevices = new Dictionary<string, AxisDevice.Motor>();
         public AxisManager()

@@ -13,6 +13,28 @@ namespace Fram.Hardware.AxisDevice
       protected  uint m_axisIndex;
         #endregion
         #region property
+        public bool PowerStatue
+        {
+            get
+            {
+                int v = 0;
+                m_motionCard.GetAxisIoData(m_axisIndex, ref v);
+                return (v & (1 << 7)) != 0;
+            }
+            set
+            {
+                m_motionCard.PowerSet(m_axisIndex, value);
+            }
+        }
+        public bool Busy
+        {
+            get
+            {
+                int v = 0;
+                m_motionCard.GetAxisStatue(m_axisIndex, ref v);
+              return   (v & (1 << 1)) != 0;
+            }
+        }
         public override double HomeAccV
         {
             get
@@ -22,6 +44,10 @@ namespace Fram.Hardware.AxisDevice
                 return data;
             }
             set { m_motionCard.SetAxisHomeAcc(m_axisIndex, value); }
+        }
+        public override void Stop()
+        {
+            m_motionCard.AxisEmgStop(m_axisIndex);
         }
         public override double HomeDecV
         {
@@ -63,6 +89,17 @@ namespace Fram.Hardware.AxisDevice
             }
             set { m_motionCard.SetAxisHomeMode(m_axisIndex, value); }
         }
+        public override int HomeDir
+        {
+            get
+            {
+                int data = 0;
+                m_motionCard.GetAxisHomeDir(m_axisIndex, ref data);
+                return data;
+            }
+            set { m_motionCard.SetAxisHomeDir(m_axisIndex, value); }
+        }
+
         public override double MoveAccV
         {
             get
@@ -122,7 +159,10 @@ namespace Fram.Hardware.AxisDevice
         }
         public override async Task HomeAsync(bool ispositivedir)
         {
-           await m_motionCard.HomeAsync(m_axisIndex, 0);           
+            if(ispositivedir)
+              await m_motionCard.HomeAsync(m_axisIndex); 
+            else
+              await m_motionCard.HomeAsync(m_axisIndex);
         }
      
         public override async  Task AbsMoveAsync(int position)
@@ -154,7 +194,10 @@ namespace Fram.Hardware.AxisDevice
         {
             m_motionCard.GetAxisPosition(m_axisIndex, ref data);
         }
-
+        public override void SetAxisCPoint(double data = 0)
+        {
+            m_motionCard.SetAxisPosition(m_axisIndex, data);
+        }
     }
 
 }

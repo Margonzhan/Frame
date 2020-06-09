@@ -27,6 +27,7 @@ namespace OcrTool
             m_OcrParam = new RegionParam();
             m_TrainParam = new OcrTrainParam();
             DelegateUIControl.GetInstance().FormSetHDisplay = this.hDisplay1;
+            DelegateUIControl.GetInstance().txt_CharsTrainf = this.txt_CharsTrainf;
         }
         public HObject BackImage
         {
@@ -45,7 +46,7 @@ namespace OcrTool
             {
                 string path = ofd.FileName;
                 HOperatorSet.ReadImage(out m_image, path);
-                HOperatorSet.InvertImage(m_image, out m_image);
+              //  HOperatorSet.InvertImage(m_image, out m_image);
                 DelegateUIControl.GetInstance().UpdateHDisplay("FormSetHDisplay", m_image, null, null);
             }
         }
@@ -62,11 +63,11 @@ namespace OcrTool
             {
                 if (cmb_RoiModle.SelectedItem.ToString() == "矩形")
                 {
-                    hDisplay1.AddRegion("矩形", true);
+                    hDisplay1.AddRegion(EnumModelShapeType.Rectangle1, true);
                 }
                 else if (cmb_RoiModle.SelectedItem.ToString() == "旋转矩形")
                 {
-                    hDisplay1.AddRegion("旋转矩形", true);
+                    hDisplay1.AddRegion(EnumModelShapeType.Rectangle2, true);
                 }
             }
         }
@@ -181,11 +182,17 @@ namespace OcrTool
             try
             {
                 HOperatorSet.ReadOcrClassMlp(omcfile, out m_ocrhandle);
-               // HOperatorSet.ReadOcrTrainf(
+                HOperatorSet.ReadOcrTrainfNames(trffile, out HTuple characterNames, out HTuple characterCount);
+                string character = string.Empty;
+                foreach(var mem in characterNames.SArr)
+                {
+                    character += mem + ", ";
+                }
+                DelegateUIControl.GetInstance().UpdateTextBox("txt_CharsTrainf", character, false);
             }
             catch(Exception ex)
-            { 
-            
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -318,6 +325,11 @@ namespace OcrTool
             if (fbd.ShowDialog() == DialogResult.OK)
             {
                  path = fbd.SelectedPath;
+                if(!Directory.Exists(path))
+                {
+                    MessageBox.Show($"不存在 '{path}' 路径!");
+                    return;
+                }
                  string[] _f = path.Split('\\');
                   Foldername = _f[_f.Length - 1];
                  trffilepath = path + "\\" + Foldername + ".trf";
@@ -328,9 +340,9 @@ namespace OcrTool
             HOperatorSet.GenEmptyObj(out _characterRegion);
             for (int i = 0; i < hv_Number.I; i++)
             {
-                HOperatorSet.AppendOcrTrainf(_region[i + 1], m_image, _characterTrained[i], trffilepath);
-            
+                HOperatorSet.AppendOcrTrainf(_region[i + 1], m_image, _characterTrained[i], trffilepath);           
             }
+            
             HTuple _ocrhandle=new HTuple();
             HTuple error=new HTuple();
             HTuple errorlog=new HTuple();
@@ -355,21 +367,72 @@ namespace OcrTool
         {
             string trffile1 = string.Empty;
             string trffile2 = string.Empty;
-            string folderpath = string.Empty;
-            OpenFileDialog opd = new OpenFileDialog();
-            opd.Filter = "|*.trf";
-            if (opd.ShowDialog() == DialogResult.OK)
-            {
-                trffile1 = opd.FileName;                           
-            }
-            else return;
 
-            if (opd.ShowDialog() == DialogResult.OK)
-            {
-                trffile2 = opd.FileName;
-            }
-            else return;
+            HTuple charTrf1 = new HTuple();//第一个训练文件包含的字符
+            HObject character1 = new HObject();
+            HTuple  charTrf2 = new HTuple ();//第二个训练文件包含的字符
+            HObject character2 = new HObject();
+
+            string concatTrf = string.Empty;//合并字符
+            HObject characterConcat = new HObject();
+
+            string folderpath = string.Empty;
+
             FolderBrowserDialog fbd = new FolderBrowserDialog();
+            fbd.ShowNewFolderButton = false;
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                bool _isContrainTrfFile = false;
+                foreach(var mem in Directory.GetFiles(fbd.SelectedPath))
+                {
+                    if(mem.EndsWith(".trf"))
+                    {
+                        _isContrainTrfFile = true;
+                        trffile1 = mem;
+                        HOperatorSet.ReadOcrTrainf(out character1, mem, out charTrf1);
+                        break;
+                    }
+                }
+                if(!_isContrainTrfFile)
+                {
+                    MessageBox.Show($"文件夹中不包含trf文件 ","异常");
+                }
+
+            }
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                bool _isContrainTrfFile = false;
+                foreach (var mem in Directory.GetFiles(fbd.SelectedPath))
+                {
+                    if (mem.EndsWith(".trf"))
+                    {
+                        _isContrainTrfFile = true;
+                        trffile2 = mem;
+                        HOperatorSet.ReadOcrTrainf(out character2, mem, out charTrf2);
+                        break;
+                    }
+                }
+                if (!_isContrainTrfFile)
+                {
+                    MessageBox.Show($"文件夹中不包含trf文件 ", "异常");
+                }
+            }
+            List<string> listchartrf = charTrf2.SArr.ToList();
+            foreach (var mem in charTrf1.SArr)
+            {
+                if(listchartrf.Contains(mem))
+                {
+                    int index = listchartrf.FindIndex(str=>str.Contains(mem));
+                    listchartrf.RemoveAt(index);
+                    HOperatorSet.RemoveObj(character2, out character2, index+1);
+                    charTrf2 = charTrf2.TupleRemove(index);
+                    
+                }
+            }
+            
+     character1=       character1.ConcatObj(character2);
+      charTrf1=      charTrf1.TupleConcat(charTrf2);
+            
             fbd.ShowNewFolderButton = true;
             fbd.Description = "请选择保存路径";
             if (fbd.ShowDialog() == DialogResult.OK)
@@ -380,12 +443,14 @@ namespace OcrTool
                 {
                     string[] _f = folderpath.Split('\\');
                     Foldername = _f[_f.Length - 1];
-                    HOperatorSet.ConcatOcrTrainf(new string[] { trffile1, trffile2 }, folderpath+"\\"+Foldername+".trf");
-                    HTuple _characterTrained=new HTuple();
-                    HObject _characcter=new HObject();
-                    HOperatorSet.ReadOcrTrainf(out _characcter, folderpath + "\\" + Foldername + ".trf", out _characterTrained);
+
+                    HOperatorSet.WriteOcrTrainfImage(character1, charTrf1, folderpath + "\\" + Foldername + ".trf");
+                   // HOperatorSet.ConcatOcrTrainf(new string[] { trffile1, trffile2 }, folderpath+"\\"+Foldername+".trf");
+                  //  HTuple _characterTrained=new HTuple();
+                  //  HObject _characcter=new HObject();
+                  //  HOperatorSet.ReadOcrTrainf(out _characcter, folderpath + "\\" + Foldername + ".trf", out _characterTrained);
                     HTuple _ocrhandle = new HTuple();
-                    HOperatorSet.CreateOcrClassMlp((int)nmud_CharacterWidth.Value, (int)nmud_CharacterHidth.Value, "constant", "default", _characterTrained,
+                    HOperatorSet.CreateOcrClassMlp((int)nmud_CharacterWidth.Value, (int)nmud_CharacterHidth.Value, "constant", "default", charTrf1,
                 80, "none", 10, 42, out _ocrhandle);
                     HTuple error = new HTuple();
                     HTuple errorlog = new HTuple();
@@ -402,7 +467,12 @@ namespace OcrTool
         public HObject  SearchReagion
         {
             set { hDisplay1.HSeaarchRegionXList = new List<HObject>() {value}; }
-            get { return hDisplay1.GetSearchRegions().ElementAt(0); }
+            get
+            {
+                if (hDisplay1.GetSearchRegions().Count > 0)
+                    return hDisplay1.GetSearchRegions().ElementAt(0);
+                else return null;
+            }
         }
         public void SerializeParam(string path)
         {

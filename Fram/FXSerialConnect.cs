@@ -79,7 +79,7 @@ namespace readCodetest
             if (str.Contains("00FF")&&(str.Length>5)&&(str.Length<10))
             {             
                 M000=(str.Substring(5,1)=="1"?true:false);
-                DelegateUIControl.GetInstance().UpdateTextBox("txt_ErrorMessage", M000.ToString(), false, Color.Red);
+                DelegateUIControl.Instance.UpdateTextBox("txt_ErrorMessage", M000.ToString(), false, Color.Red);
                 M001 = (str.Substring(6, 1) == "1" ? true : false);               
             }
         }

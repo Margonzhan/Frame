@@ -66,6 +66,10 @@ namespace OcrTool
                 {
                     DelegateTextBox(txt_ErrorMessage, info, append, color);
                 }
+                else if(textboxname== "txt_CharsTrainf")
+                {
+                    DelegateTextBox(txt_CharsTrainf, info, append, color);
+                }
             }
             private void DelegateTextBox(TextBox textbox, string info, bool append, Color? color = null)
             {
@@ -102,7 +106,7 @@ namespace OcrTool
                     button.Text = info;
                 }
             }
-            public TextBox txt_ErrorMessage;
+            public TextBox txt_ErrorMessage, txt_CharsTrainf;
             public HDisplay FormSetHDisplay;
         }
     

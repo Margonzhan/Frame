@@ -8,7 +8,7 @@ using Fram.Hardware.MotionCard;
 using Fram.Config;
 namespace Fram.Hardware
 {
-   public  class MotionCardManager : Singleton<MotionCardManager>
+   public sealed class MotionCardManager : Singleton<MotionCardManager>
     {
         Dictionary<string, MotionCardBase> m_motionCards = new Dictionary<string, MotionCardBase>();
         public MotionCardManager()
@@ -28,9 +28,15 @@ namespace Fram.Hardware
                     switch (_motioncardbrand)
                     {
                         case MotionCardBrand.AdlinkAMP204c:
-                            Adlink_Amp204c adlink_Amp204C = new Adlink_Amp204c(mem.DeviceName, mem.Guid);
+                            Adlink_Amp204c adlink_Amp204C = new Adlink_Amp204c(mem.DeviceName, mem.Guid,16,16,mem.CardId);
                             adlink_Amp204C.LoadConfigFile(AppDomain.CurrentDomain.BaseDirectory + "param.xml");
                             m_motionCards.Add(mem.DeviceName, adlink_Amp204C);
+                            break;
+                        case MotionCardBrand.AdlinkEMX100:
+                            Adlink_EMX100 adlink_EMX100 = new Adlink_EMX100(mem.DeviceName, mem.Guid,16,8, mem.CardId);
+                            adlink_EMX100.LoadConfigFile(AppDomain.CurrentDomain.BaseDirectory + "param.xml");
+                            m_motionCards.Add(mem.DeviceName, adlink_EMX100);
+
                             break;
                     }
                 }

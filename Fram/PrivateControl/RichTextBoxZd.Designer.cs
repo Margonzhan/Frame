@@ -1,4 +1,4 @@
-﻿namespace 燃气罩锁螺丝
+﻿namespace Fram
 {
     partial class RichTextBoxZd
     {

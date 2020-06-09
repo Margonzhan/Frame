@@ -11,6 +11,7 @@
     <AssemblyName>OcrTool</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,13 +31,11 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="halcondotnet">
       <HintPath>..\DllFile\halcondotnet.dll</HintPath>
-    </Reference>
-    <Reference Include="HDisplay">
-      <HintPath>..\DllFile\HDisplay.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,9 +46,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="ViewROI">
-      <HintPath>..\DllFile\ViewROI.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CDelegate.cs" />
@@ -64,6 +62,16 @@
     <EmbeddedResource Include="OcrControl.resx">
       <DependentUpon>OcrControl.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Display\HDisplay\HDisplay.csproj">
+      <Project>{96cc5929-ee8a-4cb5-812e-5cee3c23820b}</Project>
+      <Name>HDisplay</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Display\ViewROI\ViewROI.csproj">
+      <Project>{275cc20c-00b9-470b-9017-4d6457d74be6}</Project>
+      <Name>ViewROI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
