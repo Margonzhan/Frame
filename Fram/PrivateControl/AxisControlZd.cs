@@ -42,6 +42,7 @@ namespace Fram.PrivateControl
             this.label_AxisName.Text = Motor.DeviceName;
             btn_Power.Text = Motor.PowerStatue ? "Power On" : "Power Off";
             cmB_HomeDir.SelectedIndex= Motor.HomeDir;
+            txt_MaxSpeed.Text = Motor.MoveVM.ToString();
             CancellationTokenSource = new CancellationTokenSource();
             Task.Run(new Action(() => FrashPosition()), CancellationTokenSource.Token);
         }
@@ -145,6 +146,12 @@ namespace Fram.PrivateControl
                     MessageBox.Show("distance 不为数字", "异常提示");
                     return;
                 }
+                if(!double.TryParse(txt_MaxSpeed.Text,out double vm))
+                {
+                    MessageBox.Show("移动速度 格式不正确", "异常提示");
+                    return;
+                }
+                Motor.MoveVM = vm;
                 _moveCancelTokenSource = new CancellationTokenSource();
                 switch (mode)
                 {

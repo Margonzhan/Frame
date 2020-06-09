@@ -37,6 +37,7 @@
             this.label_AbsPosition = new System.Windows.Forms.Label();
             this.label_AxisName = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.txt_MaxSpeed = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,7 +55,7 @@
             // btn_Move
             // 
             this.btn_Move.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btn_Move.Location = new System.Drawing.Point(665, 2);
+            this.btn_Move.Location = new System.Drawing.Point(763, 2);
             this.btn_Move.Margin = new System.Windows.Forms.Padding(15, 2, 2, 2);
             this.btn_Move.Name = "btn_Move";
             this.btn_Move.Size = new System.Drawing.Size(66, 27);
@@ -66,7 +67,7 @@
             // txt_Distance
             // 
             this.txt_Distance.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txt_Distance.Location = new System.Drawing.Point(554, 5);
+            this.txt_Distance.Location = new System.Drawing.Point(652, 5);
             this.txt_Distance.Margin = new System.Windows.Forms.Padding(2);
             this.txt_Distance.Name = "txt_Distance";
             this.txt_Distance.Size = new System.Drawing.Size(94, 21);
@@ -140,7 +141,7 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 8;
+            this.tableLayoutPanel1.ColumnCount = 9;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 98F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 98F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85F));
@@ -149,22 +150,35 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 98F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 98F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 98F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 98F));
             this.tableLayoutPanel1.Controls.Add(this.label_AxisName, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label_AbsPosition, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.btn_Home, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.cmB_HomeDir, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.cmB_MoveMode, 5, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txt_Distance, 6, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btn_Move, 7, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txt_Distance, 7, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btn_Move, 8, 0);
             this.tableLayoutPanel1.Controls.Add(this.btn_Power, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txt_MaxSpeed, 6, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(745, 32);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(846, 32);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // txt_MaxSpeed
+            // 
+            this.txt_MaxSpeed.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txt_MaxSpeed.Location = new System.Drawing.Point(554, 5);
+            this.txt_MaxSpeed.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_MaxSpeed.Name = "txt_MaxSpeed";
+            this.txt_MaxSpeed.Size = new System.Drawing.Size(94, 21);
+            this.txt_MaxSpeed.TabIndex = 4;
+            this.txt_MaxSpeed.Text = "0";
+            this.txt_MaxSpeed.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // AxisControlZd
             // 
@@ -173,7 +187,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AxisControlZd";
-            this.Size = new System.Drawing.Size(745, 32);
+            this.Size = new System.Drawing.Size(846, 32);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -191,5 +205,6 @@
         private System.Windows.Forms.Label label_AbsPosition;
         private System.Windows.Forms.Label label_AxisName;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TextBox txt_MaxSpeed;
     }
 }
