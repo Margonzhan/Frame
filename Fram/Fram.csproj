@@ -59,6 +59,7 @@
     <Reference Include="DevExpress.XtraCharts.v17.2.Wizard, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraEditors.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraGrid.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraLayout.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraPrinting.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraRichEdit.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="halcondotnet, Version=12.0.0.0, Culture=neutral, PublicKeyToken=4973bed59ddbf2b8, processorArchitecture=MSIL">
@@ -93,6 +94,8 @@
     <Compile Include="Config\IORelevantConfig\IoCardConfig.cs" />
     <Compile Include="Config\IORelevantConfig\SingleIoDeviceConfig.cs" />
     <Compile Include="Config\MotionRelevantConfig\AxisConfig.cs" />
+    <Compile Include="Config\MotionRelevantConfig\AxisAssemblageConfig.cs" />
+    <Compile Include="Config\MotionRelevantConfig\LogicAxisConfig.cs" />
     <Compile Include="Config\MotionRelevantConfig\MotionCardConfig.cs" />
     <Compile Include="DelegateUIControl.cs" />
     <Compile Include="FormFolder\FormAuto.cs">
@@ -106,6 +109,12 @@
     </Compile>
     <Compile Include="FormFolder\FormAxis.Designer.cs">
       <DependentUpon>FormAxis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormFolder\FormAxisUnit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFolder\FormAxisUnit.Designer.cs">
+      <DependentUpon>FormAxisUnit.cs</DependentUpon>
     </Compile>
     <Compile Include="FormFolder\FormIO.cs">
       <SubType>UserControl</SubType>
@@ -150,6 +159,10 @@
     <Compile Include="Hardware\IoCard\IIoCard.cs" />
     <Compile Include="Hardware\IoCard\IoCardBase.cs" />
     <Compile Include="Hardware\IoCard\Zmcaux.cs" />
+    <Compile Include="Hardware\LogicAxisUnite\AxisPoint.cs" />
+    <Compile Include="Hardware\LogicAxisUnite\AxisUnitPoint.cs" />
+    <Compile Include="Hardware\LogicAxisUnite\LogicAxis.cs" />
+    <Compile Include="Hardware\LogicAxisUnite\LogicAxisUnite.cs" />
     <Compile Include="Hardware\MotionCardManager.cs" />
     <Compile Include="Hardware\MotionCard\Adlink\Adlink_EMX100.cs" />
     <Compile Include="Hardware\MotionCard\Adlink\Adlink_Amp204c.cs" />
@@ -180,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormFolder\FormAxis.resx">
       <DependentUpon>FormAxis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFolder\FormAxisUnit.resx">
+      <DependentUpon>FormAxisUnit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormFolder\FormIO.resx">
       <DependentUpon>FormIO.cs</DependentUpon>

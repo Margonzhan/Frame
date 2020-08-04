@@ -9,24 +9,24 @@ namespace Fram.Station
 {
    public  class StationManager:Singleton<StationManager>
     {
-       public  Dictionary<string, StationBase> StationDictionry;//station collection
+       public  Dictionary<string, StationBase> StationDictionary;//station collection
        public  StationManager()
         {
-            StationDictionry = new Dictionary<string, StationBase>();
+            StationDictionary = new Dictionary<string, StationBase>();
         }
         public   StationBase GetStationByName(string stationname)
         {
             StationBase _station = null;
-            if(StationDictionry.ContainsKey(stationname))
+            if(StationDictionary.ContainsKey(stationname))
             {
-                _station = StationDictionry[stationname];
+                _station = StationDictionary[stationname];
             }
             return _station;
         }
         public string InitAll()
         {
             string errorInfo = null;
-            foreach(var mem in StationDictionry)
+            foreach(var mem in StationDictionary)
             {
                 string error = null;
                 mem.Value.Init(ref error);
@@ -41,7 +41,7 @@ namespace Fram.Station
         {
            // if(string.IsNullOrEmpty(InitAll()))
             {
-                foreach (var mem in StationDictionry)
+                foreach (var mem in StationDictionary)
                 {
                     try
                     {
@@ -60,7 +60,7 @@ namespace Fram.Station
         }
         public void StopAll()
         {          
-            foreach (var mem in StationDictionry)
+            foreach (var mem in StationDictionary)
             {
                 try
                 {
@@ -74,7 +74,7 @@ namespace Fram.Station
         }
         public void SuspendAll()
         {
-            foreach (var mem in StationDictionry)
+            foreach (var mem in StationDictionary)
             {
                 try
                 {
@@ -88,7 +88,7 @@ namespace Fram.Station
         }
         public void ResumeAll()
         {
-            foreach (var mem in StationDictionry)
+            foreach (var mem in StationDictionary)
             {
                 try
                 {

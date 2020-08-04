@@ -13,7 +13,7 @@ namespace Fram.Hardware
         Dictionary<string, AxisDevice.Motor> m_AxisDevices = new Dictionary<string, AxisDevice.Motor>();
         public AxisManager()
         {
-            foreach (var mem in ConfigManager.Instance.HardWareConfigrationMuster.AxisConfigs)
+            foreach (var mem in ConfigManager.Instance.HardWareConfigrationMuster.PhysicalAxisConfigs)
             {
                 if (!mem.Enable)
                     continue;

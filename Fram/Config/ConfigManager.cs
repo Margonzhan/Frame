@@ -142,7 +142,7 @@ namespace Fram.Config
         {
             get { return m_singleIoDeviceConfigs; }
         }
-        public List<AxisConfig> AxisConfigs
+        public List<AxisConfig> PhysicalAxisConfigs
         {
             get { return m_axisConfigs; }
         }
