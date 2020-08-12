@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Fram.Hardware.AxisDevice;
 using System.Threading;
+using Fram.Hardware.LogicAxisUnite;
+
 namespace Fram.PrivateControl
 {
     public partial class AxisControlZd : UserControl
@@ -46,7 +48,23 @@ namespace Fram.PrivateControl
             CancellationTokenSource = new CancellationTokenSource();
             Task.Run(new Action(() => FrashPosition()), CancellationTokenSource.Token);
         }
-        
+        public AxisControlZd (LogicAxis logicAxis)
+        {
+            InitializeComponent();
+            cmB_MoveMode.SelectedIndex = 0;
+            cmB_HomeDir.SelectedIndex = 0;
+            Motor = logicAxis.Motor;
+            this.label_AxisName.Text = logicAxis.Name;
+            btn_Power.Text = Motor.PowerStatue ? "Power On" : "Power Off";
+            if(!logicAxis.IsHOme)
+            {
+                this.btn_Home.Enabled = false;
+            }
+            cmB_HomeDir.SelectedIndex = Motor.HomeDir;
+            txt_MaxSpeed.Text = Motor.MoveVM.ToString();
+            CancellationTokenSource = new CancellationTokenSource();
+            Task.Run(new Action(() => FrashPosition()), CancellationTokenSource.Token);
+        }
         private void FrashPosition()
         {
             while(CancellationTokenSource.Token.CanBeCanceled)

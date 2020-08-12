@@ -10,6 +10,8 @@ using Newtonsoft.Json;
 using Fram.Hardware;
 using Newtonsoft.Json.Linq;
 using Communication;
+using Fram.Hardware.LogicAxisUnite;
+using Fram.Config.MotionRelevantConfig;
 
 namespace Fram.Config
 {
@@ -130,6 +132,7 @@ namespace Fram.Config
         List<CameraConfig> m_cameraConfigs = new List<CameraConfig>();
         List<SerialPortConfig> m_serialPortConfigs = new List<SerialPortConfig>();
         List<TcpClientConfig> m_tcpClientConfigs = new List<TcpClientConfig>();
+        List<LogicAxisUnitConfig> m_logicAxisUnitConfigs = new List<LogicAxisUnitConfig>();
         public List<MotionCardConfig> MotionCardConfigs
         {
             get { return m_moitionCardConfigs; }
@@ -157,6 +160,10 @@ namespace Fram.Config
         public List<TcpClientConfig> TcpClientConfigs
         {
             get { return m_tcpClientConfigs; }
+        }
+        public List<LogicAxisUnitConfig> LogicAxisUnitConfigs
+        {
+            get { return m_logicAxisUnitConfigs; }
         }
     }
 }

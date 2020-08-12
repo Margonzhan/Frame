@@ -10,6 +10,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Fram.Station;
+using Fram.Hardware.LogicAxisUnite;
+
 namespace Fram
 {
     public partial class FormMain : Form
@@ -24,7 +26,7 @@ namespace Fram
         Hardware.CameraManager CameraManager;
         Hardware.MotionCardManager MotionCardManager;
         Hardware.AxisManager AxisManager;
-
+        LogicAxisUnitManager LogicAxisUnitManager;
 
         public FormMain()
         {
@@ -47,11 +49,12 @@ namespace Fram
             IoDeviceManager = Hardware.IoDeviceManager.Instance;
             CameraManager = Hardware.CameraManager.Instance;
             AxisManager = Hardware.AxisManager.Instance;
+            LogicAxisUnitManager = Hardware.LogicAxisUnite.LogicAxisUnitManager.Instance;
           //  GloablObject.Instance.Init();
-            //Stationtest stationtest = new Stationtest("test");
-            //StationManager.Instance.StationDictionry.Add(stationtest.StationName, stationtest);
-            //StationManager.Instance.InitAll();
-           
+          //Stationtest stationtest = new Stationtest("test");
+          //StationManager.Instance.StationDictionry.Add(stationtest.StationName, stationtest);
+          //StationManager.Instance.InitAll();
+
 
             DelegateUIControl.Instance.RichTxtBoxZdS.Add("FormMain_RichTBoxZD_Log", this.rTBZD_Log);
             try

@@ -10,5 +10,6 @@ namespace Fram.Config.MotionRelevantConfig
     {
         public Guid BindDeviceGuid { get; set; }
         public uint HomeIndex { get; set; } = 0;
+        public bool IsHome { get; set; } = true;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fram.Hardware.LogicAxisUnite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,15 @@ namespace Fram.FormFolder
         public FormAxisUnit()
         {
             InitializeComponent();
+            foreach (var mem in LogicAxisUnitManager.Instance.LogicAxisUnitS)
+            {
+                cmb_AxisUnitName.Items.Add(mem.Key);
+            }
+        }
+
+        private void cmb_AxisUnitName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -9,6 +9,10 @@ namespace Fram.Hardware.LogicAxisUnite
     public class AxisPoint
     {
         /// <summary>
+        /// 当前轴是否参与该点位运行
+        /// </summary>
+        public bool IsMove { get; set; }
+        /// <summary>
         /// 逻辑轴名称
         /// </summary>
         public string LogicAxisName { get;  set; }

@@ -94,7 +94,7 @@
     <Compile Include="Config\IORelevantConfig\IoCardConfig.cs" />
     <Compile Include="Config\IORelevantConfig\SingleIoDeviceConfig.cs" />
     <Compile Include="Config\MotionRelevantConfig\AxisConfig.cs" />
-    <Compile Include="Config\MotionRelevantConfig\AxisAssemblageConfig.cs" />
+    <Compile Include="Config\MotionRelevantConfig\LogicAxisUnitConfig.cs" />
     <Compile Include="Config\MotionRelevantConfig\LogicAxisConfig.cs" />
     <Compile Include="Config\MotionRelevantConfig\MotionCardConfig.cs" />
     <Compile Include="DelegateUIControl.cs" />
@@ -162,7 +162,8 @@
     <Compile Include="Hardware\LogicAxisUnite\AxisPoint.cs" />
     <Compile Include="Hardware\LogicAxisUnite\AxisUnitPoint.cs" />
     <Compile Include="Hardware\LogicAxisUnite\LogicAxis.cs" />
-    <Compile Include="Hardware\LogicAxisUnite\LogicAxisUnite.cs" />
+    <Compile Include="Hardware\LogicAxisUnite\LogicAxisUnit.cs" />
+    <Compile Include="Hardware\LogicAxisUnite\LogicAxisUnitManager.cs" />
     <Compile Include="Hardware\MotionCardManager.cs" />
     <Compile Include="Hardware\MotionCard\Adlink\Adlink_EMX100.cs" />
     <Compile Include="Hardware\MotionCard\Adlink\Adlink_Amp204c.cs" />

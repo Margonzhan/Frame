@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fram.Config.MotionRelevantConfig
 {
-     public   class AxisAssemblageConfig:ConfigBase
+     public   class LogicAxisUnitConfig:ConfigBase
     {
         public string StationName { get; set; }
         public List<LogicAxisConfig> LogicAxisConfigs { get; set; }
