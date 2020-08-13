@@ -8,7 +8,6 @@ namespace Fram.Config.MotionRelevantConfig
 {
      public   class LogicAxisUnitConfig:ConfigBase
     {
-        public string StationName { get; set; }
         public List<LogicAxisConfig> LogicAxisConfigs { get; set; }
     }
 }

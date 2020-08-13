@@ -54,7 +54,7 @@ namespace Fram.PrivateControl
             cmB_MoveMode.SelectedIndex = 0;
             cmB_HomeDir.SelectedIndex = 0;
             Motor = logicAxis.Motor;
-            this.label_AxisName.Text = logicAxis.Name;
+            this.label_AxisName.Text = logicAxis.DeviceName;
             btn_Power.Text = Motor.PowerStatue ? "Power On" : "Power Off";
             if(!logicAxis.IsHOme)
             {

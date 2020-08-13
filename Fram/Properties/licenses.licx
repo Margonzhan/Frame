@@ -1,5 +1,5 @@
-DevExpress.XtraRichEdit.RichEditControl, DevExpress.XtraRichEdit.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
 DevExpress.Patch.InMemoryPatch, DevExpress.Patch.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7fc7bfca2443de66
+DevExpress.XtraRichEdit.RichEditControl, DevExpress.XtraRichEdit.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
 DevExpress.XtraDataLayout.DataLayoutControl, DevExpress.XtraLayout.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
 DevExpress.XtraCharts.ChartControl, DevExpress.XtraCharts.v17.2.UI, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
 DevExpress.XtraEditors.ButtonEdit, DevExpress.XtraEditors.v17.2, Version=17.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a

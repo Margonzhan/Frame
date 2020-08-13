@@ -81,6 +81,10 @@ namespace Fram
                     tabNavigationPage_Cameras.PageVisible = false;
                 }
 
+                FormAxisUnit formAxisUnit = new FormAxisUnit();
+                formAxisUnit.Dock = DockStyle.Fill;
+                tabNavigationPage_LogicAxisUnit.Controls.Add(formAxisUnit);
+
                 if (AxisManager.AxisDeviceS.Count > 0)
                 {
                     formAxis = new FormAxis();

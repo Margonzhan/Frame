@@ -33,7 +33,6 @@
             this.tabPage_Auto = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.gB_Log = new System.Windows.Forms.GroupBox();
-            this.rTBZD_Log = new Fram.RichTextBoxZd();
             this.tabNagPage_Menu = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tabPane_Menu = new DevExpress.XtraBars.Navigation.TabPane();
             this.tabNavigationPage_IoDevice = new DevExpress.XtraBars.Navigation.TabNavigationPage();
@@ -44,6 +43,8 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
+            this.rTBZD_Log = new Fram.RichTextBoxZd();
+            this.tabNavigationPage_LogicAxisUnit = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabPane)).BeginInit();
             this.tabPane.SuspendLayout();
@@ -62,9 +63,9 @@
             this.panel1.Controls.Add(this.tabPane);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1655, 892);
+            this.panel1.Size = new System.Drawing.Size(1241, 714);
             this.panel1.TabIndex = 0;
             // 
             // tabPane
@@ -73,14 +74,14 @@
             this.tabPane.Controls.Add(this.tabNagPage_Menu);
             this.tabPane.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPane.Location = new System.Drawing.Point(0, 0);
-            this.tabPane.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPane.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabPane.Name = "tabPane";
             this.tabPane.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] {
             this.tabPage_Auto,
             this.tabNagPage_Menu});
-            this.tabPane.RegularSize = new System.Drawing.Size(1655, 892);
+            this.tabPane.RegularSize = new System.Drawing.Size(1241, 714);
             this.tabPane.SelectedPage = this.tabNagPage_Menu;
-            this.tabPane.Size = new System.Drawing.Size(1655, 892);
+            this.tabPane.Size = new System.Drawing.Size(1241, 714);
             this.tabPane.TabIndex = 2;
             this.tabPane.Text = "tabPane";
             // 
@@ -90,10 +91,10 @@
             this.tabPage_Auto.Caption = "Auto";
             this.tabPage_Auto.Controls.Add(this.splitContainer1);
             this.tabPage_Auto.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabPage_Auto.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPage_Auto.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabPage_Auto.Name = "tabPage_Auto";
             this.tabPage_Auto.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabPage_Auto.Size = new System.Drawing.Size(1633, 834);
+            this.tabPage_Auto.Size = new System.Drawing.Size(1219, 664);
             // 
             // splitContainer1
             // 
@@ -101,7 +102,7 @@
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -109,8 +110,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.gB_Log);
             this.splitContainer1.Panel2MinSize = 50;
-            this.splitContainer1.Size = new System.Drawing.Size(1633, 834);
-            this.splitContainer1.SplitterDistance = 782;
+            this.splitContainer1.Size = new System.Drawing.Size(1219, 664);
+            this.splitContainer1.SplitterDistance = 612;
             this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 5;
             // 
@@ -120,74 +121,66 @@
             this.gB_Log.Controls.Add(this.rTBZD_Log);
             this.gB_Log.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gB_Log.Location = new System.Drawing.Point(0, 0);
-            this.gB_Log.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gB_Log.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gB_Log.Name = "gB_Log";
             this.gB_Log.Padding = new System.Windows.Forms.Padding(0);
-            this.gB_Log.Size = new System.Drawing.Size(1631, 48);
+            this.gB_Log.Size = new System.Drawing.Size(1217, 48);
             this.gB_Log.TabIndex = 0;
             this.gB_Log.TabStop = false;
             this.gB_Log.Text = "Log:";
-            // 
-            // rTBZD_Log
-            // 
-            this.rTBZD_Log.AutoScroll = true;
-            this.rTBZD_Log.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rTBZD_Log.Location = new System.Drawing.Point(0, 18);
-            this.rTBZD_Log.Margin = new System.Windows.Forms.Padding(0);
-            this.rTBZD_Log.Name = "rTBZD_Log";
-            this.rTBZD_Log.Size = new System.Drawing.Size(1631, 30);
-            this.rTBZD_Log.TabIndex = 0;
             // 
             // tabNagPage_Menu
             // 
             this.tabNagPage_Menu.Caption = "Menu";
             this.tabNagPage_Menu.Controls.Add(this.tabPane_Menu);
             this.tabNagPage_Menu.ItemShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabNagPage_Menu.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabNagPage_Menu.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabNagPage_Menu.Name = "tabNagPage_Menu";
             this.tabNagPage_Menu.Properties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
-            this.tabNagPage_Menu.Size = new System.Drawing.Size(1633, 834);
+            this.tabNagPage_Menu.Size = new System.Drawing.Size(1223, 668);
             // 
             // tabPane_Menu
             // 
             this.tabPane_Menu.Controls.Add(this.tabNavigationPage_IoDevice);
             this.tabPane_Menu.Controls.Add(this.tabNavigationPage_Cameras);
             this.tabPane_Menu.Controls.Add(this.tabNavigationPage_AxisDevice);
+            this.tabPane_Menu.Controls.Add(this.tabNavigationPage_LogicAxisUnit);
             this.tabPane_Menu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPane_Menu.Location = new System.Drawing.Point(0, 0);
-            this.tabPane_Menu.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabPane_Menu.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabPane_Menu.Name = "tabPane_Menu";
             this.tabPane_Menu.PageProperties.ShowMode = DevExpress.XtraBars.Navigation.ItemShowMode.ImageAndText;
             this.tabPane_Menu.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] {
             this.tabNavigationPage_IoDevice,
             this.tabNavigationPage_Cameras,
-            this.tabNavigationPage_AxisDevice});
-            this.tabPane_Menu.RegularSize = new System.Drawing.Size(1633, 834);
+            this.tabNavigationPage_AxisDevice,
+            this.tabNavigationPage_LogicAxisUnit});
+            this.tabPane_Menu.RegularSize = new System.Drawing.Size(1223, 668);
             this.tabPane_Menu.SelectedPage = this.tabNavigationPage_Cameras;
-            this.tabPane_Menu.Size = new System.Drawing.Size(1633, 834);
+            this.tabPane_Menu.Size = new System.Drawing.Size(1223, 668);
             this.tabPane_Menu.TabIndex = 0;
             this.tabPane_Menu.Text = "IO设备";
             // 
             // tabNavigationPage_IoDevice
             // 
             this.tabNavigationPage_IoDevice.Caption = "Io Device";
-            this.tabNavigationPage_IoDevice.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabNavigationPage_IoDevice.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabNavigationPage_IoDevice.Name = "tabNavigationPage_IoDevice";
-            this.tabNavigationPage_IoDevice.Size = new System.Drawing.Size(1611, 776);
+            this.tabNavigationPage_IoDevice.Size = new System.Drawing.Size(1205, 622);
             // 
             // tabNavigationPage_Cameras
             // 
             this.tabNavigationPage_Cameras.Caption = "Camera";
-            this.tabNavigationPage_Cameras.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabNavigationPage_Cameras.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabNavigationPage_Cameras.Name = "tabNavigationPage_Cameras";
-            this.tabNavigationPage_Cameras.Size = new System.Drawing.Size(1611, 776);
+            this.tabNavigationPage_Cameras.Size = new System.Drawing.Size(1223, 668);
             // 
             // tabNavigationPage_AxisDevice
             // 
             this.tabNavigationPage_AxisDevice.Caption = "Axis Device";
-            this.tabNavigationPage_AxisDevice.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabNavigationPage_AxisDevice.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.tabNavigationPage_AxisDevice.Name = "tabNavigationPage_AxisDevice";
-            this.tabNavigationPage_AxisDevice.Size = new System.Drawing.Size(1504, 682);
+            this.tabNavigationPage_AxisDevice.Size = new System.Drawing.Size(1223, 668);
             // 
             // BottomToolStripPanel
             // 
@@ -225,14 +218,30 @@
             // 
             this.ContentPanel.Size = new System.Drawing.Size(220, 43);
             // 
+            // rTBZD_Log
+            // 
+            this.rTBZD_Log.AutoScroll = true;
+            this.rTBZD_Log.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rTBZD_Log.Location = new System.Drawing.Point(0, 14);
+            this.rTBZD_Log.Margin = new System.Windows.Forms.Padding(0);
+            this.rTBZD_Log.Name = "rTBZD_Log";
+            this.rTBZD_Log.Size = new System.Drawing.Size(1217, 34);
+            this.rTBZD_Log.TabIndex = 0;
+            // 
+            // tabNavigationPage_LogicAxisUnit
+            // 
+            this.tabNavigationPage_LogicAxisUnit.Caption = "LogicAxisUnit";
+            this.tabNavigationPage_LogicAxisUnit.Name = "tabNavigationPage_LogicAxisUnit";
+            this.tabNavigationPage_LogicAxisUnit.Size = new System.Drawing.Size(1223, 668);
+            // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1655, 892);
+            this.ClientSize = new System.Drawing.Size(1241, 714);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.Name = "FormMain";
             this.Text = "MyFram";
             this.panel1.ResumeLayout(false);
@@ -266,6 +275,7 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.GroupBox gB_Log;
         private Fram.RichTextBoxZd rTBZD_Log;
+        private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPage_LogicAxisUnit;
 
         #endregion
         //private HalconModle.ShapeModle shapeModle;

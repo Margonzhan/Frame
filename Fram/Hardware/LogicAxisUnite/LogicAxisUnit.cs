@@ -77,7 +77,7 @@ namespace Fram.Hardware.LogicAxisUnite
             string pointTxt = JsonConvert.SerializeObject(axisUnitPoints);
             File.WriteAllText(pointFilePath, pointTxt);
         }
-        public void Add(string key, LogicAxis value)
+        public void AddLogicAxis(string key, LogicAxis value)
         {
             if (logicAxisS.ContainsKey(key))
             {
@@ -85,7 +85,7 @@ namespace Fram.Hardware.LogicAxisUnite
             }
             logicAxisS.Add(key, value);
         }
-        public void Remove(string key)
+        public void RemoveLogicAxis(string key)
         {
             if (!logicAxisS.ContainsKey(key))
             {
@@ -93,7 +93,7 @@ namespace Fram.Hardware.LogicAxisUnite
             }
             logicAxisS.Remove(key);
         }
-        public LogicAxis GetByKey(string key)
+        public LogicAxis GetLogicAxisByKey(string key)
         {
             return logicAxisS[key];
         }
@@ -101,5 +101,34 @@ namespace Fram.Hardware.LogicAxisUnite
         {
             get { return logicAxisS; }
         }
+
+        public void AddPoint(string key, AxisUnitPoint value)
+        {
+            if (axisUnitPoints.ContainsKey(key))
+            {
+                throw new Exception($"the keyname {key} is already exist");
+            }
+            axisUnitPoints.Add(key, value);
+        }
+        public void RemovePoint(string key)
+        {
+            if (!axisUnitPoints.ContainsKey(key))
+            {
+                throw new Exception($"the keyname {key} is not found ");
+            }
+            axisUnitPoints.Remove(key);
+        }
+        public AxisUnitPoint GetPointByKey(string key)
+        {
+            return axisUnitPoints[key];
+        }
+        public Dictionary<string, AxisUnitPoint> AxisUnitPoints
+        {
+            get { return axisUnitPoints; }
+        }
+
+
+
+
     }
 }

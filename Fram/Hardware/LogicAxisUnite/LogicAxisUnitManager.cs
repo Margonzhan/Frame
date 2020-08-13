@@ -1,5 +1,6 @@
 ﻿using CommonFunc;
 using Fram.Config;
+using Fram.Hardware.AxisDevice;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,8 +32,9 @@ namespace Fram.Hardware.LogicAxisUnite
                     {
                         if(logicAxisConfig.BindDeviceGuid==axis.Value.Guid)
                         {
-                            LogicAxis logicAxis = new LogicAxis(logicAxisConfig.DeviceName, logicAxisConfig.Guid, axis, logicAxisConfig.IsHome, logicAxisConfig.HomeIndex);
-                            logicAxisUnit.Add(logicAxis.DeviceName, logicAxis);
+                         
+                            LogicAxis logicAxis = new LogicAxis(logicAxisConfig.DeviceName, logicAxisConfig.Guid, (StepMotor)axis.Value, logicAxisConfig.IsHome, logicAxisConfig.HomeIndex);
+                            logicAxisUnit.AddLogicAxis(logicAxis.DeviceName, logicAxis);
                             break;
                         }
                     }                   
