@@ -564,7 +564,7 @@ namespace Fram.Hardware.MotionCard
                 throw new Exception("请先初始化");
             if (!m_isLoadConfigFile)
                 throw new Exception("未加载xml配置文件");
-            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_MODE, paramvalue);
+            APS168.APS_set_axis_param((int)axisindex, (Int32)APS_Define.PRA_HOME_MODE, paramvalue);
         }
         public override void GetAxisHomeMode(uint axisindex, ref int paramvalue)
         {
@@ -572,9 +572,9 @@ namespace Fram.Hardware.MotionCard
                 throw new Exception("请先初始化");
             if (!m_isLoadConfigFile)
                 throw new Exception("未加载xml配置文件");
-            double rtn=0;
-            APS168.APS_get_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_MODE, ref rtn);
-            paramvalue = (int)rtn;
+          
+            APS168.APS_get_axis_param((int)axisindex, (Int32)APS_Define.PRA_HOME_MODE, ref paramvalue);
+           
         }
         public override void SetAxisHomeDir(uint axisindex, int paramvalue)
         {
@@ -582,7 +582,7 @@ namespace Fram.Hardware.MotionCard
                 throw new Exception("请先初始化");
             if (!m_isLoadConfigFile)
                 throw new Exception("未加载xml配置文件");
-            APS168.APS_set_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_DIR, paramvalue);
+            APS168.APS_set_axis_param((int)axisindex, (Int32)APS_Define.PRA_HOME_DIR, paramvalue);
         }
         public override void GetAxisHomeDir(uint axisindex, ref int paramvalue)
         {
@@ -590,9 +590,9 @@ namespace Fram.Hardware.MotionCard
                 throw new Exception("请先初始化");
             if (!m_isLoadConfigFile)
                 throw new Exception("未加载xml配置文件");
-            double rtn = 0;
-            APS168.APS_get_axis_param_f((int)axisindex, (Int32)APS_Define.PRA_HOME_DIR, ref rtn);
-            paramvalue = (int)rtn;
+            int rtn = 0;
+            APS168.APS_get_axis_param((int)axisindex, (Int32)APS_Define.PRA_HOME_DIR, ref rtn);
+            paramvalue = rtn;
         }
 
 

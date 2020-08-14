@@ -38,12 +38,17 @@ namespace Fram.PrivateControl
         public AxisControlZd(StepMotor motor)
         {
             InitializeComponent();
+          
             cmB_MoveMode.SelectedIndex = 0;
             cmB_HomeDir.SelectedIndex = 0;
+         
             Motor = motor;
             this.label_AxisName.Text = Motor.DeviceName;
             btn_Power.Text = Motor.PowerStatue ? "Power On" : "Power Off";
-            cmB_HomeDir.SelectedIndex= Motor.HomeDir;
+          
+            cmB_HomeDir.SelectedIndex = Motor.HomeDir;
+
+           
             txt_MaxSpeed.Text = Motor.MoveVM.ToString();
             CancellationTokenSource = new CancellationTokenSource();
             Task.Run(new Action(() => FrashPosition()), CancellationTokenSource.Token);

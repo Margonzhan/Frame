@@ -118,12 +118,19 @@
     {
       "Enable": true,
       "DeviceName": "test",
+      
       "LogicAxisConfigs": [
         {
           "Enable": true,
           "DeviceName": "R",
           "IsHome": false,
           "BindDeviceGuid": "ea6c5b64-158f-4d15-98ed-033906d35d90"
+        },
+        {
+          "Enable": false,
+          "DeviceName": "X",
+          "IsHome": false,
+          "BindDeviceGuid": "d5dd174a-fc78-459f-bc59-7a50d2b8f20f"
         }
 
       ]

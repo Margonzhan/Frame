@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Fram.Hardware.LogicAxisUnite
 {
@@ -14,6 +15,7 @@ namespace Fram.Hardware.LogicAxisUnite
         
         Dictionary<string, LogicAxis> logicAxisS = new Dictionary<string, LogicAxis>();
         Dictionary<string, AxisUnitPoint> axisUnitPoints = new Dictionary<string, AxisUnitPoint>();
+        public string RelatedProductName { get; set; } = "Common";//关联产品的名称，有时需要不同的产品示教不同的点位，common为公用点位
         public LogicAxisUnit(string devicename, Guid guid) : base(devicename, guid)
         {
 
@@ -22,10 +24,10 @@ namespace Fram.Hardware.LogicAxisUnite
         {
 
         }
-        public void LoadPoint(string productName)
+        public void LoadPoint()
         {
-            string pointFileDir =$" {AppDomain.CurrentDomain.BaseDirectory}+\\PointsFile\\{productName}";
-            string pointFilePath = $"{pointFileDir} + \\ + {DeviceName}.json";
+            string pointFileDir =$" {AppDomain.CurrentDomain.BaseDirectory}PointsFile\\{RelatedProductName}";
+            string pointFilePath = $"{pointFileDir}\\{DeviceName}.json";
             if (Directory.Exists(pointFileDir))
             {
                 if (File.Exists(pointFilePath))
@@ -40,14 +42,22 @@ namespace Fram.Hardware.LogicAxisUnite
         }
         public void MoveToPoint(string PointName)
         {
+            foreach(var mem in logicAxisS)
+            {
+                if(mem.Value.Motor.Busy)
+                {
+                    MessageBox.Show("Axis is busy");
+                    return;
+                }
+            }
              AxisUnitPoint axisUnitPoint=  axisUnitPoints[PointName];
             if(axisUnitPoint!=null)
             {
-                uint maxIndex = axisUnitPoint.axisPoints.Max(x => x.MoveIndex);
-                uint minIndex = axisUnitPoint.axisPoints.Min(x => x.MoveIndex);
+                uint maxIndex = axisUnitPoint.AxisPoints.Max(x => x.MoveIndex);
+                uint minIndex = axisUnitPoint.AxisPoints.Min(x => x.MoveIndex);
                 for(uint i=minIndex;i<maxIndex+1;i++)
                 {
-                    List<AxisPoint> axisPoints= axisUnitPoint.axisPoints.FindAll(x => x.MoveIndex == i);
+                    List<AxisPoint> axisPoints= axisUnitPoint.AxisPoints.FindAll(x => x.MoveIndex == i);
                     if(axisPoints==null)
                     {
                         continue;
@@ -66,10 +76,10 @@ namespace Fram.Hardware.LogicAxisUnite
                 throw new KeyNotFoundException($"not exist the point named as {PointName}");
             }
         }
-        public void SavePoint(string productName)
+        public void SavePoint()
         {
-            string pointFileDir = $" {AppDomain.CurrentDomain.BaseDirectory}+\\PointsFile\\{productName}";
-            string pointFilePath = $"{pointFileDir} + \\ + {DeviceName}.json";
+            string pointFileDir = $" {AppDomain.CurrentDomain.BaseDirectory}PointsFile\\{RelatedProductName}";
+            string pointFilePath = $"{pointFileDir}\\{DeviceName}.json";
             if (!Directory.Exists(pointFileDir))
             {
                 Directory.CreateDirectory(pointFileDir);

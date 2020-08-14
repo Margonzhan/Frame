@@ -11,6 +11,7 @@ using Fram.Config;
 using Fram.Hardware;
 using Fram.PrivateControl;
 using Fram.Hardware.AxisDevice;
+using System.Threading;
 
 namespace Fram.FormFolder
 {
@@ -23,11 +24,12 @@ namespace Fram.FormFolder
         }
         private void Init()
         {
-            foreach(var mem in AxisManager.Instance.AxisDeviceS)
+            foreach (var mem in AxisManager.Instance.AxisDeviceS)
             {
                 StepMotor motor = (StepMotor)mem.Value;
                 AxisControlZd axisControlZd = new AxisControlZd(motor);
                 flowLayoutPanel1.Controls.Add(axisControlZd);
+                Thread.Sleep(10);
             }
         }
     }

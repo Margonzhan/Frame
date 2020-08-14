@@ -11,6 +11,7 @@ namespace Fram.Hardware.LogicAxisUnite
     /// </summary>
     public class AxisUnitPoint
     {
+        List<AxisPoint> axisPoints = new List<AxisPoint>();
         /// <summary>
         /// 对应的轴单元的名称
         /// </summary>
@@ -22,6 +23,10 @@ namespace Fram.Hardware.LogicAxisUnite
         /// <summary>
         /// 各个轴位置信息
         /// </summary>
-        public List<AxisPoint> axisPoints { get; set; }
+        public List<AxisPoint> AxisPoints
+        {
+            get { return axisPoints; }
+            
+        }
     }
 }
