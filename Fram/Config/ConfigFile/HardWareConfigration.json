@@ -109,7 +109,7 @@
       "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
       "DeviceName": "Axis2",
       "Guid": "d5dd174a-fc78-459f-bc59-7a50d2b8f20f",
-      "Enable": false,
+      "Enable": true,
       "AxisINdex": 1
     }
 
@@ -127,7 +127,7 @@
           "BindDeviceGuid": "ea6c5b64-158f-4d15-98ed-033906d35d90"
         },
         {
-          "Enable": false,
+          "Enable": true,
           "DeviceName": "X",
           "IsHome": false,
           "BindDeviceGuid": "d5dd174a-fc78-459f-bc59-7a50d2b8f20f"

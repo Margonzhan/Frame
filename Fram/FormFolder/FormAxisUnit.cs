@@ -175,21 +175,21 @@ namespace Fram.FormFolder
         }
 
         private void btn_UpdatePointInfo_Click(object sender, EventArgs e)
-        {                  
-                
-                DataGridViewRow dataGridViewRow = dGV_PointsName.CurrentRow;
-                string pointName = dataGridViewRow.Cells[0].Value.ToString();
-                AxisUnitPoint axisUnitPoint = logicAxisUnit.AxisUnitPoints[pointName];
-                foreach (DataGridViewRow mem in dGV_PointInfo.Rows)
-                {
-                    AxisPoint axisPoint = logicAxisUnit.AxisUnitPoints[pointName].AxisPoints.Find(x => x.LogicAxisName == mem.Cells[1].Value.ToString());
-                    axisPoint.IsMove = (bool)((DataGridViewCheckBoxCell)mem.Cells[0]).FormattedValue;
-                    axisPoint.LogicAxisName = mem.Cells[1].Value.ToString();
-                    axisPoint.Speed = uint.Parse(mem.Cells[2].Value.ToString());
-                    axisPoint.MoveIndex = uint.Parse(mem.Cells[3].Value.ToString());
-                    axisPoint.Position = double.Parse(mem.Cells[4].Value.ToString());
-                }
-            
+        {
+            RefrushPointInfo(string.Empty);
+            DataGridViewRow dataGridViewRow = dGV_PointsName.CurrentRow;
+            string pointName = dataGridViewRow.Cells[0].Value.ToString();
+            AxisUnitPoint axisUnitPoint = logicAxisUnit.AxisUnitPoints[pointName];
+            foreach (DataGridViewRow mem in dGV_PointInfo.Rows)
+            {
+                AxisPoint axisPoint = logicAxisUnit.AxisUnitPoints[pointName].AxisPoints.Find(x => x.LogicAxisName == mem.Cells[1].Value.ToString());
+                axisPoint.IsMove = (bool)((DataGridViewCheckBoxCell)mem.Cells[0]).FormattedValue;
+                axisPoint.LogicAxisName = mem.Cells[1].Value.ToString();
+                axisPoint.Speed = uint.Parse(mem.Cells[2].Value.ToString());
+                axisPoint.MoveIndex = uint.Parse(mem.Cells[3].Value.ToString());
+                axisPoint.Position = double.Parse(mem.Cells[4].Value.ToString());
+            }
+
         }
 
         private void btn_MoveToPoint_Click(object sender, EventArgs e)
