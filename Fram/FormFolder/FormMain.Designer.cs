@@ -33,18 +33,18 @@
             this.tabPage_Auto = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.gB_Log = new System.Windows.Forms.GroupBox();
+            this.rTBZD_Log = new Fram.RichTextBoxZd();
             this.tabNagPage_Menu = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tabPane_Menu = new DevExpress.XtraBars.Navigation.TabPane();
             this.tabNavigationPage_IoDevice = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tabNavigationPage_Cameras = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tabNavigationPage_AxisDevice = new DevExpress.XtraBars.Navigation.TabNavigationPage();
+            this.tabNavigationPage_LogicAxisUnit = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.BottomToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.TopToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
-            this.rTBZD_Log = new Fram.RichTextBoxZd();
-            this.tabNavigationPage_LogicAxisUnit = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tabPane)).BeginInit();
             this.tabPane.SuspendLayout();
@@ -102,7 +102,7 @@
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -121,13 +121,23 @@
             this.gB_Log.Controls.Add(this.rTBZD_Log);
             this.gB_Log.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gB_Log.Location = new System.Drawing.Point(0, 0);
-            this.gB_Log.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gB_Log.Margin = new System.Windows.Forms.Padding(2);
             this.gB_Log.Name = "gB_Log";
             this.gB_Log.Padding = new System.Windows.Forms.Padding(0);
             this.gB_Log.Size = new System.Drawing.Size(1217, 48);
             this.gB_Log.TabIndex = 0;
             this.gB_Log.TabStop = false;
             this.gB_Log.Text = "Log:";
+            // 
+            // rTBZD_Log
+            // 
+            this.rTBZD_Log.AutoScroll = true;
+            this.rTBZD_Log.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rTBZD_Log.Location = new System.Drawing.Point(0, 14);
+            this.rTBZD_Log.Margin = new System.Windows.Forms.Padding(0);
+            this.rTBZD_Log.Name = "rTBZD_Log";
+            this.rTBZD_Log.Size = new System.Drawing.Size(1217, 34);
+            this.rTBZD_Log.TabIndex = 0;
             // 
             // tabNagPage_Menu
             // 
@@ -182,6 +192,12 @@
             this.tabNavigationPage_AxisDevice.Name = "tabNavigationPage_AxisDevice";
             this.tabNavigationPage_AxisDevice.Size = new System.Drawing.Size(1223, 668);
             // 
+            // tabNavigationPage_LogicAxisUnit
+            // 
+            this.tabNavigationPage_LogicAxisUnit.Caption = "LogicAxisUnit";
+            this.tabNavigationPage_LogicAxisUnit.Name = "tabNavigationPage_LogicAxisUnit";
+            this.tabNavigationPage_LogicAxisUnit.Size = new System.Drawing.Size(1223, 668);
+            // 
             // BottomToolStripPanel
             // 
             this.BottomToolStripPanel.Location = new System.Drawing.Point(0, 0);
@@ -217,22 +233,6 @@
             // ContentPanel
             // 
             this.ContentPanel.Size = new System.Drawing.Size(220, 43);
-            // 
-            // rTBZD_Log
-            // 
-            this.rTBZD_Log.AutoScroll = true;
-            this.rTBZD_Log.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rTBZD_Log.Location = new System.Drawing.Point(0, 14);
-            this.rTBZD_Log.Margin = new System.Windows.Forms.Padding(0);
-            this.rTBZD_Log.Name = "rTBZD_Log";
-            this.rTBZD_Log.Size = new System.Drawing.Size(1217, 34);
-            this.rTBZD_Log.TabIndex = 0;
-            // 
-            // tabNavigationPage_LogicAxisUnit
-            // 
-            this.tabNavigationPage_LogicAxisUnit.Caption = "LogicAxisUnit";
-            this.tabNavigationPage_LogicAxisUnit.Name = "tabNavigationPage_LogicAxisUnit";
-            this.tabNavigationPage_LogicAxisUnit.Size = new System.Drawing.Size(1223, 668);
             // 
             // FormMain
             // 

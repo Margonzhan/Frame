@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+    <Prefer32Bit>true</Prefer32Bit>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -146,8 +146,8 @@
     <Compile Include="FormFolder\FormVision.Designer.cs">
       <DependentUpon>FormVision.cs</DependentUpon>
     </Compile>
-    <Compile Include="GloablObject.cs" />
-    <Compile Include="GlobalParameter.cs" />
+    <Compile Include="GloableObject.cs" />
+    <Compile Include="MachineStatueControl.cs" />
     <Compile Include="Hardware\AxisDevice\Motor.cs" />
     <Compile Include="Hardware\AxisDevice\ServoMotor.cs" />
     <Compile Include="Hardware\AxisDevice\StepMotor.cs" />
@@ -172,11 +172,14 @@
     <Compile Include="Hardware\MotionCardManager.cs" />
     <Compile Include="Hardware\MotionCard\Adlink\Adlink_EMX100.cs" />
     <Compile Include="Hardware\MotionCard\Adlink\Adlink_Amp204c.cs" />
-    <Compile Include="Hardware\MotionCard\Adlink\APS168x64.cs" />
+    <Compile Include="Hardware\MotionCard\Adlink\APS168x32.cs" />
     <Compile Include="Hardware\MotionCard\Adlink\APS_Define.cs" />
     <Compile Include="Hardware\MotionCard\IMotionCard.cs" />
     <Compile Include="Hardware\MotionCard\MotionCardBase.cs" />
     <Compile Include="Hardware\MotionCard\TcpClientIoCardTest.cs" />
+    <Compile Include="Hardware\Othrers\EzdLaser.cs" />
+    <Compile Include="Hardware\Othrers\TH_Multimeter.cs" />
+    <Compile Include="Hardware\Othrers\TongHui_Power.cs" />
     <Compile Include="PrivateControl\AxisControlZd.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -312,6 +315,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\led_on.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reset.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stop.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

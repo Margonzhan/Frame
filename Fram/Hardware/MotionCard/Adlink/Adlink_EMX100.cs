@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using APS168_W64;
+using APS168_W32;
 using APS_Define_W32;
 using System.IO;
 using System.Threading;
@@ -38,7 +38,8 @@ namespace Fram.Hardware.MotionCard
         {
             int boardIdInBits = 0;
 
-            int ret = APS168.APS_register_emx(1, 0);
+            int ret = APS168.APS_register_virtual_board(1, 1);
+            
             // Card(Board) initial,mode bit0(0:By system assigned, 1:By dip switch)  
 
             ret = APS168.APS_initial(ref boardIdInBits, m_cardIdMode);

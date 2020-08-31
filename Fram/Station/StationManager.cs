@@ -92,7 +92,7 @@ namespace Fram.Station
             {
                 try
                 {
-                    mem.Value.Stop();
+                    mem.Value.Resume();
                 }
                 catch (Exception ex)
                 {

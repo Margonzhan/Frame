@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using APS168_W64;
+using APS168_W32;
 using APS_Define_W32;
 using System.IO;
 using System.Threading;

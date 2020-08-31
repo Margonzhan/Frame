@@ -39,7 +39,8 @@ namespace Fram.Hardware.LogicAxisUnite
                         }
                     }                   
                 }
-                m_LogicAxisUnits.Add(logicAxisUnit.DeviceName, logicAxisUnit);
+                if(logicAxisUnit.AxisDeviceS.Count>0)
+                    m_LogicAxisUnits.Add(logicAxisUnit.DeviceName, logicAxisUnit);
             }
         }
 

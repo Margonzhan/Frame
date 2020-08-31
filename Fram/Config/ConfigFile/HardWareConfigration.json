@@ -25,7 +25,7 @@
     {
       "MotionCardBrand": "AdlinkAMP204c",
       "CardId": 0,
-      "Enable": true,
+      "Enable": false,
       "DeviceName": "amp204c",
       "Guid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b"
     },
@@ -68,7 +68,7 @@
       "Guid": "2ad51f62-4fc9-490f-8cc8-cc448894f08a"
     },
     {
-      "Enable": true,
+      "Enable": false,
       "DeviceName": "208c",
       "Guid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b"
     }
@@ -78,7 +78,7 @@
       "DeviceName": "Input0",
       "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
       "Guid": "3bd20161-ddad-451c-a332-1dbb02425d22",
-      "Enable": true,
+      "Enable": false,
       "IsShow": true,
       "IsInput": true,
       "IoIndex": 0
@@ -90,7 +90,7 @@
       "DeviceName": "Output0",
       "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
       "Guid": "3bd20161-ddad-451c-a332-1dbb02425d22",
-      "Enable": true,
+      "Enable": false,
       "IsShow": true,
       "IsInput": false,
       "IoIndex": 10
@@ -102,14 +102,14 @@
       "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
       "DeviceName": "Axis1",
       "Guid": "ea6c5b64-158f-4d15-98ed-033906d35d90",
-      "Enable": true,
+      "Enable": false,
       "AxisINdex": 0
     },
     {
       "BindDeviceGuid": "2ad51f62-4fc9-490f-8cc8-cc448894f04b",
       "DeviceName": "Axis2",
       "Guid": "d5dd174a-fc78-459f-bc59-7a50d2b8f20f",
-      "Enable": true,
+      "Enable": false,
       "AxisINdex": 1
     }
 

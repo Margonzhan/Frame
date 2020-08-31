@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Fram.Station;
 using Fram.Hardware.LogicAxisUnite;
-
+using Fram.Hardware.Othrers;
 namespace Fram
 {
     public partial class FormMain : Form
@@ -50,10 +50,20 @@ namespace Fram
             CameraManager = Hardware.CameraManager.Instance;
             AxisManager = Hardware.AxisManager.Instance;
             LogicAxisUnitManager = Hardware.LogicAxisUnite.LogicAxisUnitManager.Instance;
-          //  GloablObject.Instance.Init();
-          //Stationtest stationtest = new Stationtest("test");
-          //StationManager.Instance.StationDictionry.Add(stationtest.StationName, stationtest);
-          //StationManager.Instance.InitAll();
+            int rtn=-1;
+            try
+            {
+                 rtn = EzdLaser.Lmc1Initial(AppDomain.CurrentDomain.BaseDirectory + "Laser", 0, new IntPtr { });
+             
+            }
+            catch (Exception ex)
+            {
+                FileOperate.Log.WriteString($"金橙子激光器连接异常： {ex.Message}, rtn is {rtn}");
+            }
+                    
+            //Stationtest stationtest = new Stationtest("test");
+            //StationManager.Instance.StationDictionry.Add(stationtest.StationName, stationtest);
+            //StationManager.Instance.InitAll();
 
 
             DelegateUIControl.Instance.RichTxtBoxZdS.Add("FormMain_RichTBoxZD_Log", this.rTBZD_Log);
@@ -80,10 +90,17 @@ namespace Fram
                 {
                     tabNavigationPage_Cameras.PageVisible = false;
                 }
-
-                FormAxisUnit formAxisUnit = new FormAxisUnit();
-                formAxisUnit.Dock = DockStyle.Fill;
-                tabNavigationPage_LogicAxisUnit.Controls.Add(formAxisUnit);
+                if(LogicAxisUnitManager.Instance.LogicAxisUnitS.Count>0)
+                {
+                    FormAxisUnit formAxisUnit = new FormAxisUnit();
+                    formAxisUnit.Dock = DockStyle.Fill;
+                    tabNavigationPage_LogicAxisUnit.Controls.Add(formAxisUnit);
+                    tabNavigationPage_LogicAxisUnit.PageVisible = true;
+                }
+                else
+                {
+                    tabNavigationPage_LogicAxisUnit.PageVisible = false;
+                }
 
                 if (AxisManager.AxisDeviceS.Count > 0)
                 {
@@ -110,6 +127,7 @@ namespace Fram
                 }
              
                 FormAuto formAuto = new FormAuto();
+                formAuto.Dock = DockStyle.Fill;
                 this.splitContainer1.Panel1.Controls.Add(formAuto);
             }
             catch (Exception ex)

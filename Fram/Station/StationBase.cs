@@ -58,20 +58,7 @@ namespace Fram.Station
                 m_SuspendFalg = false;
             }
         }
-        private void TaskRun()
-        {
-            if (m_task.Status == TaskStatus.Created)
-            {
-                m_task.Start();
-            }
-            else if (m_task.Status == TaskStatus.Canceled || m_task.Status == TaskStatus.RanToCompletion)
-            {
-                cancellationTokenSource = new CancellationTokenSource();
-                m_task = new Task( ProcessTask, cancellationTokenSource.Token);
-                m_task.Start();
-            }
-            m_stationStatue = StationStatue.Running;
-        }
+        
         /// <summary>
         /// stop the station task
         /// </summary>
@@ -99,7 +86,28 @@ namespace Fram.Station
                 m_stationStatue = StationStatue.Suspend;
             }         
         }
-   
+        public virtual void Resume()
+        {
+            if (m_stationStatue == StationStatue.Suspend)
+            {
+                m_SuspendFalg = false;
+                m_stationStatue = StationStatue.Running;
+            }
+        }
+        private void TaskRun()
+        {
+            if (m_task.Status == TaskStatus.Created)
+            {
+                m_task.Start();
+            }
+            else if (m_task.Status == TaskStatus.Canceled || m_task.Status == TaskStatus.RanToCompletion)
+            {
+                cancellationTokenSource = new CancellationTokenSource();
+                m_task = new Task(ProcessTask, cancellationTokenSource.Token);
+                m_task.Start();
+            }
+            m_stationStatue = StationStatue.Running;
+        }
         private async void ProcessTask()
         {
             while (!cancellationTokenSource.IsCancellationRequested)
